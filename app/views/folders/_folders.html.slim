@@ -1,0 +1,4 @@
+.folders
+  - @folders.each do |folder|
+    div.folder.span12
+      = link_to "<i class='icon-folder-close'></i>  #{folder.title}".html_safe, folder if folder.root?

@@ -16,12 +16,15 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem "jquery-ui-rails"
 
 gem "paperclip", "3.4.2"
 
 gem 'slim'
 
 gem 'ancestry'
+
+gem 'simple_form'
 
 
 group :development do

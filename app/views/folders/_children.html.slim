@@ -1,0 +1,4 @@
+div.folders
+  - @folder.children.each do |sub_folder|
+    div.folder.span12
+      = link_to "<i class='icon-folder-close'></i>  #{sub_folder.title}".html_safe, sub_folder

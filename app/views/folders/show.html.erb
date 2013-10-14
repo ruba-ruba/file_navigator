@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @folder.title %>
-</p>
-
-
-<%= link_to 'Edit', edit_folder_path(@folder) %> |
+<%= "<i class='icon-folder-open'></i>#{@folder.title}".html_safe %>
+<%= link_to 'new_folder', new_dir_path %>
+<%= link_to 'Edit', edit_folder_path(@folder) %>
 <%= link_to 'Back', folders_path %>
+<%= link_to 'Destroy', @folder, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+<%= render 'children' %>
+

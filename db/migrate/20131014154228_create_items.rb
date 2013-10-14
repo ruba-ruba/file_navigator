@@ -1,7 +1,7 @@
 class CreateItems < ActiveRecord::Migration
   def change
     create_table :items do |t|
-      t.folder :references
+      t.integer :folder_id
 
       t.timestamps
     end

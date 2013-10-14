@@ -1,0 +1,17 @@
+doctype
+html
+  head
+    title FileNavigator
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  body{class="#{controller_name} #{action_name}"}
+    #main role="main"
+      header
+        .container-fluid
+          = render 'layouts/header'
+      .container-fluid
+        .content
+          .row-fluid
+            = yield
+      footer

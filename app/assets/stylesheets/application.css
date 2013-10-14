@@ -10,4 +10,21 @@
  *
  *= require_self
  *= require_tree .
+ *= require _font-awesome
+ *= require jquery.ui.all
  */
+
+
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+*{
+  padding: 0px;
+  margin: 0px;
+}
+
+a:hover{
+  text-decoration: none;
+  color:black !important;
+  background: none !important;
+};

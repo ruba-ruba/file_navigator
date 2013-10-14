@@ -25,7 +25,7 @@ class FoldersController < ApplicationController
   # GET /folders/new.json
   def new
     @folder = Folder.new
-
+    session[:prev_url] = request.referer
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @folder }
@@ -44,7 +44,7 @@ class FoldersController < ApplicationController
 
     respond_to do |format|
       if @folder.save
-        format.html { redirect_to @folder, notice: 'Folder was successfully created.' }
+        format.html { redirect_to session[:prev_url], notice: 'Folder was successfully created.' }
         format.json { render json: @folder, status: :created, location: @folder }
       else
         format.html { render action: "new" }

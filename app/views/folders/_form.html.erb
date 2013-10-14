@@ -1,4 +1,4 @@
-<%= form_for(@folder) do |f| %>
+<%= simple_form_for(@folder) do |f| %>
   <% if @folder.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
@@ -11,11 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :parent_id, :as => :hidden, :input_html => { :value => params[:id] } %>
+    <%= params[:id] %>
+    <%#= f.collection_select :parent_id, Folder.order(:title), :id, :title, include_blank: true %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>
