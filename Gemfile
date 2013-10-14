@@ -2,25 +2,54 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.14'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'sqlite3'
-
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
+  gem 'bootstrap-sass'
+  gem 'bootstrap-addons-rails'
+  gem 'font-awesome-sass-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'jquery-rails'
+
+gem "paperclip", "3.4.2"
+
+gem 'slim'
+
+gem 'ancestry'
+
+
+group :development do
+  gem 'better_errors'
+  gem 'thin', '1.5.1'
+end
+
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner', '< 1.1.0'
+  gem 'email_spec'
+  gem 'launchy'
+  gem 'guard-rspec'
+  gem 'terminal-notifier-guard', '1.5.3'
+  gem 'mocha', '0.13.2', :require => false
+  gem 'simplecov', :require => false
+  gem 'simplecov-rcov', :require => false
+  gem 'shoulda-matchers'
+  gem 'rack-contrib'
+  gem 'guard', '1.8.0'
+  gem 'guard-spork'
+  gem 'spork'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
