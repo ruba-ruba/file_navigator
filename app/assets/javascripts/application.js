@@ -14,4 +14,9 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require bootstrap
+//= require bootstrap-modal
 //= require_tree .
+
+$(function() {
+
+});

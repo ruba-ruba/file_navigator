@@ -26,6 +26,7 @@ gem 'ancestry'
 
 gem 'simple_form'
 
+gem "remotipart", "~> 1.2.1"
 
 group :development do
   gem 'better_errors'

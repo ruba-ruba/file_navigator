@@ -1,12 +1,13 @@
 FileNavigator::Application.routes.draw do
 
   root to: 'folders#index'
- 
-  resources :items
 
-  resources :folders
+  resources :folders do 
+    resources :items
+  end
 
   match '/folders/:id/new' => 'folders#new', as: :new_dir
+  #match '/folders/:id/add_file' => 'items#new', as: :new_file
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

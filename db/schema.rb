@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131014180126) do
+ActiveRecord::Schema.define(:version => 20131015070958) do
 
   create_table "folders", :force => true do |t|
     t.string   "title"
@@ -24,8 +24,12 @@ ActiveRecord::Schema.define(:version => 20131014180126) do
 
   create_table "items", :force => true do |t|
     t.integer  "folder_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "item_file_name"
+    t.string   "item_content_type"
+    t.integer  "item_file_size"
+    t.datetime "item_updated_at"
   end
 
 end

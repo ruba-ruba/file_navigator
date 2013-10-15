@@ -29,12 +29,14 @@ class FoldersController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @folder }
+      format.js
     end
   end
 
   # GET /folders/1/edit
   def edit
     @folder = Folder.find(params[:id])
+    session[:prev_url] = request.referer
   end
 
   # POST /folders
@@ -60,7 +62,7 @@ class FoldersController < ApplicationController
 
     respond_to do |format|
       if @folder.update_attributes(params[:folder])
-        format.html { redirect_to @folder, notice: 'Folder was successfully updated.' }
+        format.html { redirect_to  session[:prev_url], notice: 'Folder was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,7 +78,7 @@ class FoldersController < ApplicationController
     @folder.destroy
 
     respond_to do |format|
-      format.html { redirect_to folders_url }
+      format.html { redirect_to :back, notice: 'Folder was successfully deleted.' }
       format.json { head :no_content }
     end
   end

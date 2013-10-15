@@ -2,6 +2,9 @@
   max-width: 940px
   margin: 0 auto
 
+.row-fluid
+  margin-top: 7px
+
 header
   margin-top: 0px
   min-height: 30px
@@ -9,11 +12,43 @@ header
   background: rgba(1, 1, 1, 0.85)
   color: white
   line-height: 26px
+  .container-fluid
+    h1
+      a
+        color: white
+        text-decoration: none
+      a:hover
+        color: white !important
+        text-decoration:  none
+
+
+.folders
+  margin-top: 5px
+  
+.root
+  margin-bottom: 10px
+  .back
+    display: block
+    margin-bottom: 10px 
+    a
+      font-size: 15px 
+      
 
 .folder
   margin-left: 0px !important
   max-height: 20px
   min-height: 20px
 
-.folder:nth-child(even) 
-  background: rgba(1, 1, 1, 0.1)
+.folder
+  background: rgba(1, 221, 51, 0.1)
+
+.folder, .item
+  padding-left: 17px
+
+.folder:hover, .item:hover
+  background: rgba(154, 22, 25, 0.1)
+
+
+
+form
+  margin-top: 20px

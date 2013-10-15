@@ -1,4 +1,11 @@
 .folders
   - @folders.each do |folder|
-    div.folder.span12
-      = link_to "<i class='icon-folder-close'></i>  #{folder.title}".html_safe, folder if folder.root?
+    - if folder.root?
+      div.folder.span12
+        = link_to "<i class='icon-folder-close'></i>  #{folder.title}".html_safe, folder 
+        span.pull-right
+          = folder.created_at.strftime('%d/%m/%y')
+          '&nbsp
+          = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(folder)
+          '&nbsp
+          = link_to "<i class='icon-remove-circle'></i>".html_safe, folder, method: :delete, data: { confirm: 'Are you sure?' }
