@@ -15,6 +15,8 @@
 //= require jquery.ui.all
 //= require bootstrap
 //= require bootstrap-modal
+//= require bootstrap-tooltip
+//= require bootstrap-popover
 //= require_tree .
 
 $(function() {

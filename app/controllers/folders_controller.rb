@@ -1,6 +1,5 @@
 class FoldersController < ApplicationController
-  # GET /folders
-  # GET /folders.json
+
   def index
     @folders = Folder.all
 
@@ -10,8 +9,6 @@ class FoldersController < ApplicationController
     end
   end
 
-  # GET /folders/1
-  # GET /folders/1.json
   def show
     @folder = Folder.find(params[:id])
 
@@ -21,8 +18,6 @@ class FoldersController < ApplicationController
     end
   end
 
-  # GET /folders/new
-  # GET /folders/new.json
   def new
     @folder = Folder.new
     session[:prev_url] = request.referer
@@ -39,8 +34,7 @@ class FoldersController < ApplicationController
     session[:prev_url] = request.referer
   end
 
-  # POST /folders
-  # POST /folders.json
+
   def create
     @folder = Folder.new(params[:folder])
 
@@ -55,8 +49,7 @@ class FoldersController < ApplicationController
     end
   end
 
-  # PUT /folders/1
-  # PUT /folders/1.json
+
   def update
     @folder = Folder.find(params[:id])
 
@@ -71,15 +64,13 @@ class FoldersController < ApplicationController
     end
   end
 
-  # DELETE /folders/1
-  # DELETE /folders/1.json
   def destroy
     @folder = Folder.find(params[:id])
     @folder.destroy
 
-    respond_to do |format|
-      format.html { redirect_to :back, notice: 'Folder was successfully deleted.' }
-      format.json { head :no_content }
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to :back, notice: 'Folder was successfully deleted.' }
+    #   format.json { head :no_content }
+    # end
   end
 end

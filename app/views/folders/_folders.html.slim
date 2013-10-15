@@ -8,4 +8,4 @@
           '&nbsp
           = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(folder)
           '&nbsp
-          = link_to "<i class='icon-remove-circle'></i>".html_safe, folder, method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to "<i class='icon-remove-circle'></i>".html_safe, folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'remove_folder'

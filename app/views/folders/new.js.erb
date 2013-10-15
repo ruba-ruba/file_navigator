@@ -1,5 +1,6 @@
 $(".folders").append("<%= escape_javascript(render('folders/new'))%>");
-$("#my_modal").modal();
+
+$(".modal").modal('');
 
 $('.modal').on('hidden',function(e){
     $(this).remove();
