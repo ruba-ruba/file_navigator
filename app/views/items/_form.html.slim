@@ -8,6 +8,7 @@
         - @item.errors.full_messages.each do |msg|
           li= msg
   .field
-    = f.file_field :item
+    = f.file_field :item, :type => "file"
+    
   .actions
-    = f.submit
+    = f.submit :class => 'btn'

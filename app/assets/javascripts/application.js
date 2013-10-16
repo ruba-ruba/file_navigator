@@ -22,9 +22,5 @@
 //= require_tree .
 
 $(function() {
-  $('form').bind("ajax:success", function(){
-    if ( $(this).data('remotipartSubmitted') ){
-      alert('da');
-    }
-  });
+  
 });
