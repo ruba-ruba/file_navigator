@@ -42,6 +42,7 @@ class FoldersController < ApplicationController
       if @folder.save
         format.html { redirect_to session[:prev_url], notice: 'Folder was successfully created.' }
         format.json { render json: @folder, status: :created, location: @folder }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @folder.errors, status: :unprocessable_entity }
