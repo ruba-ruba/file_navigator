@@ -27,6 +27,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @item }
+      format.js
     end
   end
 
@@ -40,10 +41,13 @@ class ItemsController < ApplicationController
     @folder = Folder.find params[:folder_id]
     @item =  @folder.items.build params[:item]
 
+
     respond_to do |format|
       if @item.save
+        @folder = Folder.find params[:folder_id]
         format.html { redirect_to folder_path(@item.folder_id), notice: 'Item was successfully created.' }
         format.json { render json: @item, status: :created, location: @item }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @item.errors, status: :unprocessable_entity }
@@ -72,8 +76,9 @@ class ItemsController < ApplicationController
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Item was successfully deleted.' }
-      format.json { head :no_content }
+      # format.html { redirect_to :back, notice: 'Item was successfully deleted.' }
+      # format.json { head :no_content }
+      format.js
     end
   end
 end

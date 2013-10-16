@@ -1,0 +1,5 @@
+<% if remotipart_submitted? %>
+  $(".items").replaceWith("<%= escape_javascript(render('items/items'))%>");
+<% else %>
+  alert('submitted via native jquery-ujs')
+<% end %>

@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
+//= require jquery.remotipart
+//= require jquery.iframe-transport
 //= require bootstrap
 //= require bootstrap-modal
 //= require bootstrap-tooltip
@@ -20,5 +22,9 @@
 //= require_tree .
 
 $(function() {
-
+  $('form').bind("ajax:success", function(){
+    if ( $(this).data('remotipartSubmitted') ){
+      alert('da');
+    }
+  });
 });

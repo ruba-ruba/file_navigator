@@ -1,7 +1,7 @@
-.folders
+.folders.span12
   - @folders.each do |folder|
     - if folder.root?
-      div.folder.span12
+      div.folder
         = link_to "<i class='icon-folder-close'></i>  #{folder.title}".html_safe, folder 
         span.pull-right
           = folder.created_at.strftime('%d/%m/%y')

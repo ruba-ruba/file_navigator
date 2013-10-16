@@ -67,7 +67,7 @@ class FoldersController < ApplicationController
     
     respond_to do |format|
       if @folder.save
-        @folders = Folder.all
+        @folder = Folder.find(params[:id])
         format.js
       else
         format.html { render action: "new" }

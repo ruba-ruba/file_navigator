@@ -1,6 +1,6 @@
-.folders    
+.folders.span12
   - @folder.children.each do |sub_folder|
-    div.folder.span12
+    div.folder
       = link_to "<i class='icon-folder-close'></i>  #{sub_folder.title}".html_safe, sub_folder
       span.pull-right
         = sub_folder.created_at.strftime('%d/%m/%y')
@@ -8,17 +8,4 @@
         = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(sub_folder)
         '&nbsp
         = link_to "<i class='icon-remove-circle'></i>".html_safe, sub_folder, method: :delete, data: { confirm: 'Are you sure?' },  class: 'remove_folder', remote: true
-.items
-  - @folder.items.each do |item|
-    div.item.span12
-      = link_to "<i class='icon-file-alt'></i>  #{item.item_file_name}".html_safe, item.item(:original, false), target: '_blank'
-      span.pull-right
-        = item.item_content_type 
-        '&nbsp
-        = number_to_human_size(item.item_file_size)
-        '&nbsp
-        = item.item_updated_at.strftime('%d/%m/%y')
-        '&nbsp
-        = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_item_path(@folder, item)
-        '&nbsp
-        = link_to "<i class='icon-remove-circle'></i>".html_safe, [@folder, item], method: :delete, data: { confirm: 'Are you sure?' }
+  = render 'items/items'
