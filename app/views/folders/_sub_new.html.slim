@@ -5,7 +5,7 @@
     h3 
       | add folder
   .modal-body
-    = simple_form_for @folder, :url => url_for(:controller => 'folders', :action => 'sub_create'), :remote => true do |f|
+    = simple_form_for @folder, :url => sub_create_path, :remote => true do |f|
       - if @folder.errors.any?
         #error_explanation
           h2

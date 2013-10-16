@@ -6,6 +6,6 @@
         span.pull-right
           = folder.created_at.strftime('%d/%m/%y')
           '&nbsp
-          = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(folder)
+          = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(folder), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn update_folder"}
           '&nbsp
-          = link_to "<i class='icon-remove-circle'></i>".html_safe, folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'remove_folder'
+          = link_to "<i class='icon-remove-circle'></i>".html_safe, folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'btn remove_folder'

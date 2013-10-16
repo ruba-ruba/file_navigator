@@ -1,3 +1,1 @@
-$('.folders').remove();
-
-$(".row-fluid").append("<%= escape_javascript(render('folders/children'))%>");
+$(".folders").replaceWith("<%= escape_javascript(render('folders/children'))%>");

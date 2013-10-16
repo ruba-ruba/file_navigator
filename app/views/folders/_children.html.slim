@@ -5,7 +5,7 @@
       span.pull-right
         = sub_folder.created_at.strftime('%d/%m/%y')
         '&nbsp
-        = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(sub_folder)
+        = link_to  "<i class='icon-edit'></i>".html_safe, edit_dir_path(sub_folder),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn update_folder"}
         '&nbsp
-        = link_to "<i class='icon-remove-circle'></i>".html_safe, sub_folder, method: :delete, data: { confirm: 'Are you sure?' },  class: 'remove_folder', remote: true
+        = link_to "<i class='icon-remove-circle'></i>".html_safe, sub_folder, method: :delete, data: { confirm: 'Are you sure?' },  class: 'remove_folder btn', remote: true
   = render 'items/items'

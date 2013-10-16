@@ -43,6 +43,16 @@ class FoldersController < ApplicationController
   # GET /folders/1/edit
   def edit
     @folder = Folder.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def sub_edit
+    @folder = Folder.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
 
 
@@ -79,12 +89,28 @@ class FoldersController < ApplicationController
 
   def update
     @folder = Folder.find(params[:id])
-
     respond_to do |format|
       if @folder.update_attributes(params[:folder])
+        @folders = Folder.all
         format.html { redirect_to  session[:prev_url], notice: 'Folder was successfully updated.' }
         format.json { head :no_content }
         format.js
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @folder.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def sub_update
+    @folder = Folder.find(params[:id])
+    respond_to do |format|
+      if @folder.update_attributes(params[:folder])
+        @folder = Folder.find(params[:id])
+        puts @folder
+        format.js
+        format.html { redirect_to  session[:prev_url], notice: 'Folder was successfully updated.' }
+        format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @folder.errors, status: :unprocessable_entity }

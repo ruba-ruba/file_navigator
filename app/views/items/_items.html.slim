@@ -9,6 +9,10 @@
         '&nbsp
         = item.item_updated_at.strftime('%d/%m/%y')
         '&nbsp
-        = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_item_path(@folder, item)
         '&nbsp
-        = link_to "<i class='icon-remove-circle'></i>".html_safe, [@folder, item], method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "remove_item"
+        '&nbsp
+        '&nbsp
+        '&nbsp
+        /= link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_item_path(@folder, item), class: 'btn'
+        '&nbsp
+        = link_to "<i class='icon-remove-circle'></i>".html_safe, [@folder, item], method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "remove_item btn"
