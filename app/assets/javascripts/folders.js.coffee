@@ -9,4 +9,12 @@ $ ->
   $(".remove_folder").bind "ajax:before", ->
     $(this).closest(".folder").fadeOut()
 
-  #add folders
+  #remove modal
+  $(document).on "hidden", ".modal", ->
+    $(this).remove()
+
+  #on submit hide modal
+  $(document).on "submit", "form", ->
+    $('.modal, .modal-backdrop').remove()
+
+

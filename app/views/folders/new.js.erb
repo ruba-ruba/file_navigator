@@ -1,7 +1,2 @@
-$(".folders").prepend("<%= escape_javascript(render('folders/new'))%>");
-
-$(".modal").modal('');
-
-$('.modal').on('hidden',function(e){
-    $(this).remove();
-});
+$("body").append("<%= escape_javascript(render('folders/new'))%>");
+$(".modal").modal('show');

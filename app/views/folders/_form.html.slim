@@ -9,6 +9,7 @@
           li= msg
   .field
     = f.input :title
-    = f.input :parent_id, :as => :hidden, :input_html => { :value => params[:id] } unless :edit
+    = f.input :parent_id, :as => :hidden, :input_html => { :value => params[:id] }
+    = params[:id]
   .actions
-    = f.button :submit
+    = f.button :submit, :class=> "btn submit" 

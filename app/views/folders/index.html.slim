@@ -1,7 +1,8 @@
 div.pull-right
   span.activate_modal
     h2
-      = link_to "<i class='icon-folder-close'></i>  Add Folder".html_safe, new_folder_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}
+      = link_to "<i class='icon-folder-close'></i>  Add Folder".html_safe, new_folder_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_folder"}
 .clearfix
 p#notice= notice
 = render 'folders/folders'
+

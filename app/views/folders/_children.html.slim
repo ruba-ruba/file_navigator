@@ -1,4 +1,4 @@
-div.folders    
+.folders    
   - @folder.children.each do |sub_folder|
     div.folder.span12
       = link_to "<i class='icon-folder-close'></i>  #{sub_folder.title}".html_safe, sub_folder
@@ -7,7 +7,7 @@ div.folders
         '&nbsp
         = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(sub_folder)
         '&nbsp
-        = link_to "<i class='icon-remove-circle'></i>".html_safe, sub_folder, method: :delete, data: { confirm: 'Are you sure?' }
+        = link_to "<i class='icon-remove-circle'></i>".html_safe, sub_folder, method: :delete, data: { confirm: 'Are you sure?' },  class: 'remove_folder', remote: true
 .items
   - @folder.items.each do |item|
     div.item.span12

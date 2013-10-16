@@ -6,7 +6,11 @@ FileNavigator::Application.routes.draw do
     resources :items
   end
 
-  match '/folders/:id/new' => 'folders#new', as: :new_dir
+
+  get "/folders/:id/new" => "folders#sub_new", as: :new_dir
+  post "/folders/:id" => "folders#sub_create"#, :as => :sub_create
+
+  #match '/folders/:id/new' => 'folders#new', as: :new_dir
   #match '/folders/:id/add_file' => 'items#new', as: :new_file
 
   # The priority is based upon order of creation:
