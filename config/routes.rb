@@ -2,18 +2,18 @@ FileNavigator::Application.routes.draw do
 
   root to: 'folders#index'
 
-  resources :folders do 
+  resources :items
+  resources :folders, :shallow => true do
     resources :items
   end
 
+  # get "/folders/:id/new" => "folders#sub_new", as: :new_dir
 
-  get "/folders/:id/new" => "folders#sub_new", as: :new_dir
+  # post "/folders/:id" => "folders#sub_create", as: :sub_create
 
-  post "/folders/:id" => "folders#sub_create", as: :sub_create
+  # get "/sub_folder/:id/edit" => "folders#sub_edit", as: :edit_dir
 
-  get "/fold/:id/edit" => "folders#sub_edit", as: :edit_dir
-
-  put "/fold/:id" => "folders#sub_update", as: :sub_update
+  # put "/sub_folder/:id" => "folders#sub_update", as: :sub_update
 
   #match '/folders/:id/new' => 'folders#new', as: :new_dir
   #match '/folders/:id/add_file' => 'items#new', as: :new_file

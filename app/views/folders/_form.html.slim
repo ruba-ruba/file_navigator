@@ -1,4 +1,4 @@
-= simple_form_for @folder, :remote => true do |f|
+= simple_form_for @folder, :validate => true, :remote => true do |f|
   - if @folder.errors.any?
     #error_explanation
       h2

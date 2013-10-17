@@ -31,26 +31,11 @@ class FoldersController < ApplicationController
     end
   end
 
-  def sub_new
-    @folder = Folder.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @folder }
-      format.js
-    end
-  end
-
   # GET /folders/1/edit
   def edit
     @folder = Folder.find(params[:id])
     respond_to do |format|
-      format.js
-    end
-  end
-
-  def sub_edit
-    @folder = Folder.find(params[:id])
-    respond_to do |format|
+      format.html 
       format.js
     end
   end
@@ -62,8 +47,8 @@ class FoldersController < ApplicationController
     respond_to do |format|
       if @folder.save
         @folders = Folder.all
-        #format.html { redirect_to session[:prev_url], notice: 'Folder was successfully created.' }
-        #format.json { render json: @folder, status: :created, location: @folder }
+        format.html { redirect_to  @folder, notice: 'Folder was successfully created.' }
+        format.json { render json: @folder, status: :created, location: @folder }
         format.js
       else
         format.html { render action: "new" }
@@ -71,46 +56,17 @@ class FoldersController < ApplicationController
       end
     end
   end
-
-  def sub_create
-    @folder = Folder.new(params[:folder]) 
-    
-    respond_to do |format|
-      if @folder.save
-        @folder = Folder.find(params[:id])
-        format.js
-      else
-        format.html { render action: "new" }
-        format.json { render json: @folder.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
 
   def update
     @folder = Folder.find(params[:id])
     respond_to do |format|
       if @folder.update_attributes(params[:folder])
         @folders = Folder.all
-        format.html { redirect_to  session[:prev_url], notice: 'Folder was successfully updated.' }
+        puts 'i\'m in update'
+        puts @folders
+        format.html { redirect_to  @folder, notice: 'Folder was successfully updated.' }
         format.json { head :no_content }
         format.js
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @folder.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def sub_update
-    @folder = Folder.find(params[:id])
-    respond_to do |format|
-      if @folder.update_attributes(params[:folder])
-        @folder = Folder.find(params[:id])
-        puts @folder
-        format.js
-        format.html { redirect_to  session[:prev_url], notice: 'Folder was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @folder.errors, status: :unprocessable_entity }

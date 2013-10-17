@@ -5,7 +5,5 @@ class Item < ActiveRecord::Base
 
   belongs_to :folder
 
-  validates :folder_id, presence: true
-
   validates :item, :attachment_presence => true
 end

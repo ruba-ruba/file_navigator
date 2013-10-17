@@ -1,4 +1,4 @@
-= simple_form_for   [@folder, @item] , :html => { :multipart => true }, remote: true do |f|
+= simple_form_for @item , :html => { :multipart => true }, remote: true do |f|
   - if @item.errors.any?
     #error_explanation
       h2
@@ -8,6 +8,7 @@
         - @item.errors.full_messages.each do |msg|
           li= msg
   .field
+    = f.input :title, :as => :hidden, :input_html => { :value => params[:folder_id] }
     = f.file_field :item, :type => "file"
     
   .actions

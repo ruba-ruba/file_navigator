@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :folder do
-    title "MyString"
+    title {generate(:folder)}
   end
 end

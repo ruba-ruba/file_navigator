@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :item do
-    references ""
+    item ""
   end
 end

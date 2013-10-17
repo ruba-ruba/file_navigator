@@ -1,1 +1,4 @@
 $(".folders").replaceWith("<%= escape_javascript(render('folders/folders'))%>");
+
+$("#notice").html("<%= escape_javascript(flash[:notice]) %>");  
+$("#notice").show(300);

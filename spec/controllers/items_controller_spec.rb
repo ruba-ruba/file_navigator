@@ -23,7 +23,7 @@ describe ItemsController do
   # This should return the minimal set of attributes required to create a valid
   # Item. As you add validations to Item, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "references" => "" } }
+  let(:valid_attributes) { { "item" => "" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -85,14 +85,14 @@ describe ItemsController do
       it "assigns a newly created but unsaved item as @item" do
         # Trigger the behavior that occurs when invalid params are submitted
         Item.any_instance.stub(:save).and_return(false)
-        post :create, {:item => { "references" => "invalid value" }}, valid_session
+        post :create, {:item => { "item" => "invalid value" }}, valid_session
         assigns(:item).should be_a_new(Item)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Item.any_instance.stub(:save).and_return(false)
-        post :create, {:item => { "references" => "invalid value" }}, valid_session
+        post :create, {:item => { "item" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
@@ -106,8 +106,8 @@ describe ItemsController do
         # specifies that the Item created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Item.any_instance.should_receive(:update_attributes).with({ "references" => "" })
-        put :update, {:id => item.to_param, :item => { "references" => "" }}, valid_session
+        Item.any_instance.should_receive(:update_attributes).with({ "item" => "" })
+        put :update, {:id => item.to_param, :item => { "item" => "" }}, valid_session
       end
 
       it "assigns the requested item as @item" do
@@ -128,7 +128,7 @@ describe ItemsController do
         item = Item.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Item.any_instance.stub(:save).and_return(false)
-        put :update, {:id => item.to_param, :item => { "references" => "invalid value" }}, valid_session
+        put :update, {:id => item.to_param, :item => { "item" => "invalid value" }}, valid_session
         assigns(:item).should eq(item)
       end
 
@@ -136,7 +136,7 @@ describe ItemsController do
         item = Item.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Item.any_instance.stub(:save).and_return(false)
-        put :update, {:id => item.to_param, :item => { "references" => "invalid value" }}, valid_session
+        put :update, {:id => item.to_param, :item => { "item" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end

@@ -29,29 +29,43 @@ gem 'simple_form'
 
 gem "remotipart", "~> 1.2.1"
 
+gem 'client_side_validations'
+
 group :development do
+  gem 'annotate', '2.5.0'
+  gem 'sqlite3'
   gem 'better_errors'
+  gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
+  gem 'quiet_assets'
+  gem 'faker'
+  gem 'populator'
   gem 'thin', '1.5.1'
+  gem 'meta_request', '0.2.1'
+  gem 'pry-rails'
+  gem 'pry-stack_explorer'
+  gem 'pry-debugger'
 end
 
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'guard', '2.1.0'
 end
 
 group :test do
   gem 'capybara'
+  gem 'cucumber-rails', :require=>false
   gem 'database_cleaner', '< 1.1.0'
   gem 'email_spec'
   gem 'launchy'
   gem 'guard-rspec'
+  gem 'poltergeist', '1.3.0'
   gem 'terminal-notifier-guard', '1.5.3'
   gem 'mocha', '0.13.2', :require => false
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
   gem 'shoulda-matchers'
   gem 'rack-contrib'
-  gem 'guard', '1.8.0'
   gem 'guard-spork'
   gem 'spork'
 end

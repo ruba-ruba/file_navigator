@@ -14,7 +14,7 @@ $ ->
     $(this).remove()
 
   #on submit hide modal
-  $(document).on "submit", "form", ->
+  $(document).on "ajax:success", "form", ->
     $('.modal, .modal-backdrop').remove()
 
 

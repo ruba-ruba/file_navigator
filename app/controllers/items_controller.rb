@@ -21,8 +21,12 @@ class ItemsController < ApplicationController
 
 
   def new
-    @folder = Folder.find params[:folder_id]
-    @item =  @folder.items.build
+    if params[:folder_id]
+      @folder = Folder.find params[:folder_id]
+      @item = @folder.items.build
+    else
+      @item = Item.new
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -71,8 +75,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @folder = Folder.find params[:folder_id]
-    @item = @folder.items.find params[:id]
+    # @folder = Folder.find params[:folder_id]
+    @item = Item.find params[:id]
     @item.destroy
 
     respond_to do |format|
