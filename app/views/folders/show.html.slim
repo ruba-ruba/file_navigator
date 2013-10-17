@@ -9,7 +9,7 @@
       .pull-right
         = link_to "<i class='icon-folder-close'></i>  Add Folder".html_safe,  new_folder_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_folder"}
         '&nbsp
-        = link_to "<i class='icon-file'></i> Add File".html_safe,  new_folder_item_path(@folder), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_item"}
+        = link_to "<i class='icon-file'></i> Add File".html_safe,  new_item_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_item"}
     h5
       = "<i class='icon-folder-open icon-large'></i>   #{@folder.title}".html_safe
         
