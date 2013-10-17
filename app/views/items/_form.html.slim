@@ -1,4 +1,6 @@
-= simple_form_for @item , :html => { :multipart => true }, remote: true do |f|
+- url_for_update = @folder ? [@folder, @item] : @item
+
+= simple_form_for @item, :url => url_for_update, :html => { :multipart => true }, remote: true do |f|
   - if @item.errors.any?
     #error_explanation
       h2

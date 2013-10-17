@@ -3,9 +3,7 @@ FileNavigator::Application.routes.draw do
   root to: 'folders#index'
 
   resources :items
-  resources :folders, :shallow => true do
-    resources :items
-  end
+  resources :folders
 
   # get "/folders/:id/new" => "folders#sub_new", as: :new_dir
 

@@ -21,11 +21,11 @@ class ItemsController < ApplicationController
 
 
   def new
-    if params[:folder_id]
+    @item = if params[:folder_id]
       @folder = Folder.find params[:folder_id]
-      @item = @folder.items.build
+      @folder.items.build
     else
-      @item = Item.new
+      Item.new
     end
 
     respond_to do |format|
