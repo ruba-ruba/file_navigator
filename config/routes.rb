@@ -5,6 +5,8 @@ FileNavigator::Application.routes.draw do
   resources :items
   resources :folders
 
+  #get "/folders/:id/new" => "folders#new", as: :new_dir
+
   # get "/folders/:id/new" => "folders#sub_new", as: :new_dir
 
   # post "/folders/:id" => "folders#sub_create", as: :sub_create

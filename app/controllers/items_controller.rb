@@ -32,8 +32,10 @@ class ItemsController < ApplicationController
 
 
   def edit
-    @folder = Folder.find params[:folder_id]
-    @item =  @folder.items.find params[:id]
+    @item = Item.find params[:id]
+    respond_to do |format|
+      format.html
+    end
   end
 
   def create
@@ -41,10 +43,14 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        @folder = Folder.find params[:folder_id]
+        if @item.folder_id.nil?
+          @items = Item.without_folder
+        else
+          @items = Item.where(:folder_id => @item.folder_id)
+        end
         format.html { redirect_to folder_path(@item.folder_id), notice: 'Item was successfully created.' }
         format.json { render json: @item, status: :created, location: @item }
-        format.js
+        format.js { render :js=>'alert("done");' }
       else
         format.html { render action: "new" }
         format.json { render json: @item.errors, status: :unprocessable_entity }
@@ -53,13 +59,18 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @folder = Folder.find params[:folder_id]
-    @item =  @folder.items.find params[:id]
+    @item =  Item.find params[:id]
 
     respond_to do |format|
       if @item.update_attributes(params[:item])
-        format.html { redirect_to folder_path(@item.folder_id), notice: 'Item was successfully updated.' }
+        if @item.folder_id.nil?
+          @items = Item.without_folder
+        else
+          @items = Item.where(:folder_id => @item.folder_id)
+        end
+        format.html { redirect_to :back, notice: 'Item was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @item.errors, status: :unprocessable_entity }

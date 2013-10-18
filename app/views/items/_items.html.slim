@@ -1,5 +1,5 @@
 .items
-  - @folder.items.each do |item|
+  - @items.each do |item|
     div.item
       = link_to "<i class='icon-file-alt'></i>  #{item.item_file_name}".html_safe, item.item(:original, false), target: '_blank'
       span.pull-right
@@ -9,10 +9,7 @@
         '&nbsp
         = item.item_updated_at.strftime('%d/%m/%y')
         '&nbsp
-        '&nbsp
-        '&nbsp
-        '&nbsp
-        '&nbsp
-        /= link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_item_path(@folder, item), class: 'btn'
+        = link_to  "<i class='icon-edit'></i>".html_safe, edit_item_path(item), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn update_folder"}
         '&nbsp
         = link_to "<i class='icon-remove-circle'></i>".html_safe, item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "remove_item btn"
+    

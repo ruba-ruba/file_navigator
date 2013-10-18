@@ -3,7 +3,7 @@ class FoldersController < ApplicationController
   respond_to :js, :html
 
   def index
-    @folders = Folder.all
+    show_roots
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +14,8 @@ class FoldersController < ApplicationController
 
   def show
     @folder = Folder.find(params[:id])
+    @folders = @folder.children
+    @items = @folder.items
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,19 +42,37 @@ class FoldersController < ApplicationController
     end
   end
 
+  def show_roots
+    folders = Folder.all
+    @items = Item.without_folder
+    @folders = []
+    folders.each do |folder|
+      if folder.root? 
+        @folders << folder
+      end
+    end
+  end
+
 
   def create
     @folder = Folder.new(params[:folder]) 
     
     respond_to do |format|
       if @folder.save
-        @folders = Folder.all
+        if @folder.ancestry.present?
+          @folder = @folder.parent
+          @folders = @folder.children
+          @items = @folder.items
+        else
+          show_roots
+        end
         format.html { redirect_to  @folder, notice: 'Folder was successfully created.' }
         format.json { render json: @folder, status: :created, location: @folder }
         format.js
       else
         format.html { render action: "new" }
         format.json { render json: @folder.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -61,15 +81,20 @@ class FoldersController < ApplicationController
     @folder = Folder.find(params[:id])
     respond_to do |format|
       if @folder.update_attributes(params[:folder])
-        @folders = Folder.all
-        puts 'i\'m in update'
-        puts @folders
+        if @folder.ancestry.present?
+          @folder = @folder.parent
+          @folders = @folder.children
+          @items = @folder.items
+        else
+          show_roots
+        end
         format.html { redirect_to  @folder, notice: 'Folder was successfully updated.' }
         format.json { head :no_content }
         format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @folder.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

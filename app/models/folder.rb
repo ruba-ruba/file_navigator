@@ -1,5 +1,5 @@
 class Folder < ActiveRecord::Base
-  attr_accessible :title, :parent_id
+  attr_accessible :title, :parent_id, :parent, :ancestry
 
   has_ancestry
 

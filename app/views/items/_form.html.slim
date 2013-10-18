@@ -10,6 +10,5 @@
   .field
     = f.input :folder_id, :as => :hidden, :input_html => { :value => params[:folder_id] }
     = f.file_field :item, :type => "file"
-    = params[:folder_id]
   .actions
     = f.submit :class => 'btn'
