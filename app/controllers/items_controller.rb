@@ -21,12 +21,7 @@ class ItemsController < ApplicationController
 
 
   def new
-    @item = if params[:folder_id]
-      @folder = Folder.find params[:folder_id]
-      @folder.items.build
-    else
-      Item.new
-    end
+    @item = Item.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,9 +37,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @folder = Folder.find params[:folder_id]
-    @item =  @folder.items.build params[:item]
-
+    @item =  Item.new(params[:item])
 
     respond_to do |format|
       if @item.save

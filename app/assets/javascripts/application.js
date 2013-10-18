@@ -23,5 +23,5 @@
 
 
 $(function() {
-  $('form[data-validate]').validate();  
+  // $('form[data-validate]').validate();  
 });
