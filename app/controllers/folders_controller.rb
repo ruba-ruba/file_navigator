@@ -107,4 +107,17 @@ class FoldersController < ApplicationController
       format.js
     end
   end
+
+  def destroy_multiple
+
+    Folder.destroy(params[:folders]) if params[:folders].present?
+    Item.destroy(params[:items]) if params[:items].present?
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { head :no_content }
+      format.js
+    end
+
+  end
 end

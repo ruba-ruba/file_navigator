@@ -1,6 +1,8 @@
 .items
   - @items.each do |item|
-    div.item
+    div.item id=(dom_id(item))
+      = check_box_tag "items[]", item.id
+      '&nbsp
       = link_to "<i class='icon-file-alt'></i>  #{item.item_file_name}".html_safe, item.item(:original, false), target: '_blank'
       span.pull-right
         = item.item_content_type 

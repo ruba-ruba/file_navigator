@@ -7,7 +7,5 @@ class Folder < ActiveRecord::Base
 
   validates :title, presence: true, :uniqueness => true
 
-  def uniqness_on_level
-    self.siblings 
-  end
+  accepts_nested_attributes_for :items, allow_destroy: true
 end

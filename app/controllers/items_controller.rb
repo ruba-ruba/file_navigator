@@ -50,7 +50,7 @@ class ItemsController < ApplicationController
         end
         format.html { redirect_to folder_path(@item.folder_id), notice: 'Item was successfully created.' }
         format.json { render json: @item, status: :created, location: @item }
-        format.js { render :js=>'alert("done");' }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @item.errors, status: :unprocessable_entity }
@@ -89,4 +89,15 @@ class ItemsController < ApplicationController
       format.js
     end
   end
+
+  def destroy_multiple
+    Item.destroy(params[:items])
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { head :no_content }
+      format.js
+    end
+  end
+
 end

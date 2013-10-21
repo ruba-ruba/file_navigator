@@ -1,5 +1,6 @@
 <% if remotipart_submitted? %>
   $(".items").replaceWith("<%= escape_javascript(render('items/items'))%>");
+  $('.modal, .modal-backdrop').remove();
 <% else %>
   alert('submitted via native jquery-ujs')
 <% end %>

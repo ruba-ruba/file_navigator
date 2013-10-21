@@ -3,5 +3,4 @@
   $('.modal-body').prepend("<%=escape_javascript(render :partial => 'layouts/error_messages', :object => @folder)%>");
 <% else %>
   $(".folders").replaceWith("<%= escape_javascript(render('folders/folders'))%>");
-  $('.modal, .modal-backdrop').remove();
 <% end %>

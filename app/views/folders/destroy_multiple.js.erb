@@ -1,0 +1,11 @@
+<% if params[:folders] %>
+  <% for elem in params[:folders] %>
+    $("#folder_<%= elem %>").remove();
+  <% end %>
+<% end %>
+
+<% if params[:items] %>
+  <% for elem in params[:items] %>
+    $("#item_<%= elem %>").remove();
+  <% end %>
+<% end %>

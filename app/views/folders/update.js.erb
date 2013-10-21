@@ -3,5 +3,4 @@
   $('.modal-body').prepend("<p id='error'><%=  @folder.errors.full_messages %></p>");
 <% else %>
   $(".folders").replaceWith("<%= escape_javascript(render('folders/folders'))%>");
-  $('.modal, .modal-backdrop').remove();
 <% end %>

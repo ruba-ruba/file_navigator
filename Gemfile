@@ -29,7 +29,7 @@ gem 'simple_form'
 
 gem "remotipart", "~> 1.2.1"
 
-gem 'client_side_validations'
+# gem 'client_side_validations'
 
 group :development do
   gem 'annotate', '2.5.0'

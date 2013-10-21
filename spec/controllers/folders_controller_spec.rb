@@ -3,7 +3,7 @@ require 'spec_helper'
 
 
 describe FoldersController do
-
+  render_views
   let(:folder) {FactoryGirl.create(:folder)}
 
   describe "GET index" do
@@ -11,6 +11,19 @@ describe FoldersController do
       get :index
       response.should be_success
       response.should render_template :index
+    end
+  end
+
+  describe 'GET show' do
+    it 'should render show' do
+      get :show, id: folder.id
+      response.should be_success
+      response.should render_template :show
+    end
+    it 'should contain folder' do
+      folder2 = FactoryGirl.create(:folder, title: 'blah')
+      get :show, id: folder2.id
+      response.body.should  =~ /blah/ 
     end
   end
 

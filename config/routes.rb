@@ -2,8 +2,17 @@ FileNavigator::Application.routes.draw do
 
   root to: 'folders#index'
 
-  resources :items
-  resources :folders
+  resources :items do
+    collection do
+      delete 'destroy_multiple'
+    end
+  end
+  
+  resources :folders do
+    collection do
+      delete 'destroy_multiple'
+    end
+  end
 
   #get "/folders/:id/new" => "folders#new", as: :new_dir
 
