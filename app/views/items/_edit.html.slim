@@ -3,9 +3,9 @@
     .pull-right
       button.close {aria-hidden="true" data-dismiss="modal" type="button"} x
     h3 
-      | add file
+      | edit file
   .modal-body
-    = simple_form_for @item, :html => { :multipart => true } do |f|
+    = simple_form_for @item, :html => { :multipart => true }, remote: true do |f|
       - if @item.errors.any?
         #error_explanation
           h2

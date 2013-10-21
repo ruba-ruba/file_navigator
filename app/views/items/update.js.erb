@@ -1,1 +1,6 @@
-$(".items").replaceWith("<%= escape_javascript(render('items/items'))%>");
+<% if @item.errors.any? %>
+  
+<% else %>
+  $(".items").replaceWith("<%= escape_javascript(render('items/items'))%>");
+  $('.modal, .modal-backdrop').remove();
+<% end %>

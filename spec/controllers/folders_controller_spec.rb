@@ -42,6 +42,23 @@ describe FoldersController do
     it "invalid attr don't create folder" do
       expect{ post :create, folder: FactoryGirl.attributes_for(:folder, title: nil) }.to_not change(Folder,:count)
     end
+
+    describe 'create with ancestry' do
+      let!(:folder1) {FactoryGirl.create(:folder)}
+      it 'create subfolder' do
+        expect{post :create, folder: FactoryGirl.attributes_for(:folder, :ancestry => folder1)}.to change(Folder,:count).by(1)
+      end
+    end
+  end
+
+  describe "create item" do
+    let(:folder) {FactoryGirl.create(:folder)}
+    it 'create new item with folder' do
+      @file = Item.new(folder_id: folder.id,:item => File.new(Rails.root + 'spec/factories/test.csv'))
+      @file.save!
+      get :show, id: folder.id
+      response.body.should  =~ /test/ 
+    end
   end
 
   describe "GET #edit" do
@@ -66,12 +83,28 @@ describe FoldersController do
         response.should render_template :edit
       end
     end
+    describe 'create with ancestry' do
+      let!(:folder1) {FactoryGirl.create(:folder)}
+      it 'update with subfolder' do
+        put :update, id: folder, folder: FactoryGirl.attributes_for(:folder, :title => "Fodler_Name", :ancestry => folder1)
+        folder.save
+      end
+    end
   end
 
   describe "DELETE destroy" do
     let!(:folder) {FactoryGirl.create(:folder)}
     it "delete the page" do
       expect{xhr :delete, :destroy, id: folder }.to change(Folder,:count).by(-1) 
+    end
+  end
+
+  describe "delete multiple" do
+    let!(:folder1){FactoryGirl.create(:folder)}
+    let!(:folder2){FactoryGirl.create(:folder)}
+
+    it 'delete two folders' do
+      expect{xhr :delete, :destroy_multiple, :folders => [folder1.id, folder2.id]}.to change(Folder,:count).by(-2) 
     end
   end
 

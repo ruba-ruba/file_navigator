@@ -23,7 +23,7 @@ Spork.prefork do
   require 'database_cleaner'
   require File.dirname(__FILE__) + '/sequences.rb'
   require 'simplecov'
-  
+  require "paperclip/matchers"
 end
 
 
@@ -72,6 +72,10 @@ Spork.each_run do
     include Capybara::RSpecMatchers
     
     config.extend ControllerMacros, :type => :controller
+
+    RSpec.configure do |config|
+      config.include Paperclip::Shoulda::Matchers
+    end
 
     # config.before(:suite) do
     #   DatabaseCleaner.strategy = :transaction

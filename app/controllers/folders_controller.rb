@@ -38,7 +38,8 @@ class FoldersController < ApplicationController
     @folder = Folder.find(params[:id])
     respond_to do |format|
       format.html 
-      format.js
+      format.json
+      format.js { render }
     end
   end
 

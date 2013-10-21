@@ -1,6 +1,8 @@
 <% if @folder.errors.any? %>
-  $("#error").remove();
-  $('.modal-body').prepend("<%=escape_javascript(render :partial => 'layouts/error_messages', :object => @folder)%>");
+  $("#error, #error_explanation").remove();
+  $('.modal-body').prepend("<%=escape_javascript(render('layouts/error_messages', :object => @folder))%>");
+  //$('.modal-body').prepend("<p id='error'><%= @folder.errors.full_messages %> </p>");
 <% else %>
   $(".folders").replaceWith("<%= escape_javascript(render('folders/folders'))%>");
+  $('.modal, .modal-backdrop').remove();
 <% end %>

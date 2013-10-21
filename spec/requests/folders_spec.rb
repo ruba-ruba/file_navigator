@@ -1,11 +1,23 @@
 require 'spec_helper'
 
 describe "Folders" do
-  describe "GET /folders" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
+
+  subject { page }
+
+  let(:folder) {FactoryGirl.create(:folder)}
+
+  describe "delete multiple" do
+    let!(:folder1) {FactoryGirl.create(:folder, title: 'folder1')}
+    let!(:folder2) {FactoryGirl.create(:folder, title: 'folder2')}
+    let!(:folder3) {FactoryGirl.create(:folder, title: 'folder3')}
+
+    it "should delete multiple folders" do
       get folders_path
       response.status.should be(200)
+      #find(:css, "input[value='#{folder1.id}']").set(true)
+
     end
   end
+
+
 end
