@@ -11,6 +11,8 @@
         '&nbsp
         = item.item_updated_at.strftime('%d/%m/%y')
         '&nbsp
+        = link_to "<i class='icon-comments'></i>".html_safe, item_comments_path(item), class: 'btn'
+        '&nbsp
         = link_to  "<i class='icon-edit'></i>".html_safe, edit_item_path(item), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn update_folder"}
         '&nbsp
         = link_to "<i class='icon-remove-circle'></i>".html_safe, item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "remove_item btn"

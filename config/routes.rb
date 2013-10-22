@@ -3,12 +3,11 @@ FileNavigator::Application.routes.draw do
   root to: 'folders#index'
 
   resources :items do
-    collection do
-      delete 'destroy_multiple'
-    end
+    resources :comments
   end
   
   resources :folders do
+    resources :comments
     collection do
       delete 'destroy_multiple'
     end

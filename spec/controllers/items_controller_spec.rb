@@ -33,6 +33,14 @@ describe ItemsController do
       item = {folder_id: nil, :item => file } 
       expect{ post :create, item: item }.to change(Item,:count).by(1)
     end
+    it 'create new item with folder' do
+      file =  fixture_file_upload('/test.csv', 'text/csv')
+      item = {folder_id: folder.id, :item => file } 
+      expect{ post :create, item: item }.to change(Item,:count).by(1)
+    end
+    it 'create new item with folder' do 
+      expect{ post :create, item: FactoryGirl.attributes_for(:item, item_file_name: nil) }.to change(Item,:count).by(0)
+    end
   end
 
   describe "PUT #update" do

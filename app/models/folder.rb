@@ -4,6 +4,7 @@ class Folder < ActiveRecord::Base
   has_ancestry
 
   has_many :items, dependent: :destroy
+  has_many :comments, :as => :commentable, dependent: :destroy
 
   validates :title, presence: true
 

@@ -1,0 +1,12 @@
+h2 Comments
+ul#comments
+  - @comments.each do |comment|
+    li= comment.content
+h2 New Comment
+= form_for [@commentable, Comment.new], remote: true do |f|
+  .field
+    = f.label :content
+    br/
+    = f.text_area :content, :rows => 3
+  .actions
+    = submit_tag "Add comment", class: 'btn'

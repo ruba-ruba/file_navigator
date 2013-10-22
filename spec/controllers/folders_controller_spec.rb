@@ -102,9 +102,12 @@ describe FoldersController do
   describe "delete multiple" do
     let!(:folder1){FactoryGirl.create(:folder)}
     let!(:folder2){FactoryGirl.create(:folder)}
+    let!(:item1){FactoryGirl.create(:item)}
+    let!(:item2){FactoryGirl.create(:item)}
 
     it 'delete two folders' do
       expect{xhr :delete, :destroy_multiple, :folders => [folder1.id, folder2.id]}.to change(Folder,:count).by(-2) 
+      expect{xhr :delete, :destroy_multiple, :items => [item1.id, item2.id]}.to change(Item,:count).by(-2)
     end
   end
 
