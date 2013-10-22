@@ -2,6 +2,7 @@ h2 Comments
 ul#comments
   - @comments.each do |comment|
     li= comment.content
+    = link_to "<i class='icon-remove-circle'></i>".html_safe, [@commentable, comment], method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: ''
 h2 New Comment
 = form_for [@commentable, Comment.new], remote: true do |f|
   .field

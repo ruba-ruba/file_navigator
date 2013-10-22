@@ -4,7 +4,6 @@ require 'spec_helper'
 
 describe FoldersController do
   render_views
-  let(:folder) {FactoryGirl.create(:folder)}
 
   describe "GET index" do
     it "should render index" do
@@ -15,6 +14,7 @@ describe FoldersController do
   end
 
   describe 'GET show' do
+    let!(:folder) {FactoryGirl.create(:folder)}
     it 'should render show' do
       get :show, id: folder.id
       response.should be_success
@@ -44,9 +44,13 @@ describe FoldersController do
     end
 
     describe 'create with ancestry' do
-      let!(:folder1) {FactoryGirl.create(:folder)}
+      let!(:folder) {FactoryGirl.create(:folder)}
       it 'create subfolder' do
-        expect{post :create, folder: FactoryGirl.attributes_for(:folder, :ancestry => folder1)}.to change(Folder,:count).by(1)
+        expect{xhr :post, :create, folder: FactoryGirl.attributes_for(:folder, :title => 'New Title', :parent_id => folder.id)}.to change(Folder,:count).by(1)
+        folder.reload
+        folder.children.count.should == 1
+        sub_folder = folder.children.first
+        sub_folder.title.should eq("New Title")
       end
     end
   end
@@ -62,6 +66,7 @@ describe FoldersController do
   end
 
   describe "GET #edit" do
+    let!(:folder) {FactoryGirl.create(:folder)}
     it 'render with edit ' do
       get :edit, id: folder
       response.should render_template :edit
@@ -69,6 +74,7 @@ describe FoldersController do
   end
 
   describe "PUT #update" do
+    let!(:folder) {FactoryGirl.create(:folder)}
     describe "valid attributes" do
       it "update folder" do
         put :update, id: folder, folder: FactoryGirl.attributes_for(:folder, :title => "Fodler_Name")
@@ -83,11 +89,13 @@ describe FoldersController do
         response.should render_template :edit
       end
     end
-    describe 'create with ancestry' do
-      let!(:folder1) {FactoryGirl.create(:folder)}
+    describe 'update with ancestry' do
+      let!(:folder) {FactoryGirl.create(:folder)}
+      let!(:other_folder) {FactoryGirl.create(:folder)}
       it 'update with subfolder' do
-        put :update, id: folder, folder: FactoryGirl.attributes_for(:folder, :title => "Fodler_Name", :ancestry => folder1)
-        folder.save
+        xhr :put, :update, id: folder, folder: FactoryGirl.attributes_for(:folder, :title => "Fodler_Name", :parent_id => other_folder.id)
+        folder.reload
+        folder.title.should eq("Fodler_Name")
       end
     end
   end

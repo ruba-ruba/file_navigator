@@ -16,10 +16,10 @@ describe CommentsController do
   describe "POST create" do
     let!(:folder){FactoryGirl.create(:folder)}
     it 'should create comment' do
-      expect{post :create, comment: FactoryGirl.attributes_for(:folder_comment), folder_id: folder.id}.to change(Comment,:count).by(1)
+      expect{xhr :post, :create, comment: FactoryGirl.attributes_for(:folder_comment), folder_id: folder.id}.to change(Comment,:count).by(1)
     end
     it 'should not create comment' do
-      expect{post :create, comment: FactoryGirl.attributes_for(:folder_comment, content: nil), folder_id: folder.id}.to change(Comment,:count).by(0)
+      expect{xhr :post, :create, comment: FactoryGirl.attributes_for(:folder_comment, content: nil), folder_id: folder.id}.to change(Comment,:count).by(0)
     end
   end
 
