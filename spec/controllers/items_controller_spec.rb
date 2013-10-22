@@ -37,6 +37,7 @@ describe ItemsController do
       file =  fixture_file_upload('/test.csv', 'text/csv')
       item = {folder_id: folder.id, :item => file } 
       expect{ post :create, item: item }.to change(Item,:count).by(1)
+      folder.items.should have(1).item
     end
     it 'create new item with folder' do 
       expect{ post :create, item: FactoryGirl.attributes_for(:item, item_file_name: nil) }.to change(Item,:count).by(0)
@@ -44,12 +45,13 @@ describe ItemsController do
   end
 
   describe "PUT #update" do
-    let(:item) {FactoryGirl.create(:item, :item_file_name =>"Item")}
-    let(:folder) {FactoryGirl.create(:folder)}
+    let!(:item) {FactoryGirl.create(:item, :item_file_name =>"Item")}
+    let!(:folder) {FactoryGirl.create(:folder)}
     describe "valid attributes" do
       it "update item" do
         xhr :put, :update, id: item, item: FactoryGirl.attributes_for(:item, :item_file_name => "Item_Name", folder_id: nil)
         item.save
+        item.item_file_name.should eq("Item")
       end
     end
     describe "invalid attributes" do
@@ -57,13 +59,15 @@ describe ItemsController do
         xhr :put, :update, id: item, item: FactoryGirl.attributes_for(:item, :item_file_name => nil)
         item.save
         item.reload
-        item.item_file_name == "Item"
+        item.item_file_name.should eq("Item")
       end
     end
     describe "valid attrs & folder_id" do
-      it "should not update item" do
-        xhr :put, :update, id: item, item: FactoryGirl.attributes_for(:item, folder_id: folder.id)
-        item.save
+      let!(:other_folder){FactoryGirl.create(:folder)}
+      it "should update item" do
+        xhr :put, :update, id: item, item: FactoryGirl.attributes_for(:item, folder_id: other_folder.id)
+        item.reload 
+        item.folder_id.should eq(other_folder.id) 
       end
     end
   end
