@@ -36,6 +36,7 @@ class ItemsController < ApplicationController
       else
         format.html { render action: "new" }
         format.json { render json: @item.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -68,6 +69,13 @@ class ItemsController < ApplicationController
     respond_to do |format|
       # format.html { redirect_to :back, notice: 'Item was successfully deleted.' }
       # format.json { head :no_content }
+      format.js
+    end
+  end
+
+  def destroy_by_type
+    Item.destroy(params[:items])
+    respond_to do |format|
       format.js
     end
   end

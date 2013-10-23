@@ -4,6 +4,9 @@ FileNavigator::Application.routes.draw do
 
   resources :items do
     resources :comments
+    collection do
+      delete 'destroy_by_type'
+    end
   end
   
   resources :folders do
@@ -12,6 +15,8 @@ FileNavigator::Application.routes.draw do
       delete 'destroy_multiple'
     end
   end
+
+  mount MyApp::API => "/"
 
   #get "/folders/:id/new" => "folders#new", as: :new_dir
 

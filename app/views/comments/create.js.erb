@@ -1,7 +1,8 @@
 <% if @comment.errors.any? %>
   $("#error, #error_explanation").remove();
-  $('.field').prepend("<%=escape_javascript(render('layouts/error_messages', :object => @comment))%>");
+  $('.comment_content').prepend("<%=escape_javascript(render('layouts/error_messages', :object => @comment))%>");
 <% else %>
   $("#error, #error_explanation").remove();
   $(".row-fluid").replaceWith("<%= escape_javascript(render('comments/comments'))%>");
+  $('.modal, .modal-backdrop').remove();
 <% end %>

@@ -1,0 +1,13 @@
+#myModal.modal.hide.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-header
+    .pull-right
+      button.close {aria-hidden="true" data-dismiss="modal" type="button"} x
+    h3 
+      | New Comment
+  .modal-body
+    = simple_form_for  [@commentable, @comment], remote: true, html: {novalidate: true} do |f|
+      br/
+      = f.input :content, :input_html => {:rows => 3}
+      = f.input :parent_id, :as => :hidden, :input_html => { :value => params[:comment_id] }
+      .actions
+        = submit_tag "Add comment", class: 'btn'

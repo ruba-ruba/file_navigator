@@ -1,14 +1,30 @@
-h2 Comments
-ul#comments
-  - @comments.each do |comment|
-    li
+h2 
+  | Comments 
+  = link_to 'new', new_polymorphic_path([@commentable, Comment.new], :action => 'new'), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn pull-right"}
+
+- Comment.where(commentable_id: @commentable.id).roots.each do |comment|
+  div id=(dom_id(comment))
+    div.message
       = comment.content
-      = link_to "<i class='icon-remove-circle'></i>".html_safe, [@commentable, comment], method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'remove_comment'
-h2 New Comment
-= form_for [@commentable, Comment.new], remote: true do |f|
-  .field
-    = f.label :content
-    br/
-    = f.text_area :content, :rows => 3
-  .actions
-    = submit_tag "Add comment", class: 'btn'
+      br/
+      '&nbsp
+      = link_to 'reply', new_polymorphic_path([@commentable, comment], :comment_id => comment.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => ""}
+      '&nbsp |
+      = link_to 'remove', [@commentable, comment], method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'remove_comment'
+    - if comment.children.present?
+      #submenu
+        = render 'comments/sub_comments', comment: comment
+
+
+
+/destroy by type
+- types = []
+- Item.pluck(:item_file_name).each do |item|
+  - types << item.split(".")[1]
+
+- types.uniq.each do |type|
+  - ids = []
+  - Item.where("item_file_name like (?)", "%.#{type}").each do |file|
+    - ids << file.id
+  = link_to "destroy #{type}", destroy_by_type_items_path(:items => ids) , method: :delete, remote: true
+  br/

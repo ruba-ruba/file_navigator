@@ -7,6 +7,7 @@ class Item < ActiveRecord::Base
   belongs_to :folder
 
   validates :item, :attachment_presence => true
+  validates_uniqueness_of :item_file_name, :scope => :folder_id
 
   scope :without_folder, where(:acestry == nil)
 
