@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'zip'
+
 class FoldersController < ApplicationController
 
   respond_to :js, :html
@@ -10,6 +13,22 @@ class FoldersController < ApplicationController
       format.json { render json: @folders }
       format.js
     end
+  end
+
+  def drop
+  end
+
+  def download_folder
+    @folder = Folder.find(params[:id])
+    temp = Tempfile.new("zip-file-#{Time.now}")
+    Zip::File.open(temp.path) do |z|
+      @folder.libraries.each do |file|
+        z.put_next_entry(file.uploaded_file_file_name)
+        z.print IO.read(file.uploaded_file.path)
+      end
+    end
+    send_file temp.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@folder.name}.zip"
+    temp.delete() #To remove the tempfile
   end
 
   def show

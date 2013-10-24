@@ -15,3 +15,12 @@
           = link_to "<i class='icon-remove-circle'></i>".html_safe, folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'btn remove_folder'
     = render 'items/items'
     = submit_tag "Delete Selected", class: 'btn remove_all'
+
+#fileupload
+  = form_tag multi_create_items_path, multipart: true, :id => 'new_item' do |f|
+    = hidden_field_tag :folder_id, @folder.id if @folder
+    = file_field_tag 'item[]', multiple: true
+    = submit_tag 'save', class: 'btn'
+
+
+= @format

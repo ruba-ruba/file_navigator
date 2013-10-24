@@ -8,3 +8,11 @@ $ ->
   #remove item
   $(".remove_item").bind "ajax:before", ->
     $(this).closest(".item").fadeOut()
+
+
+  $('#new_item').fileupload
+    dataType: 'script'
+    add: (e, data) ->
+      data.context = $(tmpl("template-upload", data.files[0]))
+      $('#new_item').append(data.context)
+      data.submit()

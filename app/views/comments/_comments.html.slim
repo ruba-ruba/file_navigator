@@ -17,14 +17,3 @@ h2
 
 
 
-/destroy by type
-- types = []
-- Item.pluck(:item_file_name).each do |item|
-  - types << item.split(".")[1]
-
-- types.uniq.each do |type|
-  - ids = []
-  - Item.where("item_file_name like (?)", "%.#{type}").each do |file|
-    - ids << file.id
-  = link_to "destroy #{type}", destroy_by_type_items_path(:items => ids) , method: :delete, remote: true
-  br/

@@ -4,12 +4,15 @@ FileNavigator::Application.routes.draw do
 
   resources :items do
     resources :comments
+    post 'multi_create', to: 'items#multi_create', on: :collection
     collection do
       delete 'destroy_by_type'
     end
   end
   
   resources :folders do
+    get 'drop', to: 'folders#drop', on: :collection
+    get 'download', to: 'folders#download_folder', on: :member
     resources :comments
     collection do
       delete 'destroy_multiple'

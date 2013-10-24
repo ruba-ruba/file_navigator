@@ -5,6 +5,8 @@
       '&nbsp
       = link_to "<i class='icon-file-alt'></i>  #{item.item_file_name}".html_safe, item.item(:original, false), target: '_blank'
       span.pull-right
+        = item.folder_id
+        '&nbsp
         = item.item_content_type 
         '&nbsp
         = number_to_human_size(item.item_file_size)

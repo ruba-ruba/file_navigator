@@ -14,6 +14,7 @@ end
 
 gem 'jquery-rails'
 gem "jquery-ui-rails"
+gem 'jquery-fileupload-rails'
 
 gem 'bootstrap-sass'
 gem 'bootstrap-addons-rails'
@@ -32,6 +33,8 @@ gem "remotipart", "~> 1.2.1"
 # gem 'client_side_validations'
 
 gem 'grape'
+
+gem 'rubyzip'
 
 group :development do
   gem 'annotate', '2.5.0'

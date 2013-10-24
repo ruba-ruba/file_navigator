@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-fileupload
 //= require jquery.ui.all
 //= require jquery.remotipart
 //= require jquery.iframe-transport
@@ -22,6 +23,6 @@
 //= require_tree .
 
 
-$(function() {
-  // $('form[data-validate]').validate();  
+$(function () {
+
 });

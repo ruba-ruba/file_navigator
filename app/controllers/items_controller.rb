@@ -20,6 +20,26 @@ class ItemsController < ApplicationController
     end
   end
 
+  def multi_create
+    errors = []
+    params[:item].each do |item|
+      @item = Item.new(:item => item, :folder_id => params[:folder_id])
+      if @item.save
+        #
+      else
+        errors << "#{@item.item_file_name} aleready exist" 
+      end
+    end
+    respond_to do |format|
+      if @item.folder_id.nil?
+        @items = Item.without_folder
+      else
+        @items = Item.where(:folder_id => @item.folder_id)
+      end
+      format.html { redirect_to :back}
+    end
+  end  
+
   def create
     @item =  Item.new(params[:item])
 

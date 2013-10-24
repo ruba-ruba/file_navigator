@@ -9,6 +9,6 @@ class Item < ActiveRecord::Base
   validates :item, :attachment_presence => true
   validates_uniqueness_of :item_file_name, :scope => :folder_id
 
-  scope :without_folder, where(:acestry == nil)
+  scope :without_folder, where(:folder_id => nil)
 
 end
