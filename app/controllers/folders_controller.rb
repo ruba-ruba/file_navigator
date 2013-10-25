@@ -47,11 +47,9 @@ class FoldersController < ApplicationController
         zipfile.mkdir(child.title, permissionInt = 0777)
         if child.children.present?
           child.children.each do |sub_child|
-            tree += "/#{download_folder(sub_child)}"
             zipfile.mkdir("#{child.title}/"+ sub_child.title, permissionInt = 0777)
           end
         end
-        tree
       end
     end
     send_file zipfile_name
