@@ -44,18 +44,19 @@ class FoldersController < ApplicationController
 
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
       folder.children.each do |child|
-        zipfile.mkdir(child.title, permissionInt = 0777)
-        if child.children.present?
-          child.children.each do |sub_child|
-            zipfile.mkdir("#{child.title}/"+ sub_child.title, permissionInt = 0777)
-          end
-        end
+        #zipfile.mkdir(child.title, permissionInt = 0777)
+        meth(zipfile, child)
       end
     end
     send_file zipfile_name
   end
 
-
+  def meth(zipfile, child)
+      child.children.each do |sub_child|
+        zipfile.mkdir("#{child.title}/"+ sub_child.title, permissionInt = 0777)
+        meth(zipfile ,sub_child)
+      end
+  end
 
   def show
     @folder = Folder.find(params[:id])
