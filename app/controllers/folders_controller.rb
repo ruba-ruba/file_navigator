@@ -18,18 +18,44 @@ class FoldersController < ApplicationController
   def drop
   end
 
-  def download_folder
-    @folder = Folder.find(params[:id])
-    temp = Tempfile.new("zip-file-#{Time.now}")
-    Zip::File.open(temp.path) do |z|
-      @folder.libraries.each do |file|
-        z.put_next_entry(file.uploaded_file_file_name)
-        z.print IO.read(file.uploaded_file.path)
+  def download_file
+    file = Item.find(params[:item])
+    input_filenames = [file]
+
+    folder = Rails.root.to_s
+    zipfile_name = "#{Rails.root}/archives/#{file.item_file_name}.zip"
+
+    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+      input_filenames.each do |filename|
+        zipfile.add(filename.item_file_name.to_s, folder + '/public' + filename.item.url.to_s)
       end
     end
-    send_file temp.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@folder.name}.zip"
-    temp.delete() #To remove the tempfile
+    send_file zipfile_name
   end
+
+  def download_folder
+    #binding.pry
+    folder = Folder.find(params[:folder])
+    input_foldername = [folder.title]
+
+    path = Rails.root.to_s
+
+    zipfile_name = "#{Rails.root}/archives/#{folder.title}_#{Time.now.to_i}.zip"
+
+    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+      folder.children.each do |child|
+        zipfile.mkdir(child.title, permissionInt = 0777)
+        if child.children.present?
+          child.children.each do |sub_child|
+            zipfile.mkdir("#{child.title}/"+ sub_child.title, permissionInt = 0777)
+          end
+        end
+      end
+    end
+    send_file zipfile_name
+  end
+
+
 
   def show
     @folder = Folder.find(params[:id])

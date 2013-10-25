@@ -7,6 +7,9 @@
         = link_to "<i class='icon-backward'></i> back".html_safe, folder_path(@folder.parent)
       '&nbsp
       .pull-right
+        span.delete_multiple.btn.btn-danger.hide 
+          | delete selected 
+        '&nbsp
         = link_to "<i class='icon-folder-close'></i>  Add Folder".html_safe,  new_folder_path(:folder_id => params[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_folder"}
         '&nbsp
         = link_to "<i class='icon-file'></i> Add File".html_safe,  new_item_path(:folder_id => @folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_item"}

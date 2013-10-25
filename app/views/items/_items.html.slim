@@ -7,7 +7,7 @@
       span.pull-right
         = item.folder_id
         '&nbsp
-        = item.item_content_type 
+        = truncate(item.item_content_type,  :length => 25, :omission => '...')   
         '&nbsp
         = number_to_human_size(item.item_file_size)
         '&nbsp
@@ -18,4 +18,6 @@
         = link_to  "<i class='icon-edit'></i>".html_safe, edit_item_path(item), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn update_folder"}
         '&nbsp
         = link_to "<i class='icon-remove-circle'></i>".html_safe, item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "remove_item btn"
+        '&nbsp
+        = link_to "zip", download_file_path(:item => item.id) , class: ""
     

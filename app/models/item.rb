@@ -1,7 +1,9 @@
 class Item < ActiveRecord::Base
   attr_accessible :folder_id, :item, :item_file_name,  :item_content_type, :item_file_size, :item_updated_at
 
-  has_attached_file :item
+  has_attached_file :item,
+                    :url  => "/system/:attachment/:id/:style_:filename",
+                    :path => ":rails_root/public/system/:attachment/:id/:style_:filename" 
 
   has_many :comments, :as => :commentable, dependent: :destroy
   belongs_to :folder

@@ -10,9 +10,10 @@ FileNavigator::Application.routes.draw do
     end
   end
   
+  get 'download_file', to: 'folders#download_file'
+  get 'download_folder', to: 'folders#download_folder'  
   resources :folders do
     get 'drop', to: 'folders#drop', on: :collection
-    get 'download', to: 'folders#download_folder', on: :member
     resources :comments
     collection do
       delete 'destroy_multiple'

@@ -9,6 +9,16 @@ $ ->
   $(".remove_item").bind "ajax:before", ->
     $(this).closest(".item").fadeOut()
 
+  $('.remove_all_by_type').click ->
+    $(this).remove()
 
-  $('#new_item').fileupload
-    dataType: 'script'
+  $('form').on 'drop', ->
+    setTimeout (->
+      $('form').submit()
+    ), 1000
+      
+
+
+  #$('#new_item').fileupload
+  #  dataType: 'script'
+

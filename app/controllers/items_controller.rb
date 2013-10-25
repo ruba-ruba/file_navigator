@@ -95,6 +95,11 @@ class ItemsController < ApplicationController
 
   def destroy_by_type
     Item.destroy(params[:items])
+    if params[:folder_id]
+      @items = Item.where(:folder_id => params[:folder_id])      
+    else
+      @items = Item.without_folder
+    end
     respond_to do |format|
       format.js
     end
