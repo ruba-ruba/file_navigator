@@ -12,7 +12,3 @@ $ ->
 
   $('#new_item').fileupload
     dataType: 'script'
-    add: (e, data) ->
-      data.context = $(tmpl("template-upload", data.files[0]))
-      $('#new_item').append(data.context)
-      data.submit()
