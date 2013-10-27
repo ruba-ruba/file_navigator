@@ -1,0 +1,48 @@
+= number_to_human_size @jpgs_sum
+br/
+= number_to_human_size @others_sum
+
+#container
+
+javascript:
+  $(function () {
+      $('#container').highcharts({
+          title: {
+              text: 'total size of txt and other files',
+              x: -20 //center
+          },
+          subtitle: {
+              text: '',
+              x: -20
+          },
+          xAxis: {
+              categories: ["count"]
+          },
+          yAxis: {
+              title: {
+                  text: 'Size'
+              },
+              plotLines: [{
+                  value: 0,
+                  width: 1,
+                  color: '#808080'
+              }]
+          },
+          tooltip: {
+              valueSuffix: ''
+          },
+          legend: {
+              layout: 'vertical',
+              align: 'right',
+              verticalAlign: 'middle',
+              borderWidth: 0
+          },
+          series: [{
+              name: 'jpg size',
+              data: [#{@jpgs_sum}]
+          }, {
+              name: 'other size',
+              data: [#{@others_sum}]
+          }]
+      });
+    });

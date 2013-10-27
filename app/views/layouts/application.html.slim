@@ -14,5 +14,8 @@ html
       .container-fluid
         .content
           .row-fluid
-            = yield
+            .span3
+              = render 'layouts/tree'
+            .span9
+              = yield
       footer

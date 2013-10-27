@@ -1,0 +1,13 @@
+.tree
+  - @root_folders.each do |folder|
+    #root
+      = link_to folder.title, folder, id: dom_id(folder)
+      '&nbsp
+      = folder.id
+      - if folder.children.any? || folder.items.any?
+        = render 'layouts/sub_tree', folder: folder
+  - if @root_items.any?
+    .items
+      - @root_items.each do |file|
+        = link_to file.item_file_name, file.item(:original, false)
+        br/

@@ -9,7 +9,6 @@ div.actions
       = link_to "<i class='icon-file'></i> Add File".html_safe,  new_item_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_item"}
 
 
-.clearfix
 p#notice= notice
 = render 'folders/folders'
 

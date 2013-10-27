@@ -30,11 +30,11 @@ gem 'simple_form'
 
 gem "remotipart", "~> 1.2.1"
 
-# gem 'client_side_validations'
-
 gem 'grape'
 
 gem 'rubyzip'
+
+gem "highcharts-rails", "~> 3.0.0"
 
 group :development do
   gem 'annotate', '2.5.0'

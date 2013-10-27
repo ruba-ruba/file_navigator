@@ -1,5 +1,18 @@
 class ItemsController < ApplicationController
 
+  def index
+    jpgs = Item.where("item_file_name like (?)", "%.jpg")
+    @jpgs_sum = jpgs.pluck(:item_file_size).inject{|sum,x| sum + x }
+    @jpgs_count = jpgs.count
+    others = Item.where("item_file_name NOT LIKE (?)", "%.jpg")
+    @others_sum = others.pluck(:item_file_size).inject{|sum,x| sum + x }
+    @others_count = others.count
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
 
   def new
     @item = Item.new

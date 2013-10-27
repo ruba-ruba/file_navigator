@@ -15,10 +15,4 @@ $ ->
   $('form').on 'drop', ->
     setTimeout (->
       $('form').submit()
-    ), 1000
-      
-
-
-  #$('#new_item').fileupload
-  #  dataType: 'script'
-
+    ), 600
