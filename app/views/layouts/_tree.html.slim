@@ -2,9 +2,10 @@
   - @root_folders.each do |folder|
     #root
       = link_to folder.title, folder, id: dom_id(folder)
-      '&nbsp
-      = folder.id
       - if folder.children.any? || folder.items.any?
+        '&nbsp
+        = "<i class='icon-chevron-down  hide' id='#{dom_id(folder)}'></i>".html_safe
+        = "<i class='icon-chevron-up' id='#{dom_id(folder)}'></i>".html_safe
         = render 'layouts/sub_tree', folder: folder
   - if @root_items.any?
     .items

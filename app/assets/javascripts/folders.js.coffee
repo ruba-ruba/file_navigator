@@ -27,3 +27,15 @@ $ ->
       $(".delete_multiple").addClass('hide')
 
 
+  $("i.icon-chevron-down").on 'click', ->
+    $(this).addClass('hide')
+    id = $(this).attr('id')
+    $("div[id="+id+"]").removeClass("hide")
+    $(this).next().removeClass("hide")
+
+  $("i.icon-chevron-up").on 'click', ->
+    $(this).addClass('hide')
+    id = $(this).attr('id')
+    $("div[id="+id+"]").addClass("hide")
+    $(this).prev().removeClass("hide")
+

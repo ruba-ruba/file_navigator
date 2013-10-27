@@ -10,9 +10,10 @@ html
       header
         .container-fluid
           = render 'layouts/header'
-          = render 'layouts/flash'
       .container-fluid
         .content
+          - flash.each do |key, value|
+            = content_tag(:div, value, class: "alert alert-#{key}")
           .row-fluid
             .span3
               = render 'layouts/tree'

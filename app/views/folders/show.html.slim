@@ -1,20 +1,21 @@
-.span12
-  div.root
-    span.back
-      - if @folder.parent == nil
-        = link_to  "<i class='icon-backward'></i> back".html_safe, folders_path
-      - else 
-        = link_to "<i class='icon-backward'></i> back".html_safe, folder_path(@folder.parent)
+div.root
+  span.back
+    - if @folder.parent == nil
+      = link_to  "<i class='icon-backward'></i> back".html_safe, folders_path
+    - else 
+      = link_to "<i class='icon-backward'></i> back".html_safe, folder_path(@folder.parent)
+    '&nbsp
+    .pull-right
+      span.delete_multiple.btn.btn-danger.hide 
+        | delete selected 
       '&nbsp
-      .pull-right
-        span.delete_multiple.btn.btn-danger.hide 
-          | delete selected 
-        '&nbsp
-        = link_to "<i class='icon-folder-close'></i>  Add Folder".html_safe,  new_folder_path(:folder_id => params[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_folder"}
-        '&nbsp
-        = link_to "<i class='icon-file'></i> Add File".html_safe,  new_item_path(:folder_id => @folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_item"}
-    h5
-      = "<i class='icon-folder-open icon-large'></i>   #{@folder.title}".html_safe
-        
-  p#notice= notice
-  = render 'folders'
+      = link_to "<i class='icon-folder-close'></i>  Add Folder".html_safe,  new_folder_path(:folder_id => params[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_folder"}
+      '&nbsp
+      = link_to "<i class='icon-file'></i> Add File".html_safe,  new_item_path(:folder_id => @folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_item"}
+      '&nbsp
+      = link_to "<i class='icon-info-sign'></i> folder info".html_safe,  info_folder_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn info"}
+
+  h5
+    = "<i class='icon-folder-open icon-large'></i>   #{@folder.title}".html_safe
+      
+= render 'folders'

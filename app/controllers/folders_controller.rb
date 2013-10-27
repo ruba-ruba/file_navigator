@@ -5,6 +5,8 @@ class FoldersController < ApplicationController
 
   respond_to :js, :html
 
+  before_filter :authorize, only: [:edit, :update]
+
   def index
     show_roots
 
@@ -16,6 +18,10 @@ class FoldersController < ApplicationController
   end
 
   def drop
+  end
+
+  def folder_info
+    folder = Folder.find params[:id]
   end
 
   def download_file

@@ -1,7 +1,7 @@
 .folders.span12
   = form_tag destroy_multiple_folders_path, method: :delete, id: 'multiple_delete_form', remote: true do
     - @folders.each do |folder|
-      div.folder id=(dom_id(folder))
+      div.folder id=(folder.id)
         = check_box_tag "folders[]", folder.id
         '&nbsp
         = link_to "<i class='icon-folder-close'></i>  #{folder.title}".html_safe, folder 

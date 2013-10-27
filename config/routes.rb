@@ -1,5 +1,12 @@
 FileNavigator::Application.routes.draw do
 
+  get 'signup', to: 'users#new', as: 'signup'
+  get 'login', to: 'sessions#new', as: 'login'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
+
+  resources :sessions
+  resources :users
+
   root to: 'folders#index'
 
   resources :items do
@@ -13,6 +20,7 @@ FileNavigator::Application.routes.draw do
   get 'download_file', to: 'folders#download_file'
   get 'download_folder', to: 'folders#download_folder'  
   resources :folders do
+    get 'info', to: 'folders#folder_info', on: :member
     get 'drop', to: 'folders#drop', on: :collection
     resources :comments
     collection do

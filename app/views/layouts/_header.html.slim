@@ -1,2 +1,12 @@
 h1
   = link_to 'file navigator', root_path
+  .pull-right
+    - if current_user
+      | Logged in as 
+      = current_user.email
+      '&nbsp
+      = link_to "Log Out", logout_path, method: "delete", class: 'btn btn-warning' 
+    - else
+      = link_to "Sign Up", signup_path, class: 'btn btn-success'
+      '&nbsp
+      = link_to "Log In", login_path, class: 'btn btn-success'
