@@ -20,11 +20,22 @@ class FoldersController < ApplicationController
   def drop
   end
 
-  def folder_info
-    @folder = Folder.find params[:id]
-    @folders_count = @folder.children.count
-    @items_count = @folder.items.count
+  def folder_info(folder = nil)
+    if folder.nil?
+      @folder = Folder.find params[:id]
+    else
+      @folder = folder
+    end
+    sub_folders = []
+    items = []
+    items << @folder.items 
+    @folder.children.each do |child|
+      sub_folders << folder_info(child)
+    end
+    puts sub_folders.count
+    puts items.count
   end
+
 
   def download_file
     file = Item.find(params[:item])
