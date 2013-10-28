@@ -6,6 +6,8 @@ class Folder < ActiveRecord::Base
   has_many :items, dependent: :destroy
   has_many :comments, :as => :commentable, dependent: :destroy
 
+  belongs_to :user
+
   validates :title, presence: true
   validates_uniqueness_of :title, :scope => :ancestry
 

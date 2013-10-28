@@ -5,7 +5,7 @@ class FoldersController < ApplicationController
 
   respond_to :js, :html
 
-  before_filter :authorize, only: [:edit, :update]
+  before_filter :authorize, only: [:edit, :update, :new, :create, :destroy]
 
   def index
     show_roots
@@ -21,7 +21,9 @@ class FoldersController < ApplicationController
   end
 
   def folder_info
-    folder = Folder.find params[:id]
+    @folder = Folder.find params[:id]
+    @folders_count = @folder.children.count
+    @items_count = @folder.items.count
   end
 
   def download_file
@@ -39,6 +41,8 @@ class FoldersController < ApplicationController
     send_file zipfile_name
   end
 
+
+
   def download_folder
     #binding.pry
     folder = Folder.find(params[:folder])
@@ -50,18 +54,21 @@ class FoldersController < ApplicationController
 
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
       folder.children.each do |child|
-        #zipfile.mkdir(child.title, permissionInt = 0777)
-        meth(zipfile, child)
+        #zipfile.mkdir(folder.title, permissionInt = 0777)
+        meth(zipfile, child, nil)
       end
     end
     send_file zipfile_name
   end
 
-  def meth(zipfile, child)
-      child.children.each do |sub_child|
-        zipfile.mkdir("#{child.title}/"+ sub_child.title, permissionInt = 0777)
-        meth(zipfile ,sub_child)
+  def meth(zipfile, child, sub_name)
+    child.children.each do |sub_child|
+      if sub_name
+        zipfile.mkdir("#{sub_name}/"+ sub_child.title, permissionInt = 0777)
       end
+      sub_name = "#{child.parent.title}/#{child.title}/#{sub_child.title}"
+      meth(zipfile, sub_child, sub_name)
+    end
   end
 
   def show
@@ -108,7 +115,7 @@ class FoldersController < ApplicationController
 
 
   def create
-    @folder = Folder.new(params[:folder]) 
+    @folder = current_user.folders.build(params[:folder]) 
     
     respond_to do |format|
       if @folder.save

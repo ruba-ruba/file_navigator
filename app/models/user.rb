@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :email
 
+  has_many :folders 
+  has_many :items
+  has_many :comments
+
   ROLES = %w[user admin]
 
   after_create :default_role
