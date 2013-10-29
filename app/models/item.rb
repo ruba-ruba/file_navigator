@@ -14,4 +14,22 @@ class Item < ActiveRecord::Base
 
   scope :without_folder, where(:folder_id => nil)
 
+  def path
+    folder ? folder.path : nil
+  end
+
 end
+
+
+
+# if folder_id.nil?
+#   nil
+# else
+#   result = []
+#   folder = self.folder
+#   while folder do
+#     result << folder.title
+#     folder = folder.parent
+#   end
+#   result.reverse.join("/")
+# end

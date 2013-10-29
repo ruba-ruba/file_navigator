@@ -13,7 +13,7 @@ div.root
       '&nbsp
       = link_to "<i class='icon-file'></i> Add File".html_safe,  new_item_path(:folder_id => @folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_item"}
       '&nbsp
-      = link_to "<i class='icon-info-sign'></i> folder info".html_safe,  info_folder_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn info"}
+      
 
   h5
     = "<i class='icon-folder-open icon-large'></i>   #{@folder.title}".html_safe

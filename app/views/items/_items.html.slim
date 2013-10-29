@@ -19,5 +19,5 @@
         '&nbsp
         = link_to "<i class='icon-remove-circle'></i>".html_safe, item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "remove_item btn"
         '&nbsp
-        = link_to "zip", download_file_path(:item => item.id) , class: ""
+        = link_to "zip", download_file_path(:item => item.id) , class: "btn btn-mini"
     

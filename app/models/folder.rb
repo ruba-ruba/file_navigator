@@ -12,4 +12,19 @@ class Folder < ActiveRecord::Base
   validates_uniqueness_of :title, :scope => :ancestry
 
   accepts_nested_attributes_for :items, allow_destroy: true
+
+  def path
+    if self.parent.nil?
+      nil
+    else
+      result = []
+      folder = self.parent
+      while folder do
+        result << folder.title
+        folder = folder.parent
+      end
+      result.reverse.join("/")
+    end
+  end
 end
+

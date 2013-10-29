@@ -20,20 +20,18 @@ class FoldersController < ApplicationController
   def drop
   end
 
-  def folder_info(folder = nil)
+  def folder_info(folder = nil, sub_folders = [], items = [])
     if folder.nil?
       @folder = Folder.find params[:id]
     else
       @folder = folder
     end
-    sub_folders = []
-    items = []
-    items << @folder.items 
     @folder.children.each do |child|
-      sub_folders << folder_info(child)
+      items << @folder.items 
+      sub_folders << folder_info(child, sub_folders, items)
     end
-    puts sub_folders.count
-    puts items.count
+    @sub_folders_count = sub_folders.count
+    @items_count = items.compact.flatten.count
   end
 
 
@@ -66,20 +64,27 @@ class FoldersController < ApplicationController
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
       folder.children.each do |child|
         #zipfile.mkdir(folder.title, permissionInt = 0777)
-        meth(zipfile, child, nil)
+        meth(zipfile, child)
       end
     end
     send_file zipfile_name
   end
 
-  def meth(zipfile, child, sub_name)
+  def meth(zipfile, child)
+
     child.children.each do |sub_child|
-      if sub_name
-        zipfile.mkdir("#{sub_name}/"+ sub_child.title, permissionInt = 0777)
-      end
-      sub_name = "#{child.parent.title}/#{child.title}/#{sub_child.title}"
-      meth(zipfile, sub_child, sub_name)
+      zipfile.mkdir("#{child.parent.path}/"+ sub_child.title, permissionInt = 0777)
+      meth(zipfile, sub_child)
     end
+
+    # input_filenames = []
+    # input_filenames << child.parent.items if child.parent.items.any?
+    # input_filenames.each do |filename|
+    #   filename.each do |file|
+    #     zipfile.add("#{file.path}/" + file.item_file_name.to_s, File.expand_path('../..', zipfile.to_s)+ '/public' + file.item.url.to_s)
+    #   end
+    # end
+
   end
 
   def show

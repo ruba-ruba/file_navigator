@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :role
   
   validates_uniqueness_of :email
+  validates :email, :presence => true
 
   has_many :folders 
   has_many :items

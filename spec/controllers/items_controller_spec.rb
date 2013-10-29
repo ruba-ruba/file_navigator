@@ -9,6 +9,14 @@ describe ItemsController do
   #   @file = Item.new(folder_id: 2, :item => File.new(Rails.root + 'spec/factories/test.csv'))
   # end
 
+  describe 'GET index' do
+    it 'should render index' do
+      get :index
+      response.should be_success
+      response.should render_template :index
+    end
+  end
+
   describe 'get #new' do 
     it 'should render new' do
       xhr :get, :new
@@ -76,6 +84,14 @@ describe ItemsController do
   describe "DELETE destroy" do
     let!(:item) {FactoryGirl.create(:item)}
     it "delete item" do
+      expect{xhr :delete, :destroy, id: item.id }.to change(Item,:count).by(-1) 
+    end
+  end
+
+  describe 'DELETE destroy_by type' do
+    let!(:item1){FactoryGirl.create(:item, :item_file_name => 'item1.txt')}
+    let!(:item2){FactoryGirl.create(:item, :item_file_name => 'item2.txt')}
+    it 'delete two items' do
       expect{xhr :delete, :destroy, id: item.id }.to change(Item,:count).by(-1) 
     end
   end

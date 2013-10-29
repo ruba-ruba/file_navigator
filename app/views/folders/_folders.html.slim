@@ -8,14 +8,16 @@
         span.pull-right
           = folder.created_at.strftime('%d/%m/%y')
           '&nbsp
+          = link_to "<i class='icon-info-sign'></i>".html_safe,  info_folder_path(:id => folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn info"}
+          '&nbsp
           = link_to "<i class='icon-comments'></i>".html_safe, folder_comments_path(folder), class: 'btn'
           '&nbsp
           = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(folder), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn update_folder"}
           '&nbsp
           = link_to "<i class='icon-remove-circle'></i>".html_safe, folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'btn remove_folder'
           '&nbsp
-          = link_to "zip", download_folder_path(:folder => folder.id) , class: ""
-    
+          = link_to "zip", download_folder_path(:folder => folder.id) , class: "btn btn-mini"
+          
     = render 'items/items'
 
   #fileupload

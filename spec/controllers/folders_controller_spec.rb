@@ -4,7 +4,8 @@ require 'spec_helper'
 
 describe FoldersController do
   render_views
-
+  login_user
+  
   describe "GET index" do
     it "should render index" do
       get :index
@@ -24,6 +25,16 @@ describe FoldersController do
       folder2 = FactoryGirl.create(:folder, title: 'blah')
       get :show, id: folder2.id
       response.body.should  =~ /blah/ 
+    end
+  end
+
+  describe "get show_info" do
+    let!(:folder){FactoryGirl.create(:folder)}
+    let!(:parent_1){FactoryGirl.create(:folder, parent_id: folder.id)}
+    let!(:parent_2){FactoryGirl.create(:folder, parent_id: parent_1.id)}
+    it 'should return info about folder' do
+      xhr :get, :folder_info, id: folder
+      
     end
   end
 

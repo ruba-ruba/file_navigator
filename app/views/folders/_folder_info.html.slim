@@ -5,7 +5,7 @@
     h3 
       | Folders & Items count
   .modal-body
-    = @folders_count
+    = @sub_folders_count
     = @items_count
     #folder_info
 
@@ -50,7 +50,7 @@ javascript:
               },
               series: [{
                   name: "folders count",
-                  data: [#{@folders_count}]
+                  data: [#{@sub_folders_count}]
       
               },{
                   name: "items count",
