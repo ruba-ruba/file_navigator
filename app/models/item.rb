@@ -9,6 +9,8 @@ class Item < ActiveRecord::Base
   belongs_to :folder
   belongs_to :user
 
+  delegate :path, :to => :user, :allow_nil => true
+
   validates :item, :attachment_presence => true
   validates_uniqueness_of :item_file_name, :scope => :folder_id
 

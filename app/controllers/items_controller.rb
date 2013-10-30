@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
 
+  before_filter :authorize, only: [:edit, :update, :new, :create, :destroy]
+
   def index
     jpgs = Item.where("item_file_name like (?)", "%.jpg")
     @jpgs_sum = jpgs.pluck(:item_file_size).inject{|sum,x| sum + x }
@@ -36,7 +38,7 @@ class ItemsController < ApplicationController
   def multi_create
     errors = []
     params[:item].each do |item|
-      @item = Item.new(:item => item, :folder_id => params[:folder_id])
+      @item = current_user.items.build(:item => item, :folder_id => params[:folder_id])
       if @item.save
         #
       else

@@ -22,7 +22,6 @@ describe Folder do
       sub_folder1.ancestry.should eq("#{folder.id}")
       sub_folder2.ancestry.should eq("#{folder.id}/#{sub_folder1.id}")
 
-      binding.pry
       folder.path.should be_nil
       sub_folder1.path.should eq("#{folder.title}")
       sub_folder2.path.should eq("#{folder.title}/#{sub_folder1.title}")

@@ -16,9 +16,9 @@ describe Item do
       file_2.folder_id.should eq(folder.id)
       file_3.folder_id.should eq(sub_folder.id)
 
-      file_1.full_folder_path.should eq(nil)
-      file_2.full_folder_path.should eq(folder.title)
-      file_3.full_folder_path.should eq("#{folder.title}/#{sub_folder.title}")
+      file_1.path.should eq(nil)
+      file_2.path.should eq(folder.title)
+      file_3.path.should eq("#{folder.title}/#{sub_folder.title}")
     end
 
   end

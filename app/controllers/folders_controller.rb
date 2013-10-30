@@ -63,7 +63,7 @@ class FoldersController < ApplicationController
 
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
       folder.children.each do |child|
-        #zipfile.mkdir(folder.title, permissionInt = 0777)
+        
         meth(zipfile, child)
       end
     end
@@ -73,7 +73,7 @@ class FoldersController < ApplicationController
   def meth(zipfile, child)
 
     child.children.each do |sub_child|
-      zipfile.mkdir("#{child.parent.path}/"+ sub_child.title, permissionInt = 0777)
+      zipfile.mkdir("#{sub_child.path}/"+ sub_child.title, permissionInt = 0777)
       meth(zipfile, sub_child)
     end
 
