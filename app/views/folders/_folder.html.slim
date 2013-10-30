@@ -1,3 +1,9 @@
-.message
+div id=dom_id(folder) 
   .content
     = link_to folder.title, folder
+    - if folder.items.any?
+      .items
+        - folder.items.each do |item|
+          = link_to item.item_file_name, item.item(:original, false)
+          br/
+          

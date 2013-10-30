@@ -9,5 +9,6 @@
       br/
       = f.input :content, :input_html => {:rows => 3}
       = f.input :parent_id, :as => :hidden, :input_html => { :value => params[:comment_id] }
+      = f.hidden_field :user_id, :value => current_user.id 
       .actions
         = submit_tag "Add comment", class: 'btn'

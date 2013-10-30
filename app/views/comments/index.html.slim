@@ -1,1 +1,6 @@
-= render 'comments'
+h2 
+  | Comments 
+  = link_to 'new', new_polymorphic_path([@commentable, Comment.new], :action => 'new'), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn pull-right"}
+
+
+= nested_comments @comments.arrange

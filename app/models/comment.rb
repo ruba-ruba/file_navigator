@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :commentable_id, :commentable_type, :content, :parent_id
+  attr_accessible :commentable_id, :commentable_type, :content, :parent_id, :user_id
 
   has_ancestry
   

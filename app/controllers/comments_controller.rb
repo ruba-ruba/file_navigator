@@ -2,8 +2,12 @@ class CommentsController < ApplicationController
 
   before_filter :load_commentable
 
+  before_filter :authorize, only: [:edit, :update, :new, :create, :destroy]
+
   def index
-    @comments = @commentable.comments
+    #binding.pry
+    #@comments = @commentable.comments
+    @comments = Comment.where(:commentable_id => @commentable.id).scoped
   end
 
   def new
