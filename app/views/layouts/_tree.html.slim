@@ -1,14 +1,11 @@
 .tree
-  - @root_folders.each do |folder|
+  - object = Folder.roots unless object
+
+  - object.chidren.each do |folder|
     #root
       = link_to folder.title, folder, id: dom_id(folder)
       - if folder.children.any? || folder.items.any?
         '&nbsp
         = "<i class='icon-chevron-down  hide' id='#{dom_id(folder)}'></i>".html_safe
         = "<i class='icon-chevron-up' id='#{dom_id(folder)}'></i>".html_safe
-        = render 'layouts/sub_tree', folder: folder
-  - if @root_items.any?
-    .items
-      - @root_items.each do |file|
-        = link_to file.item_file_name, file.item(:original, false)
-        br/
+        = render 'layouts/tree', object: folder

@@ -1,5 +1,7 @@
 class Folder < ActiveRecord::Base
-  attr_accessible :title, :parent_id, :parent, :ancestry
+  attr_accessible :title, :parent_id, :parent, :ancestry, :folder
+
+  attr_accessor :folder
 
   has_ancestry
 
@@ -13,18 +15,20 @@ class Folder < ActiveRecord::Base
 
   accepts_nested_attributes_for :items, allow_destroy: true
 
-  def path
+  def path(root = nil)
     if self.parent.nil?
       nil
     else
+      #binding.pry
       result = []
       folder = self.parent
-      while folder do
+      while folder != nil
         result << folder.title
-        folder = folder.parent
+        folder = folder == root ? nil : folder.parent
       end
       result.reverse.join("/")
     end
   end
+
 end
 

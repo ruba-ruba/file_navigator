@@ -1,10 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :tree
+  before_filter :root_items
 
-  def tree
-    @root_folders = Folder.roots
+  def root_items
     @root_items = Item.without_folder
   end  
 

@@ -51,40 +51,35 @@ class FoldersController < ApplicationController
   end
 
 
-
   def download_folder
-    #binding.pry
     folder = Folder.find(params[:folder])
-    input_foldername = [folder.title]
+    input_folder_name = [folder.title]
 
-    path = Rails.root.to_s
+    path = Rails.root
 
-    zipfile_name = "#{Rails.root}/archives/#{folder.title}_#{Time.now.to_i}.zip"
+    zip_file_name = "#{Rails.root}/archives/#{folder.title}_#{Time.now.to_i}.zip"
 
-    Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
-      folder.children.each do |child|
-        
-        meth(zipfile, child)
-      end
+    Zip::File.open(zip_file_name, Zip::File::CREATE) do |zip_file|
+      create_folder_tree(zip_file, folder, folder)
     end
-    send_file zipfile_name
+    send_file zip_file_name
   end
 
-  def meth(zipfile, child)
-
-    child.children.each do |sub_child|
-      zipfile.mkdir("#{sub_child.path}/"+ sub_child.title, permissionInt = 0777)
-      meth(zipfile, sub_child)
+  def create_folder_tree(zip_file, folder, root)
+    create_files_for_zip(zip_file, folder, root)
+    folder.children.each do |sub_folder|
+      zip_file.mkdir([sub_folder.path(root), sub_folder.title].join('/'), 0777)
+      create_folder_tree(zip_file, sub_folder, root)
     end
+  end
 
-    # input_filenames = []
-    # input_filenames << child.parent.items if child.parent.items.any?
-    # input_filenames.each do |filename|
-    #   filename.each do |file|
-    #     zipfile.add("#{file.path}/" + file.item_file_name.to_s, File.expand_path('../..', zipfile.to_s)+ '/public' + file.item.url.to_s)
-    #   end
-    # end
-
+  def create_files_for_zip(zip_file, folder, root)
+    input_filenames = folder.items.flatten
+    input_filenames.each do |file|
+      destination_to_file = File.expand_path('../..', zip_file.to_s) + '/public' + file.item.url
+      file_name = [file.path(root), file.item_file_name].compact.join('/')
+      zip_file.add(file_name, destination_to_file)
+    end
   end
 
   def show
