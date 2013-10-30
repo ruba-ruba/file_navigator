@@ -1,6 +1,7 @@
 .tree
   - object = Folder.roots unless object
 
+  - if object
   - object.chidren.each do |folder|
     #root
       = link_to folder.title, folder, id: dom_id(folder)
