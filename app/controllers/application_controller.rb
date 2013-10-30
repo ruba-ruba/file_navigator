@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :root_items
 
   def root_items
+    @root_folders = Folder.scoped
     @root_items = Item.without_folder
   end  
 
