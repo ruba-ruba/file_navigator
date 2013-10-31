@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-  before_filter :authorize, only: [:edit, :update, :new, :create, :destroy]
+  before_filter :authorize, only: [:edit, :update, :new, :create, :multi_create,  :destroy]
 
   def index
     jpgs = Item.where("item_file_name like (?)", "%.jpg")

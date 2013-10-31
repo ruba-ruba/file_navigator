@@ -5,6 +5,9 @@ div.root
     - else 
       = link_to "<i class='icon-backward'></i> back".html_safe, folder_path(@folder.parent)
     '&nbsp
+    br/
+    br/
+    = "<i class='icon-folder-open icon-large'></i>   #{@folder.title}".html_safe
     .pull-right
       span.delete_multiple.btn.btn-danger.hide 
         | delete selected 
@@ -14,8 +17,5 @@ div.root
       = link_to "<i class='icon-file'></i> Add File".html_safe,  new_item_path(:folder_id => @folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_item"}
       '&nbsp
       
-
-  h5
-    = "<i class='icon-folder-open icon-large'></i>   #{@folder.title}".html_safe
       
 = render 'folders'

@@ -9,7 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require _font-awesome
  *= require jquery.ui.all
  *= require jquery.fileupload-ui
  *= require_tree .
@@ -23,11 +22,18 @@
 }
 
 a{
+  color: black;
   text-decoration: none !important;
+  &:visited {
+    color: white;
+  }
+  &:hover {
+    color: white !important;
+    background-color: #000;
+    text-decoration: none !important;
+    color:black !important;
+    background: none !important;
+  }
 }
 
-a:hover{
-  text-decoration: none !important;
-  color:black !important;
-  background: none !important;
-};
+

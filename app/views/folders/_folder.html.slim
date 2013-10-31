@@ -1,9 +1,16 @@
-div id=dom_id(folder) 
+div parent=dom_id(folder) 
   .content
+    - if folder.children.any? || folder.items.any?
+      = "<i class='icon-plus hide' id='#{dom_id(folder)}'></i>".html_safe
+      = "<i class='icon-minus' id='#{dom_id(folder)}'></i>".html_safe
+      '&nbsp
+    = "<i class='icon-folder-open' id='#{dom_id(folder)}'></i>".html_safe
+    '&nbsp
+    = "<i class='icon-folder-close hide' id='#{dom_id(folder)}'></i>".html_safe
     = link_to folder.title, folder
     - if folder.items.any?
-      .items
+      .items id=(dom_id(folder))
         - folder.items.each do |item|
-          = link_to item.item_file_name, item.item(:original, false)
+          = link_to "<i class='icon-file'></i> #{item.item_file_name}".html_safe, item.item(:original, false)
           br/
           

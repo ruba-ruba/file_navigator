@@ -1,17 +1,22 @@
-h1 Sign Up
-= form_for @user do |f|
-  - if @user.errors.any?
-    .error_messages
-      h2 Form is invalid
-      ul
-        - @user.errors.full_messages.each do |message|
-          li= message
-  .field
+.span6.offset2
+  h2 Sign Up
+  = form_for @user do |f|
+    - if @user.errors.any?
+      .error_messages
+        h2 Form is invalid
+        ul
+          - @user.errors.full_messages.each do |message|
+            li= message
+
     = f.label :email
-    br/
     = f.text_field :email
-  .field
     = f.label :password
-    br/
     = f.password_field :password
-  .actions= f.submit "Sign Up"
+    .actions
+      = f.submit "Sign Up", class: 'btn btn-success'
+
+
+javascript:
+  $(function () {
+    $(".tree").addClass('hide');
+  });

@@ -2,7 +2,7 @@ div id=(dom_id(comment))
   div.message
     = comment.content
     br/
-    '&nbsp
     = link_to 'reply', new_polymorphic_path([@commentable, comment], :comment_id => comment.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => ""}
-    '&nbsp |
-    = link_to 'remove', [@commentable, comment], method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'remove_comment'
+    - if current_user == comment.user
+      '&nbsp |
+      = link_to 'remove', [@commentable, comment], method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'remove_comment'

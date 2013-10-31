@@ -14,25 +14,22 @@ header
   line-height: 26px
   .container-fluid
     h1
+      a.root
+        font-size: 24px
+        font-style: italic
+      a.root:hover
+        font-size: 24px
+        font-style: italic
       a
-        color: white
         text-decoration: none
+        color: white !important
       a:hover
+        color: white !important
+        text-decoration:  none
         color: white !important
         text-decoration:  none
 
 
-.folders
-  margin-top: -5px
-  
-.root
-  margin-bottom: 10px
-  .back
-    display: block
-    margin-bottom: 10px 
-    a
-      font-size: 15px 
-      
 
 .folder, .item
   margin-left: 0px !important
@@ -42,8 +39,6 @@ header
 .folder
   background: rgba(1, 221, 51, 0.1)
 
-.folder, .item
-  padding-left: 17px
 
 .folder:hover, .item:hover
   background: rgba(154, 22, 25, 0.1)
@@ -60,6 +55,11 @@ form
 #folders_, #items_
   margin-top: -6px !important
 
+.folders 
+  margin-top: 40px
+
+.folder
+  margin-bottom: 5px
 
 input#folders_, input#items_
 
@@ -69,30 +69,30 @@ input#folders_, input#items_
   width: 100%
   height: 150px
   background: gray
-  margin-left: 20px
 
 
-.actions
-  margin-left: 20px
+.nested_message
+  margin-left: 30px
 
+i:hover
+  cursor: pointer
 
+.nested_tree
+  margin-left: 6px
 
+.warning
+  background-color: orange !important
 
+.warning:hover
+  background-color: #F76E59 !important
+ 
 
-#TREEE
+.new_button
+  transition: 0.2s
+  padding: 20px 15px
+  background-color: green
+  margin: 0 1px
 
-.tree
-  // border: 1px solid green
-  float: left
-  margin: 0 auto
-  background-color: #FFF
-  padding: 0px 10px
-
-  #root
-    margin: 3px 0
-    padding: 3px 0px
-    // border: solid 1px #999
-    .sub_tree
-      margin: 3px 0
-      padding: 4px 10px
-      // border: solid 1px #999
+.new_button:hover
+  transition: 0.2s
+  background-color: orange

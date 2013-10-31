@@ -1,2 +1,9 @@
 .tree
   = nested_tree @root_folders.arrange
+
+  - if @root_items.any?
+    .items
+      - @root_items.each do |item|
+        = link_to "<i class='icon-file'></i> #{item.item_file_name}".html_safe, item.item(:original, false)
+        br/
+      

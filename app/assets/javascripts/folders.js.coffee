@@ -12,6 +12,7 @@ $ ->
   #remove modal
   $(document).on "hidden", ".modal", ->
     $(this).remove()
+    $("#error_explanation").remove()
 
   $('.delete_multiple').click ->
     $('#multiple_delete_form').submit();
@@ -27,15 +28,16 @@ $ ->
       $(".delete_multiple").addClass('hide')
 
 
-  $("i.icon-chevron-down").on 'click', ->
+
+  $("i.icon-plus").on 'click', ->
     $(this).addClass('hide')
     id = $(this).attr('id')
     $("div[id="+id+"]").removeClass("hide")
     $(this).next().removeClass("hide")
 
-  $("i.icon-chevron-up").on 'click', ->
+
+  $("i.icon-minus").on 'click', ->
     $(this).addClass('hide')
     id = $(this).attr('id')
     $("div[id="+id+"]").addClass("hide")
     $(this).prev().removeClass("hide")
-
