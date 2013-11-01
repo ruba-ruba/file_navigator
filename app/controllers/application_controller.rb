@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :root_items
 
+  helper_method :current_user
+  helper_method :signed_in?
+  helper :all
+
   def root_items
     @root_folders = Folder.scoped
     @root_items = Item.without_folder
@@ -13,9 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  helper_method :current_user
-  helper_method :signed_in?
-
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end

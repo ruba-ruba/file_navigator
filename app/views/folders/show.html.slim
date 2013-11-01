@@ -1,21 +1,22 @@
-div.root
+div.nav-actions
+  .pull-right
+      span.delete_multiple.hide
+        span.action_buttons.warning
+          | delete selected 
+      '&nbsp
+      = link_to "Add Folder",  new_folder_path(:folder_id => params[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "action_buttons"}
+      = link_to "add file",  new_item_path(:folder_id => @folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "action_buttons"}
+
   span.back
     - if @folder.parent == nil
-      = link_to  "<i class='icon-backward'></i> back".html_safe, folders_path
+      = link_to "← back", folders_path, class: 'action_buttons'
     - else 
-      = link_to "<i class='icon-backward'></i> back".html_safe, folder_path(@folder.parent)
+      = link_to "← back", folder_path(@folder.parent), class: 'action_buttons'
     '&nbsp
-    br/
-    br/
-    = "<i class='icon-folder-open icon-large'></i>   #{@folder.title}".html_safe
-    .pull-right
-      span.delete_multiple.btn.btn-danger.hide 
-        | delete selected 
-      '&nbsp
-      = link_to "<i class='icon-folder-close'></i>  Add Folder".html_safe,  new_folder_path(:folder_id => params[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_folder"}
-      '&nbsp
-      = link_to "<i class='icon-file'></i> Add File".html_safe,  new_item_path(:folder_id => @folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn new_item"}
-      '&nbsp
+    
+span.hide
+  = "<i class='icon-folder-open icon-white'></i> #{@folder.title}".html_safe
+    
       
       
 = render 'folders'

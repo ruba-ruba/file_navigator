@@ -1,11 +1,8 @@
 .items
   - @items.each do |item|
     div.item id=(dom_id(item))
-      = check_box_tag "items[]", item.id
-      '&nbsp
       = link_to "<i class='icon-file'></i>  #{item.item_file_name}".html_safe, item.item(:original, false), target: '_blank'
       span.pull-right
-        = item.folder_id
         '&nbsp
         = truncate(item.item_content_type,  :length => 25, :omission => '...')   
         '&nbsp
@@ -13,11 +10,9 @@
         '&nbsp
         = item.item_updated_at.strftime('%d/%m/%y')
         '&nbsp
-        = link_to "<i class='icon-comment'></i>".html_safe, item_comments_path(item), class: 'btn'
-        '&nbsp
-        = link_to  "<i class='icon-edit'></i>".html_safe, edit_item_path(item), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn update_folder"}
-        '&nbsp
-        = link_to "<i class='icon-remove-circle'></i>".html_safe, item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "remove_item btn"
-        '&nbsp
-        = link_to "<i class='icon-download-alt'></i>".html_safe, download_file_path(:item => item.id) , class: "btn"
-    
+        = link_to "<i class='icon-info-sign'></i>".html_safe, "#", class: "controll_buttons hide-button"
+        = link_to "<i class='icon-comment icon-white'></i>".html_safe, item_comments_path(item), class: 'controll_buttons'
+        = link_to  "<i class='icon-edit icon-white'></i>".html_safe, edit_item_path(item), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "controll_buttons"}
+        = link_to "<i class='icon-download-alt icon-white'></i>".html_safe, download_file_path(:item => item.id) , class: "controll_buttons"
+        = link_to "<i class='icon-remove-circle icon-white'></i>".html_safe, item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "controll_buttons"
+        = check_box_tag "items[]", item.id

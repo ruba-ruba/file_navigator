@@ -21,11 +21,11 @@ class CommentsController < ApplicationController
       respond_to do |format|
       if @comment.save
         @comments = Comment.where(:commentable_id => @commentable.id).scoped
-        flash[:notice] = "Successfully saved comment."  
+        #flash[:notice] = "Successfully saved comment."  
         format.js
-        format.html {redirect_to :back}
+        #format.html {redirect_to :back}
         else
-        format.html {redirect_to :back}
+        #format.html {redirect_to :back}
         format.js
       end
     end

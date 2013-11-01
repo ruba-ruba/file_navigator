@@ -2,21 +2,16 @@
   = form_tag destroy_multiple_folders_path, method: :delete, id: 'multiple_delete_form', remote: true do
     - @folders.each do |folder|
       div.folder id=(folder.id)
-        = check_box_tag "folders[]", folder.id
-        '&nbsp
-        = link_to "<i class='icon-folder-close'></i>  #{folder.title}".html_safe, folder 
+        = link_to "<i class='icon-folder-close icon-white'></i>  #{folder.title}".html_safe, folder 
         span.pull-right
           = folder.created_at.strftime('%d/%m/%y')
           '&nbsp
-          = link_to "<i class='icon-info-sign'></i>".html_safe,  info_folder_path(:id => folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn info"}
-          '&nbsp
-          = link_to "<i class='icon-comment'></i>".html_safe, folder_comments_path(folder), class: 'btn'
-          '&nbsp
-          = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(folder), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "btn update_folder"}
-          '&nbsp
-          = link_to "<i class='icon-remove-circle'></i>".html_safe, folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'btn remove_folder'
-          '&nbsp
-          = link_to "<i class='icon-download-alt'></i>".html_safe, download_folder_path(:folder => folder.id) , class: "btn "
+          = link_to "<i class='icon-info-sign icon-white'></i>".html_safe,  info_folder_path(:id => folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "controll_buttons"}
+          = link_to "<i class='icon-comment icon-white'></i>".html_safe, folder_comments_path(folder), class: 'controll_buttons'
+          = link_to  "<i class='icon-edit icon-white'></i>".html_safe, edit_folder_path(folder), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "controll_buttons"}
+          = link_to "<i class='icon-download-alt icon-white'></i>".html_safe, download_folder_path(:folder => folder.id) , class: "controll_buttons"
+          = link_to "<i class='icon-remove-circle icon-white'></i>".html_safe, folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'controll_buttons'
+          = check_box_tag "folders[]", folder.id
           
     = render 'items/items'
 

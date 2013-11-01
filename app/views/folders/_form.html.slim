@@ -1,7 +1,8 @@
 = simple_form_for @folder, :remote => true, html: {novalidate: true} do |f|
   /= render 'layouts/error_messages', :object => @folder
   .field
-    = f.input :title, input_html: { :autocomplete => "off", type: 'text' }
+    = f.label "folder name"
+    = f.input :title, label: false ,input_html: { :autocomplete => "off", type: 'text' }
     = f.input :parent_id, :as => :hidden, :input_html => { :value => params[:folder_id] } unless params[:action] == "edit"
   .actions
-    = f.button :submit, :class=> "btn submit" 
+    = f.button :submit, :class=> "btn-submit" 

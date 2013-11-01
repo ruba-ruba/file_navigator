@@ -102,8 +102,11 @@ class ItemsController < ApplicationController
     @item.destroy
 
     respond_to do |format|
-      # format.html { redirect_to :back, notice: 'Item was successfully deleted.' }
-      # format.json { head :no_content }
+      if @item.folder_id.nil?
+        @items = Item.without_folder
+      else
+        @items = Item.where(:folder_id => @item.folder_id)
+      end
       format.js
     end
   end
