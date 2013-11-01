@@ -8,14 +8,15 @@ div.nav-actions
       = link_to "add file",  new_item_path(:folder_id => @folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "action_buttons"}
 
   span.back
-    - if @folder.parent == nil
-      = link_to "← back", folders_path, class: 'action_buttons'
+    - unless @folder.parent.nil?
+      span.action_buttons
+        = "<i class='icon-folder-close icon-white'></i> #{@folder.parent.title}".html_safe
+    - if @folder.parent.nil?
+      = link_to "<i class='icon-arrow-left icon-white'></i> root".html_safe, folders_path, class: 'action_buttons'
     - else 
-      = link_to "← back", folder_path(@folder.parent), class: 'action_buttons'
-    '&nbsp
-    
-span.hide
-  = "<i class='icon-folder-open icon-white'></i> #{@folder.title}".html_safe
+      = link_to "<i class='icon-arrow-left icon-white'></i> back".html_safe, folder_path(@folder.parent), class: 'action_buttons'
+    span.action_buttons
+      = "<i class='icon-folder-open icon-white'></i> #{@folder.title}".html_safe
     
       
       

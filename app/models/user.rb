@@ -10,11 +10,7 @@ class User < ActiveRecord::Base
 
   ROLES = %w[user admin]
 
-  after_create :default_role
-  
-  private
-  def default_role
-    self.update_attributes(:role => 'user')
-  end
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
+  validates :role, :inclusion => { :in => ROLES }
 end

@@ -15,4 +15,6 @@
         = link_to  "<i class='icon-edit icon-white'></i>".html_safe, edit_item_path(item), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "controll_buttons"}
         = link_to "<i class='icon-download-alt icon-white'></i>".html_safe, download_file_path(:item => item.id) , class: "controll_buttons"
         = link_to "<i class='icon-remove-circle icon-white'></i>".html_safe, item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "controll_buttons"
+        span.controll_buttons.remove.multiple id=(item.id)
+             = "<i class='icon-check icon-white'></i>".html_safe
         = check_box_tag "items[]", item.id
