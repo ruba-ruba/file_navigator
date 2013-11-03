@@ -5,9 +5,12 @@
     h3 
       | New Comment
   .modal-body
+    - @parent = Comment.find params[:comment_id]
+    .message
+      = @parent.content
     = simple_form_for  [@commentable, @comment], remote: true, html: {novalidate: true} do |f|
       br/
-      = f.input :content, :input_html => {:rows => 3}
+      = f.input :content, :input_html => {:rows => 3},  :label => false, :placeholder => "leave a comment"
       = f.input :parent_id, :as => :hidden, :input_html => { :value => params[:comment_id] }
       = f.hidden_field :user_id, :value => current_user.id 
       .actions

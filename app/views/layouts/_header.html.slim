@@ -2,10 +2,13 @@ h1
   = link_to 'file navigator', root_path, class: 'root'
   .pull-right
     - if current_user
+      - if admin?
+        = link_to 'users', users_path, class: 'header_buttons'
+        '&nbsp
       | Logged in as 
       = current_user.email
       '&nbsp
-      = link_to "Log Out", logout_path, method: "delete", class: 'header_buttons' 
+      = link_to "Log Out", logout_path, method: "delete", class: 'header_buttons ' 
     - else
       = link_to "Sign Up", signup_path, class: 'header_buttons'
       = link_to "Log In", login_path, class: 'header_buttons'

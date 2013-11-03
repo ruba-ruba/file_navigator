@@ -1,0 +1,10 @@
+.users
+  - @users.each do |user|
+    .user id=(dom_id(user))
+      '&nbsp
+      = user.email
+      .pull-right
+        = user.role
+        '&nbsp
+        = link_to "<i class='icon-edit'></i>".html_safe, '#', class: 'controll_buttons'
+        = link_to "<i class='icon-remove-circle'></i>".html_safe, '#', class: 'controll_buttons remove'

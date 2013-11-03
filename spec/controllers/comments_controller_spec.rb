@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe CommentsController do
+  login_user
   render_views
-  let!(:folder_comment) {FactoryGirl.create(:folder_comment)}
 
   describe 'GET index' do 
     let!(:folder){FactoryGirl.create(:folder)}
@@ -14,7 +14,7 @@ describe CommentsController do
   end
 
   describe 'GET new' do
-    let(:folder){FactoryGirl.create(:folder)}
+    let!(:folder){FactoryGirl.create(:folder)}
     it 'should render new for object' do
       xhr :get, :new, folder_id: folder.id
       response.should be_success
@@ -33,11 +33,12 @@ describe CommentsController do
   end
 
   describe "DELETE destroy" do
-    let!(:folder){FactoryGirl.create(:folder)}
-    let!(:comment){FactoryGirl.create(:folder_comment)}
+    let!(:user){FactoryGirl.create(:user)}
+    let!(:comment){FactoryGirl.create(:folder_comment, user_id: user.id)}
 
     it "should delete comment" do
-      expect{xhr :delete, :destroy, id: comment.id, folder_id: folder.id }.to change(Comment,:count).by(-1) 
+      binding.pry
+      expect{xhr :delete, :destroy, id: comment, folder_id: comment.commentable.id}.to change(Comment,:count).by(-1) 
     end
   end
 

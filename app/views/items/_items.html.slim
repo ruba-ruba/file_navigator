@@ -11,10 +11,10 @@
         = item.item_updated_at.strftime('%d/%m/%y')
         '&nbsp
         = link_to "<i class='icon-info-sign'></i>".html_safe, "#", class: "controll_buttons hide-button"
-        = link_to "<i class='icon-comment icon-white'></i>".html_safe, item_comments_path(item), class: 'controll_buttons'
-        = link_to  "<i class='icon-edit icon-white'></i>".html_safe, edit_item_path(item), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "controll_buttons"}
-        = link_to "<i class='icon-download-alt icon-white'></i>".html_safe, download_file_path(:item => item.id) , class: "controll_buttons"
-        = link_to "<i class='icon-remove-circle icon-white'></i>".html_safe, item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "controll_buttons"
+        = link_to "<i class='icon-comment'></i>".html_safe, item_comments_path(item), class: 'controll_buttons'
+        = link_to  "<i class='icon-edit'></i>".html_safe, edit_item_path(item), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "controll_buttons"}
+        = link_to "<i class='icon-download-alt'></i>".html_safe, download_file_path(:item => item.id) , class: "controll_buttons"
+        = link_to "<i class='icon-remove-circle'></i>".html_safe, item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "controll_buttons remove"
         span.controll_buttons.remove.multiple id=(item.id)
-             = "<i class='icon-check icon-white'></i>".html_safe
+             = "<i class='icon-check'></i>".html_safe
         = check_box_tag "items[]", item.id

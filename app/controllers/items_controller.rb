@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-  before_filter :authorize, only: [:edit, :update, :new, :create, :multi_create,  :destroy]
+  before_filter :authorize, only: [:edit, :update, :new, :create, :multi_create,  :destroy, :destroy_by_type]
 
   def index
     jpgs = Item.where("item_file_name like (?)", "%.jpg")
@@ -18,10 +18,8 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @item }
+      #format.html # new.html.erb
       format.js
     end
   end
@@ -56,7 +54,8 @@ class ItemsController < ApplicationController
   end  
 
   def create
-    @item =  Item.new(params[:item])
+    binding.pry
+    @item =  current_user.items.build(params[:item])
 
     respond_to do |format|
       if @item.save

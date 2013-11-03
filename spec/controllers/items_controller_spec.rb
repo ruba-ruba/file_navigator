@@ -5,9 +5,7 @@ require 'spec_helper'
 describe ItemsController do
 
   render_views
-  # before :each do
-  #   @file = Item.new(folder_id: 2, :item => File.new(Rails.root + 'spec/factories/test.csv'))
-  # end
+  login_user
 
   describe 'GET index' do
     it 'should render index' do
@@ -92,7 +90,7 @@ describe ItemsController do
     let!(:item1){FactoryGirl.create(:item, :item_file_name => 'item1.txt')}
     let!(:item2){FactoryGirl.create(:item, :item_file_name => 'item2.txt')}
     it 'delete two items' do
-      expect{xhr :delete, :destroy, id: item.id }.to change(Item,:count).by(-1) 
+      expect{xhr :delete, :destroy_by_type, items: [item1.id, item2.id] }.to change(Item,:count).by(-2) 
     end
   end
   

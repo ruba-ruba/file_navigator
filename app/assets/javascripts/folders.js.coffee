@@ -29,15 +29,23 @@ $ ->
 
 
 
-  $("i.icon-plus").on 'click', ->
-    $(this).addClass('hide')
-    id = $(this).attr('id')
+  #$("i.icon-plus").on 'click', ->
+  #  $(this).addClass('hide')
+  #  id = $(this).attr('id')
+  #  $("div[id="+id+"]").removeClass("hide")
+  #  $(this).next().removeClass("hide")
+
+
+  #$("i.icon-minus").on 'click', ->
+  #  $(this).addClass('hide')
+  #  id = $(this).attr('id')
+  #  $("div[id="+id+"]").addClass("hide")
+  #  $(this).prev().removeClass("hide")
+
+
+  $('.tree_folder').toggle (->
+    id = $(this).attr('parent')
     $("div[id="+id+"]").removeClass("hide")
-    $(this).next().removeClass("hide")
-
-
-  $("i.icon-minus").on 'click', ->
-    $(this).addClass('hide')
-    id = $(this).attr('id')
+  ), ->
+    id = $(this).attr('parent')
     $("div[id="+id+"]").addClass("hide")
-    $(this).prev().removeClass("hide")

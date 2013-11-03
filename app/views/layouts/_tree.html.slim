@@ -2,8 +2,9 @@
   = nested_tree @root_folders.arrange
 
   - if @root_items.any?
-    .items
+    .tree_items_root
       - @root_items.each do |item|
-        = link_to "<i class='icon-file'></i> #{item.item_file_name}".html_safe, item.item(:original, false)
-        br/
-      
+        .tree_item
+          = link_to "<i class='icon-file'></i> #{item.item_file_name}".html_safe, item.item(:original, false)
+          br/
+        
