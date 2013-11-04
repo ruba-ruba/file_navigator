@@ -19,7 +19,7 @@ html
                 .pull-right = "<i class='remove-flash icon-remove'></i>".html_safe
           .row-fluid
             .span3
-              = render 'layouts/tree'
+              = yield :tree
             .span9
               = yield
       footer
