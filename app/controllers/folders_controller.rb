@@ -180,7 +180,6 @@ class FoldersController < ApplicationController
   end
 
   def destroy_multiple
-
     Folder.destroy(params[:folders]) if params[:folders].present?
     Item.destroy(params[:items]) if params[:items].present?
 
@@ -189,6 +188,14 @@ class FoldersController < ApplicationController
       format.json { head :no_content }
       format.js
     end
-
   end
+
+  private
+
+    def correct_user
+      @folder = Folder.find(params[:id])
+      redirect_to root_path unless current_user == @folder.user || admin?
+      flash.now[:notice] = "not permitted"
+    end
+
 end

@@ -2,6 +2,8 @@ class ItemsController < ApplicationController
 
   before_filter :authorize, only: [:edit, :update, :new, :create, :multi_create,  :destroy, :destroy_by_type]
 
+  skip_before_filter :verify_authenticity_token, only: :create
+
   def index
     jpgs = Item.where("item_file_name like (?)", "%.jpg")
     @jpgs_sum = jpgs.pluck(:item_file_size).inject{|sum,x| sum + x }
@@ -54,9 +56,8 @@ class ItemsController < ApplicationController
   end  
 
   def create
-    binding.pry
+    
     @item =  current_user.items.build(params[:item])
-
     respond_to do |format|
       if @item.save
         if @item.folder_id.nil?
@@ -65,7 +66,7 @@ class ItemsController < ApplicationController
           @items = Item.where(:folder_id => @item.folder_id)
         end
         format.html { render :nothing => true }
-        format.js
+        format.js { render :layout => false }
       else
         format.html { render action: "new" }
         format.js

@@ -9,6 +9,11 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+#main configs
+CONFIG = YAML.load(File.read(File.expand_path('../settings.yml', __FILE__)))
+CONFIG.merge! CONFIG.fetch(Rails.env, {})
+CONFIG.symbolize_keys!
+
 module FileNavigator
   class Application < Rails::Application
 

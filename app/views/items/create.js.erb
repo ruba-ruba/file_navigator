@@ -1,4 +1,5 @@
 <% if remotipart_submitted? %>
+  alert('da');
   $(".items").replaceWith("<%= escape_javascript(render('items/items'))%>");
   $('.modal, .modal-backdrop').remove();
   alert('da');

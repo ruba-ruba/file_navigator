@@ -7,7 +7,6 @@ class CommentsController < ApplicationController
   before_filter :correct_user, :only => :destroy
 
   def index
-    #@comments = @commentable.comments
     @comments = Comment.where(:commentable_id => @commentable.id).scoped
   end
 
@@ -20,12 +19,9 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(params[:comment])
       respond_to do |format|
       if @comment.save
-        @comments = Comment.where(:commentable_id => @commentable.id).scoped
-        #flash[:notice] = "Successfully saved comment."  
+        @comments = Comment.where(:commentable_id => @commentable.id).scoped  
         format.js
-        #format.html {redirect_to :back}
         else
-        #format.html {redirect_to :back}
         format.js
       end
     end
@@ -49,7 +45,7 @@ class CommentsController < ApplicationController
 
     def correct_user
       @comment = Comment.find(params[:id])
-      redirect_to root_path unless current_user == @comment.user
+      redirect_to root_path unless current_user == @comment.user || admin?
       flash.now[:notice] = "not permitted"
     end
 
