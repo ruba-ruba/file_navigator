@@ -3,6 +3,6 @@ class DailyMailer < ActionMailer::Base
   
   def daily_notification(items)
     @items = items
-    mail(:to =>  CONFIG[:admin_email], :subject => "daily file upload")
+    mail(:to =>  "gunit1991@ukr.net", :subject => "daily file upload")
   end
 end

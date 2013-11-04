@@ -23,10 +23,11 @@ class Item < ActiveRecord::Base
     folder ? folder.path(root) : nil
   end
 
-  def daily_mailer
+  def self.daily_mailer
     items = Item.where('created_at >= ?', 24.hours.ago)
-    DailyMailer.delay.daily_notification(items.all)
+    DailyMailer.delay_for(0.minutes).daily_notification(items.all)
   end
 
+  
 
 end
