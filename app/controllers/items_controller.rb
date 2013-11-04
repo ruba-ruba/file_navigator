@@ -65,11 +65,9 @@ class ItemsController < ApplicationController
           @items = Item.where(:folder_id => @item.folder_id)
         end
         format.html { render :nothing => true }
-        format.json { render json: @item, status: :created, location: @item }
         format.js
       else
         format.html { render action: "new" }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
         format.js
       end
     end
@@ -121,6 +119,7 @@ class ItemsController < ApplicationController
       format.js
     end
   end
+
 
 
 end

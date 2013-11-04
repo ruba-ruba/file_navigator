@@ -4,8 +4,6 @@ gem 'rails', '3.2.14'
 
 gem 'sqlite3'
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -35,6 +33,12 @@ gem 'grape'
 gem 'rubyzip'
 
 gem "highcharts-rails", "~> 3.0.0"
+
+gem 'sidekiq'
+gem 'sidekiq-client-cli'
+gem 'whenever', :require => false
+gem 'sinatra', require: false
+gem 'slim'
 
 group :development do
   gem 'annotate', '2.5.0'

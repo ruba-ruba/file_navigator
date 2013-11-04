@@ -1,0 +1,11 @@
+defaults: &defaults
+  admin_email: 'gunit1991@ukr.net'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

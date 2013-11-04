@@ -1,0 +1,27 @@
+div.date
+  | files uploaded during 
+  '&nbsp
+  = Date.today
+  br/
+div.files
+  table
+    tr
+      td
+        | file name
+      td
+        | file size
+    - @items.each do |i|
+      tr
+        td
+          = i.item_file_name
+          '&nbsp
+        td
+          = number_to_human_size(i.item_file_size)
+          
+     
+
+sass:
+  table
+    tr
+      td
+        border: 1px solid silver

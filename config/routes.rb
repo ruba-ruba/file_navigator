@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 FileNavigator::Application.routes.draw do
 
   get 'signup', to: 'users#new', as: 'signup'
@@ -28,20 +30,11 @@ FileNavigator::Application.routes.draw do
     end
   end
 
+  #grape
   mount MyApp::API => "/"
+  #sidekiq
+  mount Sidekiq::Web, at: "/sidekiq"
 
-  #get "/folders/:id/new" => "folders#new", as: :new_dir
-
-  # get "/folders/:id/new" => "folders#sub_new", as: :new_dir
-
-  # post "/folders/:id" => "folders#sub_create", as: :sub_create
-
-  # get "/sub_folder/:id/edit" => "folders#sub_edit", as: :edit_dir
-
-  # put "/sub_folder/:id" => "folders#sub_update", as: :sub_update
-
-  #match '/folders/:id/new' => 'folders#new', as: :new_dir
-  #match '/folders/:id/add_file' => 'items#new', as: :new_file
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
