@@ -28,6 +28,86 @@ class Item < ActiveRecord::Base
     DailyMailer.delay_for(0.minutes).daily_notification(items.all)
   end
 
-  
+
+  def self.duplicates
+    result = {}
+    files = Item.all
+
+    names = []
+    files.each do |f|
+      names << [f.item_file_name, f.item_file_size]
+    end
+
+    duplicates = names.select{|item| names.count(item) > 1}.uniq
+
+    dup_hash_keys = duplicates.flatten
+    name_keys = dup_hash_keys.values_at(* dup_hash_keys.each_index.select {|i| i.even?})
+
+
+    dup_files = []
+    files.each do |file|
+      dup_files << file if duplicates.include?([file.item_file_name, file.item_file_size])
+    end
+
+    name_keys.each do |key|
+      result[key] = []
+      dup_files.each do |file|
+        puts result
+        puts key
+        puts file.item_file_name
+
+        result[key] << file if file.item_file_name == key && !file.nil? && !key.nil?
+      end
+    end
+
+
+    result
+  end
+
+
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # names = []
+    # files.each do |f|
+    #   names << [f.item_file_name, f.item_file_size]
+    # end
+
+    # duplicates = names.select{|item| names.count(item) > 1}.uniq
+
+    # dup_hash_keys = duplicates.flatten
+    # name_keys = dup_hash_keys.values_at(* dup_hash_keys.each_index.select {|i| i.even?})
+
+
+    # dup_files = []
+    # files.each do |file|
+    #   dup_files << file if duplicates.include?([file.item_file_name, file.item_file_size])
+    # end

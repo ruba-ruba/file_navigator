@@ -7,7 +7,9 @@ FileNavigator::Application.routes.draw do
   delete 'logout', to: 'sessions#destroy', as: 'logout'
 
   resources :sessions
-  resources :users
+  resources :users do 
+    get 'file_review', to: 'users#file_review', on: :collection
+  end
 
   root to: 'folders#index'
 

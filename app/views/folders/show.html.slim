@@ -5,7 +5,7 @@ div.nav-actions
           | delete selected 
       '&nbsp
       = link_to "Add Folder",  new_folder_path(:folder_id => params[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "action_buttons"}
-      = link_to "add file",  new_item_path(:folder_id => @folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "action_buttons"}
+      = link_to "Add file",  new_item_path(:folder_id => @folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "action_buttons"}
 
   span.back
     - unless @folder.parent.nil?

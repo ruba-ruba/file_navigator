@@ -20,8 +20,8 @@
 # Learn more: http://github.com/javan/whenever
 
 
-#1.day, :at => '11:59 pm'
+#
 
-every 1.minute do
+every 1.day, :at => '01:00 am' do
   runner "Item.daily_mailer"
 end

@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+  before_filter :authorize
+  before_filter :admin_user
+
   def index
     @users = User.all
   end
@@ -17,6 +20,10 @@ class UsersController < ApplicationController
     else
       render "new"
     end
+  end
+
+  def file_review
+
   end
 
 end

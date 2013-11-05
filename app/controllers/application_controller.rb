@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :signed_in?
   helper_method :admin?
+  helper_method :admin_user
 
   def root_items
     @root_folders = Folder.scoped
@@ -28,6 +29,10 @@ class ApplicationController < ActionController::Base
 
   def admin?
     current_user.role == 'admin'
+  end
+
+  def admin_user
+    redirect_to root_path, alert: "Not permitted" if current_user.role != 'admin'
   end
 
 
