@@ -32,10 +32,8 @@ Spork.each_run do
   if ENV['DRB']
     require 'simplecov'
     SimpleCov.start 'rails'
-    SampleApp::Application.initialize!
-    class SampleApp::Application
-      def initialize!; end
-    end
+    FileNavigator::Application.initialize!
+
   end
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }

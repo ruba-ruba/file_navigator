@@ -19,8 +19,12 @@ class Item < ActiveRecord::Base
   DummyFolder = Struct.new(:parent)
 
   def path(root = folder)
-    folder.parent = folder
-    folder ? folder.path(root) : nil
+    if folder.nil?
+      ""
+    else
+      folder.parent = folder
+      folder ? folder.path(root) : nil
+    end
   end
 
   def self.daily_mailer
@@ -29,9 +33,11 @@ class Item < ActiveRecord::Base
   end
 
 
-  def self.duplicates
+
+  
+
+  def self.duplicates(files)
     result = {}
-    files = Item.all
 
     names = []
     files.each do |f|
@@ -52,15 +58,10 @@ class Item < ActiveRecord::Base
     name_keys.each do |key|
       result[key] = []
       dup_files.each do |file|
-        puts result
-        puts key
-        puts file.item_file_name
-
         result[key] << file if file.item_file_name == key && !file.nil? && !key.nil?
       end
     end
-
-
+    
     result
   end
 
@@ -89,12 +90,8 @@ end
 
 
 
-
-
-
-
-
-
+    # result = {}
+    # files = Item.all
 
     # names = []
     # files.each do |f|
@@ -111,3 +108,19 @@ end
     # files.each do |file|
     #   dup_files << file if duplicates.include?([file.item_file_name, file.item_file_size])
     # end
+
+    # name_keys.each do |key|
+    #   result[key] = []
+    #   dup_files.each do |file|
+    #     result[key] << file if file.item_file_name == key && !file.nil? && !key.nil?
+    #   end
+    # end
+    
+    # result
+
+
+
+
+
+
+ 

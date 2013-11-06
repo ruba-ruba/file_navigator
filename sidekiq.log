@@ -1,0 +1,4 @@
+# Logfile created on 2013-11-06 11:25:09 +0200 by logger.rb/31641
+2013-11-06T09:25:22Z 2425 TID-17d5hc INFO: Booting Sidekiq 2.16.1 with redis options {}
+2013-11-06T09:25:22Z 2425 TID-17d5hc INFO: Running in ruby 1.9.3p448 (2013-06-27 revision 41675) [i686-linux]
+2013-11-06T09:25:22Z 2425 TID-17d5hc INFO: See LICENSE and the LGPL-3.0 for licensing details.
