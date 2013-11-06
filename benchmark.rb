@@ -7,7 +7,7 @@ F = Struct.new(:name, :size) do
   end
 end
 
-N = 10
+N = 1
 
 files = []
 1000.times { files << F.new("#{%w(a b c d e).sample}.txt", (1..5).to_a.sample) }
@@ -56,7 +56,7 @@ def test_duplicates_optimized(files)
 end
 
 def test_inject(files)
- files.group_by{|e|"#{e.name}/#{e.size}"}.inject({}){|res, (k, v)| res[k.split('/')[0]] = v if v.size > 1; res} 
+ files.group_by{|e|"#{e.name}/#{e.size}"}.inject({}){|res, (k, v)| res[k.split('/')[0]] ||=[]; res[k.split('/')[0]] << v if v.size > 1; res}
 end
 
 def test_duplicates2(files)
@@ -82,9 +82,9 @@ c = test_duplicates2(files)
 d = test_inject(files)
 
 # puts files
-# puts c 
-# puts "____________________________qq"
-# puts d
+ puts c 
+ puts "____________________________qq"
+ puts d
 #raise "c != d" unless c == d
 
 
