@@ -24,8 +24,8 @@ class UsersController < ApplicationController
 
 
   def file_review
-    files = Item.all
-    @data = Item.duplicates(files)
+    files = List.all
+    @data = List.duplicates(files)
   end
 
 end

@@ -9,11 +9,9 @@ table
           td
             '&nbsp
             | - 
-            = [file.path, file.item_file_name].join("/") 
+            = [file.path, file.item_name].join("/") 
           td
-            = link_to 'delete_file', '#'
-
-
+            = link_to "delete_file", { :controller => 'items', :action => 'destroy', :id => file.item_id }, { :confirm => 'Are you sure?', :method => :delete, :remote => true} 
 sass:
   table
     tr

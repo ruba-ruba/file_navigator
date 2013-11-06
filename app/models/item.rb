@@ -6,10 +6,11 @@ class Item < ActiveRecord::Base
                     :path => ":rails_root/public/system/:attachment/:id/:style_:filename" 
 
   has_many :comments, :as => :commentable, dependent: :destroy
+  has_many :lists, dependent: :destroy
   belongs_to :folder
   belongs_to :user
 
-  delegate :path, :to => :user, :allow_nil => true
+  delegate :path, :to => :folder, :allow_nil => true
 
   validates :item, :attachment_presence => true
   validates_uniqueness_of :item_file_name, :scope => :folder_id
@@ -31,41 +32,6 @@ class Item < ActiveRecord::Base
     items = Item.where('created_at >= ?', 24.hours.ago)
     DailyMailer.delay_for(0.minutes).daily_notification(items.all)
   end
-
-
-
-  
-
-  def self.duplicates(files)
-    result = {}
-
-    names = []
-    files.each do |f|
-      names << [f.item_file_name, f.item_file_size]
-    end
-
-    duplicates = names.select{|item| names.count(item) > 1}.uniq
-
-    dup_hash_keys = duplicates.flatten
-    name_keys = dup_hash_keys.values_at(* dup_hash_keys.each_index.select {|i| i.even?})
-
-
-    dup_files = []
-    files.each do |file|
-      dup_files << file if duplicates.include?([file.item_file_name, file.item_file_size])
-    end
-
-    name_keys.each do |key|
-      result[key] = []
-      dup_files.each do |file|
-        result[key] << file if file.item_file_name == key && !file.nil? && !key.nil?
-      end
-    end
-    
-    result
-  end
-
-
 
 end
 

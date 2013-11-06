@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(:version => 20131106084456) do
     t.integer  "item_id"
     t.string   "item_name"
     t.integer  "item_size"
+    t.integer  "folder_id"
+    t.string   "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
