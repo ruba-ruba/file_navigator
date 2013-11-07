@@ -14,15 +14,11 @@ class ListWorker
     end
     result = result.reject{|k,v| v.empty? }
     result
-    remove_previouse
     create_list(result)
   end
 
-  def self.remove_previouse
-    List.delete_all
-  end
-
   def self.create_list(data)
+    List.delete_all
     array = data.values.flatten
     array.each do |file|
       List.create(item_id: file.id, item_name: file.item_file_name, item_size: file.item_file_size, user_id: file.user_id, folder_id: file.folder_id)

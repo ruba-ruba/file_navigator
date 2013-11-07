@@ -12,7 +12,10 @@ $ ->
   $('.remove_all_by_type').click ->
     $(this).remove()
 
-  $('form').on 'drop', ->
+  #$('form').on 'drop', ->
     setTimeout (->
       $('form').submit()
     ), 600
+
+  $("#item_").change ->
+    $('.btn-submit').removeClass("hide")

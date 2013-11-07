@@ -25,18 +25,4 @@
     = form_tag multi_create_items_path, multipart: true, :id => 'new_item' do |f|
       = hidden_field_tag :folder_id, @folder.id if @folder
       = file_field_tag 'item[]', multiple: true
-
-
-
-  br/
-  /destroy by type
-  - types = []
-  - Item.pluck(:item_file_name).each do |item|
-    - types << item.split(".")[1]
-
-  - types.uniq.each do |type|
-    - ids = []
-    - Item.where("item_file_name like (?)", "%.#{type}").each do |file|
-      - ids << file.id
-    = link_to "destroy all #{type} files", destroy_by_type_items_path(:items => ids, :folder_id => @folder.try(:id)) , method: :delete, remote: true, class: 'remove_all_by_type'
-    br/
+      = submit_tag "save", :class => "hide btn-submit submit-big"

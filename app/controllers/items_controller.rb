@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     respond_to do |format|
-      #format.html # new.html.erb
+      format.html
       format.js
     end
   end
@@ -56,7 +56,6 @@ class ItemsController < ApplicationController
   end  
 
   def create
-    
     @item =  current_user.items.build(params[:item])
     respond_to do |format|
       if @item.save
