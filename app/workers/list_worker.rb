@@ -3,25 +3,17 @@ class ListWorker
   sidekiq_options retry: false
 
   def self.duplicates(files)
-    result = {}
+    result = []
     files.each do |file|
-      result[file.item_file_name] ||= []
-      result[file.item_file_name] << files.select{|f| f.item_file_size == file.item_file_size && file.item_file_name == f.item_file_name && file.duplicate ==  true}
+      result << files.select{|f| f.item_file_size == file.item_file_size && file.item_file_name == f.item_file_name && file.duplicate ==  true}
     end
-
-    result.each do |key, val|
-      result[key] = val.select{|i| val.count(i) > 1}.uniq.flatten
-    end
-    result = result.reject{|k,v| v.empty? }
-    result
     create_list(result)
   end
 
-  def self.create_list(data)
+  def self.create_list(files)
     List.delete_all
-    array = data.values.flatten
-    array.each do |file|
-      List.create(item_id: file.id, item_name: file.item_file_name, item_size: file.item_file_size, user_id: file.user_id, folder_id: file.folder_id)
+    files.uniq.flatten.each do |file|
+      List.create(item_id: file.id, item_file_name: file.item_file_name, item_file_size: file.item_file_size, user_id: file.user_id, folder_id: file.folder_id)
     end
   end
 

@@ -1,5 +1,5 @@
 class List < ActiveRecord::Base
-  attr_accessible :item_id, :item_name, :item_size, :user_id, :folder_id
+  attr_accessible :item_id, :item_file_name, :item_file_size, :user_id, :folder_id
 
   belongs_to :folder
   belongs_to :item
@@ -17,7 +17,7 @@ class List < ActiveRecord::Base
   end
 
   def self.prepare_list
-  	files = Item.all
+    files = Item.all
     ListWorker.duplicates(files)
   end
 
@@ -25,8 +25,8 @@ class List < ActiveRecord::Base
   def self.duplicates(files)
     result = {}
     files.each do |file|
-      result[file.item_name] ||= []
-      result[file.item_name] << files.select{|f| f.item_size == file.item_size && file.item_name == f.item_name}
+      result[file.item_file_name] ||= []
+      result[file.item_file_name] << files.select{|f| f.item_file_size == file.item_file_size && file.item_file_name == f.item_file_name}
     end
 
     result.each do |key, val|

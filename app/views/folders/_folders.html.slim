@@ -1,6 +1,16 @@
 - content_for :tree do
-  = render 'layouts/tree'
+  .tree
+  = nested_tree @root_folders.arrange
 
+  - if @root_items.any?
+    .tree_items_root
+      - @root_items.each do |item|
+        .tree_item
+          = link_to "<i class='icon-file'></i> #{item.item_file_name}".html_safe, item.item(:original, false)
+          br/
+        
+
+= @errors
 .folders
   = form_tag destroy_multiple_folders_path, method: :delete, id: 'multiple_delete_form', remote: true do
     - @folders.each do |folder|

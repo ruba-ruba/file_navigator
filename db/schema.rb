@@ -49,12 +49,12 @@ ActiveRecord::Schema.define(:version => 20131107104703) do
 
   create_table "lists", :force => true do |t|
     t.integer  "item_id"
-    t.string   "item_name"
-    t.integer  "item_size"
+    t.string   "item_file_name"
+    t.integer  "item_file_size"
     t.integer  "folder_id"
     t.string   "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "users", :force => true do |t|

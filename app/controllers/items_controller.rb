@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  
+  include ActionView::Helpers::TextHelper 
 
   before_filter :authorize, only: [:edit, :update, :new, :create, :multi_create,  :destroy, :destroy_by_type]
 
@@ -37,12 +39,13 @@ class ItemsController < ApplicationController
 
   def multi_create
     errors = []
+    saved = 0
     params[:item].each do |item|
       @item = current_user.items.build(:item => item, :folder_id => params[:folder_id])
       if @item.save
-        #
+        saved += 1
       else
-        errors << "#{@item.item_file_name} aleready exist" 
+        errors << @item.item_file_name 
       end
     end
     respond_to do |format|
@@ -51,7 +54,17 @@ class ItemsController < ApplicationController
       else
         @items = Item.where(:folder_id => @item.folder_id)
       end
-      format.html { redirect_to :back}
+      if errors.empty? 
+        type = 'notice'
+         message = "saved #{pluralize(saved, 'file')}"
+      elsif saved == 0
+        type = 'alert'
+        message = "#{errors} - already exists"
+      else
+        type = 'alert'
+        message = [[errors, " - already exists"], "saved #{pluralize(saved, 'file')}"].join("\n")
+      end 
+      format.html { redirect_to :back, type.to_sym => message }
     end
   end  
 

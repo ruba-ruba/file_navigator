@@ -2,7 +2,7 @@ module ControllerMacros
   def login_admin
     before(:each) do
       admin = FactoryGirl.create(:admin)
-      session[:user_id] = user.id
+      session[:user_id] = admin.id
     end
   end
 

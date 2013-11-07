@@ -44,8 +44,8 @@ $ ->
 
 
   $('.tree_folder').toggle (->
-    id = $(this).attr('parent')
-    $("div[id="+id+"]").removeClass("hide")
+    element = $(this).attr('owner_of')
+    $("div[child_of="+element+"]").removeClass("hide")
   ), ->
-    id = $(this).attr('parent')
-    $("div[id="+id+"]").addClass("hide")
+    element = $(this).attr('owner_of')
+    $("div[child_of="+element+"]").addClass("hide")
