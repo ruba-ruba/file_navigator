@@ -6,7 +6,7 @@ class ListWorker
     result = {}
     files.each do |file|
       result[file.item_file_name] ||= []
-      result[file.item_file_name] << files.select{|f| f.item_file_size == file.item_file_size && file.item_file_name == f.item_file_name}
+      result[file.item_file_name] << files.select{|f| f.item_file_size == file.item_file_size && file.item_file_name == f.item_file_name && file.duplicate ==  true}
     end
 
     result.each do |key, val|

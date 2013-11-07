@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  attr_accessible :folder_id, :item, :item_file_name,  :item_content_type, :item_file_size, :item_updated_at
+  attr_accessible :folder_id, :item, :item_file_name,  :item_content_type, :item_file_size, :item_updated_at, :duplicate
 
   has_attached_file :item,
                     :url  => "/system/:attachment/:id/:style_:filename",

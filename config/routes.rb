@@ -19,6 +19,7 @@ FileNavigator::Application.routes.draw do
     collection do
       delete 'destroy_by_type'
     end
+    post 'update_duplicate_condition', to: 'items#update_duplicate_condition', on: :member
   end
   
   get 'download_file', to: 'folders#download_file'

@@ -1,8 +1,30 @@
+- content_for :tree do
+  br/
+  /destroy by type
+  - types = []
+  - Item.pluck(:item_file_name).each do |item|
+    - types << item.split(".")[1]
+
+  - types.uniq.each do |type|
+    - ids = []
+    - Item.where("item_file_name like (?)", "%.#{type}").each do |file|
+      - ids << file.id
+    = link_to "destroy all #{type} files", destroy_by_type_items_path(:items => ids, :folder_id => @folder.try(:id)) , method: :delete, remote: true, class: 'remove_all_by_type'
+    br/
+
 table
+  tr.t_header
+    td
+      | file name
+    td
+      | remove file
+    td
+      | make as not duplicate file
   - @data.each do |name, files|
     tr
       td
         = name
+      td
       td
       - files.each do |file|
         tr
@@ -11,23 +33,10 @@ table
             | - 
             = [file.path, file.item_name].join("/") 
           td
-            = link_to "delete_file", { :controller => 'items', :action => 'destroy', :id => file.item_id }, { :confirm => 'Are you sure?', :method => :delete, :remote => true} 
-
-br/
-/destroy by type
-- types = []
-- Item.pluck(:item_file_name).each do |item|
-  - types << item.split(".")[1]
-
-- types.uniq.each do |type|
-  - ids = []
-  - Item.where("item_file_name like (?)", "%.#{type}").each do |file|
-    - ids << file.id
-  = link_to "destroy all #{type} files", destroy_by_type_items_path(:items => ids, :folder_id => @folder.try(:id)) , method: :delete, remote: true, class: 'remove_all_by_type'
-  br/
-
-
-
+            = link_to "delete_file", { :controller => 'items', :action => 'destroy', :id => file.item_id }, { :confirm => 'Are you sure?', :method => :delete, :remote => true}
+          td
+            span.controll_buttons id=(file.item_id)
+             = link_to "<i class='icon-check'></i>".html_safe, update_duplicate_condition_item_path(file.item_id), :remote => true, :method=> :post
             
 sass:
   table
@@ -35,6 +44,13 @@ sass:
       td
         padding: 6px !important
         font-size: 14px !important
+        border-left: 1px solid silver
+        &:first-child
+          border-left: none
         &:last-child
           margin-bottom: 10px
+    tr.t_header
+      border-bottom: 1px solid silver
+      td
+        font-style: italic
 

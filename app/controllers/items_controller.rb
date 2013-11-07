@@ -73,6 +73,16 @@ class ItemsController < ApplicationController
     end
   end
 
+
+  def update_duplicate_condition
+    item = Item.find(params[:id])
+    item.update_attribute(:duplicate, false)
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def update
     @item =  Item.find params[:id]
 
