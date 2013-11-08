@@ -1,14 +1,8 @@
 .span6.offset2
-  h2 Log In
   = form_tag sessions_path do
-    = label_tag :email
-    = text_field_tag :email, params[:email]
-    = label_tag :password
+    = text_field_tag :email, params[:email], :placeholder => "your email"
+    = label_tag "password"
     = password_field_tag :password
     .actions
-      = submit_tag "Log In", class: 'btn-submit'
+      = submit_tag "Log In", class: 'btn-submit submit-big'
 
-javascript:
-  $(function () {
-    $(".tree").addClass('hide');
-  });

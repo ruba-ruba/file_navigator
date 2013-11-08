@@ -1,16 +1,20 @@
-h1
-  = link_to 'file navigator', root_path, class: 'root'
-  .pull-right
-    - if current_user
-      span.user
-        | Logged in as 
-        = current_user.email
+.title
+  = link_to "#{image_tag('cabinet.png', size: "20x0")} Document Manager".html_safe , root_path, class: 'root'
+
+
+
+  
+.pull-right.hide
+  - if current_user
+    span.user
+      | Logged in as 
+      = current_user.email
+    '&nbsp
+    - if admin?
+      = link_to 'file review', file_review_users_path, class: 'header_buttons'
+      = link_to 'users', users_path, class: 'header_buttons'
       '&nbsp
-      - if admin?
-        = link_to 'file review', file_review_users_path, class: 'header_buttons'
-        = link_to 'users', users_path, class: 'header_buttons'
-        '&nbsp
-      = link_to "Log Out", logout_path, method: "delete", class: 'header_buttons ' 
-    - else
-      = link_to "Sign Up", signup_path, class: 'header_buttons'
-      = link_to "Log In", login_path, class: 'header_buttons'
+    = link_to "Log Out", logout_path, method: "delete", class: 'header_buttons ' 
+  - else
+    = link_to "Sign Up", signup_path, class: 'header_buttons'
+    = link_to "Log In", login_path, class: 'header_buttons'

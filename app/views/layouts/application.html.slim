@@ -7,10 +7,9 @@ html
     = csrf_meta_tags
   body
     #main role="main"
-      header
-        .container-fluid
+      div.wrapper
+        header
           = render 'layouts/header'
-      .container-fluid
         .content
           - flash.each do |key, value|
             = content_tag(:div, class: "alert alert-#{key}") do
@@ -18,8 +17,7 @@ html
                 = value
                 .pull-right = "<i class='remove-flash icon-remove'></i>".html_safe
           .row-fluid
-            .span3
-              = yield :tree
-            .span9
+            span12
+              /= yield :tree
               = yield
-      footer
+        footer

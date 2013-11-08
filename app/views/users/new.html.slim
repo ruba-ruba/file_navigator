@@ -8,12 +8,10 @@
           - @user.errors.full_messages.each do |message|
             li= message
 
-    = f.label :email
-    = f.text_field :email
-    = f.label :password
-    = f.password_field :password
+    = f.text_field :email, :placeholder => "your email"
+    = f.password_field :password, :placeholder => "your password"
     .actions
-      = f.submit "Sign Up", class: 'btn-submit'
+      = f.submit "Sign Up", class: 'btn-submit submit-big'
 
 
 javascript:

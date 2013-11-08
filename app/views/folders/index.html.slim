@@ -1,11 +1,17 @@
-div.nav-actions
-  div.pull-right
-    span.delete_multiple.hide
-        span.action_buttons.warning
-          | delete selected 
-    '&nbsp
-    = link_to "Add Folder", new_folder_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "action_buttons"}
-    = link_to "Add File",  new_item_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "action_buttons"}
+.top
+  span.create_folder
+    = link_to "#{image_tag('new_folder.png', size: '16x0')} &nbsp Create A Folder".html_safe, new_folder_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button"}
+  span.used.pull-right
+    | 3% used
 
-= render 'folders/folders'
+
+.middle
+  #fileupload
+    = form_tag multi_create_items_path, multipart: true, :id => 'new_item' do |f|
+      /= text_field "person", "name"
+      = hidden_field_tag :folder_id, @folder.id if @folder
+      = file_field_tag 'item[]', multiple: true
+      = submit_tag "save", :class => "hide btn-submit submit-big"
+
+= render 'folders'
 

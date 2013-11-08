@@ -18,25 +18,31 @@
 *{
   padding: 0px;
   margin: 0px;
-  font-size: 15px;
 }
 
-a{
-  color: black;
-  text-decoration: none !important;
-  &:visited {
-    color: white;
-  }
-  &:hover {
-    color: white !important;
-    background-color: #000;
-    text-decoration: none !important;
-    color:black !important;
-    background: none !important;
-  }
+#main {
+  width: 748px;
+  margin: 0 auto;
 }
 
+.top{
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, #fcffff), color-stop(4%, #c9c9c6), color-stop(21%, #d1d1d1), color-stop(41%, #e1e1e1), color-stop(100%, #e1e1e1));
+  background: -webkit-linear-gradient(top, #fcffff 0%, #c9c9c6 4%, #d1d1d1 21%, #e1e1e1 41%, #e1e1e1 100%);
+  background: -o-linear-gradient(top, #fcffff 0%, #c9c9c6 4%, #d1d1d1 21%, #e1e1e1 41%, #e1e1e1 100%);
+  background: -ms-linear-gradient(top, #fcffff 0%, #c9c9c6 4%, #d1d1d1 21%, #e1e1e1 41%, #e1e1e1 100%);
+  background: linear-gradient(to bottom, #fcffff 0%, #c9c9c6 4%, #d1d1d1 21%, #e1e1e1 41%, #e1e1e1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcffff', endColorstr='#e1e1e1', GradientType=0 );
+  }
 
-i:hover{
-  cursor: pointer;
+
+.create_folder{
+  background: #ffffff;
+  background: -moz-linear-gradient(top, #ffffff 0%, #E9E9E3 9%, #FFFFFF 99%, #FFFFFF 99%, #FFFFFF 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, #ffffff), color-stop(9%, #E9E9E3), color-stop(99%, #FFFFFF), color-stop(99%, #FFFFFF), color-stop(100%, #FFFFFF));
+  background: -webkit-linear-gradient(top, #ffffff 0%, #E9E9E3 9%, #FFFFFF 99%, #FFFFFF 99%, #FFFFFF 100%);
+  background: -o-linear-gradient(top, #ffffff 0%, #E9E9E3 9%, #FFFFFF 99%, #FFFFFF 99%, #FFFFFF 100%);
+  background: -ms-linear-gradient(top, #ffffff 0%, #E9E9E3 9%, #FFFFFF 99%, #FFFFFF 99%, #FFFFFF 100%);
+  background: linear-gradient(to bottom, #ffffff 0%, #E9E9E3 9%, #FFFFFF 99%, #FFFFFF 99%, #FFFFFF 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#FFFFFF', GradientType=0 );
+
 }

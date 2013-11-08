@@ -1,38 +1,60 @@
-- content_for :tree do
-  .tree
-  = nested_tree @root_folders.arrange
+.main
+  .navigation
+    .buttons
+      span.documents
+        = image_tag('folder_with_files.png', size: "40x0")
+        br/
+        | My Documents
+    .buttons
+      span.nav
+        = image_tag('folder_with_files.png', size: "40x0")
+        br/
+        | Tree
+  .area
+    .placing
+    .files
+      table
+        tr.t_header
+          td.name
+            | Name
+          td.description
+            | Description
+          td.size
+            | Size
+          td.date
+            | Date
+          td.edit
+            | Edit
+          td.delete
+            | Delete
+          = form_tag destroy_multiple_folders_path, method: :delete, id: 'multiple_delete_form', remote: true do
+            - @folders.each do |folder|
+              tr
+                td
+                  = link_to folder.title, folder 
+                td
+                  | descr
+                td
+                td
+                  = folder.created_at.strftime('%d/%m/%y %I:%M%p')
+                td
+                  = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(folder), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "controll_buttons"}
+                td
+                  = link_to "<i class='icon-remove-circle'></i>".html_safe, folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'controll_buttons remove'
+                  
+                    
+            = render 'items/items'
+    .tree
+      - content_for :tree do
+        = render 'shared/tree_elements', :elements => {:folders => Folder.roots, :items =>  Item.without_folder}
 
-  - if @root_items.any?
-    .tree_items_root
-      - @root_items.each do |item|
-        .tree_item
-          = link_to "<i class='icon-file'></i> #{item.item_file_name}".html_safe, item.item(:original, false)
-          br/
-        
 
-= @errors
-.folders
-  = form_tag destroy_multiple_folders_path, method: :delete, id: 'multiple_delete_form', remote: true do
-    - @folders.each do |folder|
-      div.folder id=(folder.id)
-        = link_to "<i class='icon-folder-close'></i>  #{folder.title}".html_safe, folder 
-        span.pull-right
-          = folder.created_at.strftime('%d/%m/%y')
-          '&nbsp
-          = link_to "<i class='icon-info-sign'></i>".html_safe,  info_folder_path(:id => folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "controll_buttons"}
-          = link_to "<i class='icon-comment'></i>".html_safe, folder_comments_path(folder), class: 'controll_buttons'
-          = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(folder), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "controll_buttons"}
-          = link_to "<i class='icon-download-alt'></i>".html_safe, download_folder_path(:folder => folder.id) , class: "controll_buttons"
-          = link_to "<i class='icon-remove-circle'></i>".html_safe, folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'controll_buttons remove'
-          span.controll_buttons.remove.multiple id=(folder.id)
-             = "<i class='icon-check'></i>".html_safe
 
-          = check_box_tag "folders[]", folder.id
-          
-    = render 'items/items'
 
-  #fileupload
-    = form_tag multi_create_items_path, multipart: true, :id => 'new_item' do |f|
-      = hidden_field_tag :folder_id, @folder.id if @folder
-      = file_field_tag 'item[]', multiple: true
-      = submit_tag "save", :class => "hide btn-submit submit-big"
+
+
+
+
+span.delete_multiple.hide
+  span.action_buttons.warning
+    | delete selected 

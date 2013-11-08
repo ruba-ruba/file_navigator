@@ -1,34 +1,131 @@
-.container-fluid
-  max-width: 1040px
-  min-width: 1040px
+.wrapper
+  max-width: 730px
+  min-width: 730px
   margin: 0 auto
 
-.row-fluid
-  margin-top: 7px
 
-header
-  margin-top: 0px
-  min-height: 60px
-  max-height: 60px
-  background: rgba(1, 1, 1, 0.85)
-  color: white
-  line-height: 26px
-  .container-fluid
-    h1
-      a.root
-        font-size: 24px
-        font-style: italic
-      a.root:hover
-        font-size: 24px
-        font-style: italic
+.wrapper
+  left: 5px
+  header
+    min-height: 40px
+    max-height: 40px
+    margin: 0 auto
+    color: #656964
+    line-height: 26px
+    .title
+      width: 236px
       a
         text-decoration: none
-        color: white !important
-      a:hover
-        color: white !important
-        text-decoration:  none
-        color: white !important
-        text-decoration:  none
+        font-family:  Impact
+        letter-spacing: +2px
+        font-style: bold
+        line-height: 40px
+        font-size: 20px
+        color: #656964 
+        border-bottom: 0.1em solid silver
+
+
+.top
+  height: 36px
+  border: 2px solid #656964
+  position: relative
+  margin-bottom: 8px
+
+  .create_folder
+    position: absolute
+    height: 18px
+    width: 120px
+    border: 2px solid #828282
+    left: 10px
+    top: 7px
+    a
+      margin-left: 4px
+      font-family:  Impact
+      letter-spacing: +0.7px 
+      font-size: 12px
+      color: #003366
+      text-decoration: none
+      img
+        vertical-align: top
+
+
+
+.middle
+  max-height: 84px
+  min-height: 84px
+  border: 2px solid #989894
+  background-color: #F2F2F2
+  margin-bottom: 13px
+  #fileupload
+    input
+      box-shadow: none !important
+      border-radius: none !important
+
+
+.main
+  .navigation
+    background-color: #F2F2F2
+    border: 2px solid #989894  
+    max-width: 70px
+    min-width: 70px
+    height: 100%
+    min-height: 100%
+    float: left
+    margin-right: 16px
+    .buttons
+      margin: 6px auto
+      border: 2px solid #989894
+      height: 64px
+      width: 58px
+      text-align: center
+      font-size: 11px
+      line-height: 12px
+      .documents
+        display: inline
+        text-align: center !important
+        img
+          left 4px
+      .nav
+        text-align: center
+  .area
+    float: left
+    max-width: 640px
+    min-width: 640px
+    .placing
+      min-height: 54px
+      max-height: 54px
+    .files
+      border: 2px solid #989894
+      border-top: 3px solid #989894
+      table
+        tr
+          td 
+            border: 1px solid #989894
+        tr.t_header
+          height: 18px
+          td
+    .tree
+
+
+
+td.name,td.description
+  width: 192px
+td.size
+  width: 54px
+td.date
+  width: 128px
+td.edit
+  width: 28px
+td.delete
+  width: 44px
+
+        
+$item: #D8D7DE
+$item_hover: #B5B2C4
+
+$folder: #F7F0E0
+$folder_hover: #DDD2BA
+
 
 
 
@@ -40,11 +137,6 @@ header
 
 
 
-$item: #D8D7DE
-$item_hover: #B5B2C4
-
-$folder: #F7F0E0
-$folder_hover: #DDD2BA
 
 
 .folder, .item
@@ -76,16 +168,7 @@ input#folders_, input#items_
   visibility: hidden
   display: none
 
-form
-  margin-top: 20px
-  .remove_all
-    margin-top: 10px
 
-
-#item_
-  width: 100%
-  height: 150px
-  background: $item
 
 .warning
   background-color: orange !important
@@ -96,39 +179,6 @@ form
   &:hover
     background-color: #F76E59 !important
  
-
-.header_buttons
-  transition: 0.2s
-  padding: 20px 15px
-  &:hover
-    @extend .warning
-    transition: 0.2s
-    background-color: green
-
-.action_buttons
-  cursor: pointer
-  transition: 0.2s
-  display: inline-block
-  transition: 0.2s
-  padding: 8px 20px
-  background-color: $folder
-  border-bottom: 1px solid silver
-  border-right: 1px solid silver
-  &:hover
-    transition: 0.2s
-    padding: 8px 20px
-    background-color: orange
-
-a.action_buttons
-  color: black
-
-.controll_buttons
-  transition: 0.2s
-  display: inline-block
-  padding: 8px 12px
-  &:hover
-    transition: 0.2s
-    background-color: orange
 
 .btn-submit
   transition: 0.2s
@@ -147,53 +197,5 @@ a.action_buttons
 .hide-button
   visibility: hidden
 
-
-
-.nav-actions
-  max-height: 34px
-  min-height: 34px
-  #border: 1px solid black
-
-.folders
-  #border: 1px solid black
-
-
-
-
-.nested_tree, .tree_items
+.nested_tree
   margin-left: 14px
-
-.tree_folder
-  position: relative
-  min-height: 26px
-  max-height: 46px
-  background-color: #F7F0E0
-  transition: 0.3s
-  border-bottom: 1px solid silver
-  z-index: 1
-  a
-    z-index: 10
-    position: absolute
-    left: 4px
-    top: 5px
-    color: black
-  &:hover
-    transition: 0.3s
-    background-color: #DDD2BA
-
-
-.tree_item
-  position: relative
-  min-height: 26px
-  max-height: 46px
-  transition: 0.3s
-  background-color: $item
-  border-bottom: 1px solid silver
-  a
-    color: black
-    top: 5px
-    left: 4px
-    position: absolute
-  &:hover
-    transition: 0.3s
-    background-color: $item_hover
