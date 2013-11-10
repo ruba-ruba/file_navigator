@@ -9,6 +9,7 @@
           li= msg
   .field
     = f.input :folder_id, :as => :hidden, :input_html => { :value => params[:folder_id] } if params[:folder_id]
+    = f.input :description
     = f.file_field :item, :type => "file"
   br/
   .actions

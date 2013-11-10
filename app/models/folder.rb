@@ -1,5 +1,5 @@
 class Folder < ActiveRecord::Base
-  attr_accessible :title, :parent_id, :parent, :ancestry, :folder
+  attr_accessible :title, :parent_id, :parent, :ancestry, :folder, :description
 
   attr_accessor :folder
 

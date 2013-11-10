@@ -1,17 +1,21 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :root_items
+  before_filter :total_size
 
   helper_method :current_user
   helper_method :signed_in?
   helper_method :admin?
   helper_method :admin_user
 
-  def root_items
-    @root_folders = Folder.scoped
-    @root_items = Item.without_folder
-  end  
+  QUOTA = 157_286_400
+
+  def total_size
+    size = Item.pluck(:item_file_size).inject{|sum,x| sum + x }
+    @taken = size*100/QUOTA
+    @total = QUOTA
+  end
+
 
   def authorize
     redirect_to login_url, alert: "Not authorized" if current_user.nil?

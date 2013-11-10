@@ -4,6 +4,11 @@
   margin: 0 auto
 
 
+.active
+  background-color: #FFFFCA
+  border: 2px solid #989894
+
+
 .wrapper
   left: 5px
   header
@@ -30,7 +35,6 @@
   border: 2px solid #656964
   position: relative
   margin-bottom: 8px
-
   .create_folder
     position: absolute
     height: 18px
@@ -44,11 +48,43 @@
       letter-spacing: +0.7px 
       font-size: 12px
       color: #003366
+      line-height: 17px
       text-decoration: none
       img
         vertical-align: top
-
-
+  .used
+    position: relative
+    width: 242px
+    margin-right: 1px
+    margin-top: 8px
+    font-size: 13px
+    .text
+      position: absolute
+      letter-spacing: -0.3px
+      &:last-child
+        margin-left: 160px
+        letter-spacing: -0.5px
+        margin-top: 1px
+    .progressbar
+      display: inline-block
+      margin-left: 40px
+      border: 1px solid #656964
+      background-color: #E1E1E1
+      border-radius: 5px
+      max-height: 17px
+      min-height: 17px
+      max-width: 116px
+      min-width: 116px
+      position: absolute
+      z-index: 10
+      div
+        position: absolute
+        display: inline-block
+        background-color: #BFBEB9
+        height: 100%
+        border-right: 1px solid  #656964
+        border-radius: 7px 0px 0px 7px
+        z-index: 1
 
 .middle
   max-height: 84px
@@ -57,9 +93,14 @@
   background-color: #F2F2F2
   margin-bottom: 13px
   #fileupload
-    input
-      box-shadow: none !important
-      border-radius: none !important
+    margin-left: 10px
+    margin-top: 24px
+    form
+      input
+        box-shadow: none !important
+        border-radius: none !important
+      .btn-default
+        width: 104px
 
 
 .main
@@ -74,8 +115,7 @@
     margin-right: 16px
     .buttons
       margin: 6px auto
-      border: 2px solid #989894
-      height: 64px
+      height: 66px
       width: 58px
       text-align: center
       font-size: 11px
@@ -84,7 +124,7 @@
         display: inline
         text-align: center !important
         img
-          left 4px
+          left: 4px
       .nav
         text-align: center
   .area
@@ -94,39 +134,63 @@
     .placing
       min-height: 54px
       max-height: 54px
+      .pl-top
+        font-size: 12px
+        font-weight: bold
+        img
+          vertical-align: top
+      .pl-down
+        margin-top: 7px
+        font-size: 12px
+        a
+          color: #003366
+
     .files
       border: 2px solid #989894
       border-top: 3px solid #989894
       table
         tr
-          td 
+          td
+            padding-left: 3px 
             border: 1px solid #989894
+            font-size: 12px
+            &:last-child
+              text-align: center
+            a
+              color: #003366
+              text-decoration: none
+              &:hover 
+                text-decoration: none
+              img
+                vertical-align: bottom 
         tr.t_header
           height: 18px
+          font-family:  Impact
+          letter-spacing: +0.7px 
+          font-size: 12px
+          text-decoration: none
           td
-    .tree
+            text-align: left
 
+    .tree
+      border: 2px solid #989894
+      border-top: 3px solid #989894
 
 
 td.name,td.description
   width: 192px
+  color: #003366
 td.size
   width: 54px
 td.date
   width: 128px
+  color: #003366
 td.edit
   width: 28px
 td.delete
-  width: 44px
+  width: 42px
 
         
-$item: #D8D7DE
-$item_hover: #B5B2C4
-
-$folder: #F7F0E0
-$folder_hover: #DDD2BA
-
-
 
 
 .alert-alert
@@ -139,27 +203,14 @@ $folder_hover: #DDD2BA
 
 
 
-.folder, .item
-  margin-left: 0px !important
-  max-height: 31px !important
-  min-height: 31px !important
-
-.folder
-  background-color: $folder
-  &:hover
-    background-color: $folder_hover
-
-.item
-  background-color: $item
-  &:hover
-    background-color: $item_hover
 
 
-.folder, .item
-  border-bottom: 1px solid silver
-  a
-    color: black
-    line-height: 40px
+
+
+
+
+
+
 
 
 
@@ -169,15 +220,6 @@ input#folders_, input#items_
   display: none
 
 
-
-.warning
-  background-color: orange !important
-  &:hover
-    background-color: #F76E59 !important
-
-.remove
-  &:hover
-    background-color: #F76E59 !important
  
 
 .btn-submit

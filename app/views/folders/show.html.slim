@@ -1,23 +1,24 @@
-div.nav-actions
-  .pull-right
-      span.delete_multiple.hide
-        span.action_buttons.warning
-          | delete selected 
-      '&nbsp
-      = link_to "Add Folder",  new_folder_path(:folder_id => params[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "action_buttons"}
-      = link_to "Add file",  new_item_path(:folder_id => @folder.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "action_buttons"}
+.top
+  span.create_folder
+    = link_to "#{image_tag('new_folder.png', size: '16x0')} &nbsp Create A Folder".html_safe, new_folder_path(:folder_id => params[:id] || nil), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button"}
+  span.used.pull-right
+    span.text
+      = @taken
+      | % full 
+    .progressbar
+      div
+    span.text
+      = number_to_human_size(@total)  
+      |  Quota  
 
-  span.back
-    - unless @folder.parent.nil?
-      span.action_buttons
-        = "<i class='icon-folder-close'></i> #{@folder.parent.title}".html_safe
-    - if @folder.parent.nil?
-      = link_to "<i class='icon-arrow-left'></i> root".html_safe, folders_path, class: 'action_buttons'
-    - else 
-      = link_to "<i class='icon-arrow-left'></i> back".html_safe, folder_path(@folder.parent), class: 'action_buttons'
-    span.action_buttons
-      = "<i class='icon-folder-open'></i> #{@folder.title}".html_safe
-    
-      
+
+.middle
+  #fileupload
+    = form_tag multi_create_items_path, multipart: true, :id => 'new_item' do |f|
+      /= text_field "person", "name"
+      = hidden_field_tag :folder_id, @folder.id if @folder
+      = file_field_tag 'item[]', multiple: true
+      = submit_tag "Upload File", type: "button", class: "btn btn-default hide"
+
       
 = render 'folders'

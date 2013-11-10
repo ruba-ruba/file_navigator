@@ -3,12 +3,12 @@
     td
       = link_to item.item_file_name, item.item(:original, false), target: '_blank'
     td
-      | descr
+      = item.description
     td
       = number_to_human_size(item.item_file_size)
     td
       = item.item_updated_at.strftime('%d/%m/%y')
     td
-     = link_to  "<i class='icon-edit'></i>".html_safe, edit_item_path(item), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "controll_buttons"}
+     = link_to  image_tag('edit.png', size: '20x0'), edit_item_path(item), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button"}
      td
-      = link_to "<i class='icon-remove-circle'></i>".html_safe, item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "controll_buttons remove"
+      = link_to image_tag('Trash.png', size: '20x0'), item, method: :delete, data: { confirm: 'Are you sure?' }, remote: true

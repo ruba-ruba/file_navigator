@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107104703) do
+ActiveRecord::Schema.define(:version => 20131109113910) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -27,10 +27,11 @@ ActiveRecord::Schema.define(:version => 20131107104703) do
 
   create_table "folders", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "ancestry"
     t.string   "user_id"
+    t.string   "description"
   end
 
   add_index "folders", ["ancestry"], :name => "index_folders_on_ancestry"
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20131107104703) do
     t.datetime "item_updated_at"
     t.string   "user_id"
     t.boolean  "duplicate",         :default => true
+    t.string   "description"
   end
 
   create_table "lists", :force => true do |t|

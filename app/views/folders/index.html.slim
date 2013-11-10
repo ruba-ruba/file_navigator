@@ -2,7 +2,14 @@
   span.create_folder
     = link_to "#{image_tag('new_folder.png', size: '16x0')} &nbsp Create A Folder".html_safe, new_folder_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button"}
   span.used.pull-right
-    | 3% used
+    span.text
+      = @taken
+      | % full 
+    .progressbar
+      div
+    span.text
+      = number_to_human_size(@total)  
+      |  Quota  
 
 
 .middle

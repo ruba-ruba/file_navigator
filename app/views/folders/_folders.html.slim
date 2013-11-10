@@ -1,6 +1,6 @@
 .main
   .navigation
-    .buttons
+    .buttons.active
       span.documents
         = image_tag('folder_with_files.png', size: "40x0")
         br/
@@ -12,6 +12,18 @@
         | Tree
   .area
     .placing
+      .pl-top
+        = image_tag('folder.png', size: '18x0')
+        |  Files stored
+      .pl-down
+        | You are here: / 
+        = link_to "My Documents", root_path
+        |  / 
+        - if @folder && @folder.path
+          - @folder.path.split("/").each do |folder|
+            = link_to folder, Folder.find_by_title(folder)
+            |  / 
+        = @folder.title if @folder
     .files
       table
         tr.t_header
@@ -31,30 +43,29 @@
             - @folders.each do |folder|
               tr
                 td
-                  = link_to folder.title, folder 
+                  = link_to "#{image_tag('folder.png', size: '18x0')} #{folder.title}".html_safe, folder 
                 td
-                  | descr
+                  = folder.description
                 td
                 td
                   = folder.created_at.strftime('%d/%m/%y %I:%M%p')
                 td
-                  = link_to  "<i class='icon-edit'></i>".html_safe, edit_folder_path(folder), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button", :class => "controll_buttons"}
+                  = link_to  image_tag('edit.png', size: '20x0'), edit_folder_path(folder), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button"}
                 td
-                  = link_to "<i class='icon-remove-circle'></i>".html_safe, folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'controll_buttons remove'
+                  = link_to image_tag('Trash.png', size: '20x0'), folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }
                   
                     
             = render 'items/items'
-    .tree
-      - content_for :tree do
-        = render 'shared/tree_elements', :elements => {:folders => Folder.roots, :items =>  Item.without_folder}
-
-
-
-
-
+    .tree.hide
+      = render 'shared/tree_elements', :elements => {:folders => Folder.roots, :items =>  Item.without_folder}
 
 
 
 span.delete_multiple.hide
   span.action_buttons.warning
     | delete selected 
+
+javascript:
+  $(function () {
+    $(".progressbar > div").css("width", #{@taken});  
+  });

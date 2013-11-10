@@ -18,4 +18,4 @@ $ ->
     ), 600
 
   $("#item_").change ->
-    $('.btn-submit').removeClass("hide")
+    $('.btn').removeClass("hide")
