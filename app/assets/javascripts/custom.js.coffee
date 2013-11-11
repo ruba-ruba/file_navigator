@@ -45,14 +45,17 @@ $ ->
 
 
 
-  #open folders tree for currnet folders
+  #open folders tree
   name = $(".folder_dom_id").text()
-  element = "div[child_of="+name+"]"
-
-  open_parent = (element) ->
+  if name != ""
+    element = "div[child_of="+name+"]"
     $(element).removeClass "hide"
-    attr = $(element).parent()
-    if $(element).parent().attr("class") != "tree" 
-      open_parent(attr)
-  
-  open_parent(element)
+
+    open_parent = (element) ->
+      parent = $(element).parent()
+      $(parent).removeClass "hide"
+      if parent.parent().parent().attr("class") == "area"
+        return false
+      open_parent(parent)
+    
+    open_parent(element)

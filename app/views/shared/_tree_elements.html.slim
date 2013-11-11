@@ -14,5 +14,6 @@
           = render 'shared/tree_elements', :elements =>  {:folders => folder.children, :items =>  folder.items} 
 
   - elements[:items].each do |item|
-    = link_to "<i class='icon-file'></i> #{item.item_file_name}".html_safe, item
+    = "#{icon(item)} ".html_safe
+    = link_to item.item_file_name, item
     br/
