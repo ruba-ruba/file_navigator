@@ -17,6 +17,7 @@ gem 'jquery-fileupload-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap-addons-rails'
 gem 'font-awesome-sass-rails'
+gem 'silk-bootstrap-rails'
 
 gem "paperclip", "3.4.2"
 

@@ -3,6 +3,8 @@ require 'zip'
 
 class FoldersController < ApplicationController
 
+  helper_method :sort_column, :sort_direction
+
   respond_to :js, :html
 
   before_filter :authorize, only: [:edit, :update, :new, :create, :destroy]
@@ -84,7 +86,7 @@ class FoldersController < ApplicationController
 
   def show
     @folder = Folder.find(params[:id])
-    @folders = @folder.children
+    @folders = @folder.children.order(sort_column + ' ' + sort_direction)
     @items = @folder.items
 
     respond_to do |format|
@@ -114,7 +116,7 @@ class FoldersController < ApplicationController
   end
 
   def show_roots
-    folders = Folder.all
+    folders = Folder.order(sort_column + ' ' + sort_direction)
     @items = Item.without_folder
     @folders = []
     folders.each do |folder|
@@ -196,6 +198,16 @@ class FoldersController < ApplicationController
       @folder = Folder.find(params[:id])
       redirect_to root_path unless current_user == @folder.user || admin?
       flash.now[:notice] = "not permitted"
+    end
+
+    private
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    end
+
+    def sort_column
+      Folder.column_names.include?(params[:sort]) ? params[:sort] : "title"
     end
 
 end

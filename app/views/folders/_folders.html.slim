@@ -28,13 +28,13 @@
       table
         tr.t_header
           td.name
-            | Name
+            = sortable 'title', 'Name'
           td.description
-            | Description
+            = sortable 'description', 'Description'
           td.size
             | Size
           td.date
-            | Date
+            = sortable 'created_at', 'Date'
           td.edit
             | Edit
           td.delete
@@ -43,7 +43,8 @@
             - @folders.each do |folder|
               tr
                 td
-                  = link_to "#{image_tag('folder.png', size: '18x0')} #{folder.title}".html_safe, folder 
+                  span.popover_title data-content="#{folder.title}" rel="popover"
+                    = link_to "<i class='silk-folder'></i> #{truncate(folder.title, length: 24)}".html_safe, folder
                 td
                   = folder.description
                 td
@@ -52,9 +53,8 @@
                 td
                   = link_to  image_tag('edit.png', size: '20x0'), edit_folder_path(folder), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '.modal', :role => "button"}
                 td
-                  = link_to image_tag('Trash.png', size: '20x0'), folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }
+                  = link_to image_tag('Trash.png', size: '20x0'), folder, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }, class: 'remove_folder'
                   
-                    
             = render 'items/items'
     .tree.hide
       = render 'shared/tree_elements', :elements => {:folders => Folder.roots, :items =>  Item.without_folder}
@@ -65,7 +65,5 @@ span.delete_multiple.hide
   span.action_buttons.warning
     | delete selected 
 
-javascript:
-  $(function () {
-    $(".progressbar > div").css("width", #{@taken});  
-  });
+span.hide.folder_dom_id
+  = element = dom_id(@folder) if @folder

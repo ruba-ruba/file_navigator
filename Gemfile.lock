@@ -277,6 +277,8 @@ GEM
     sidekiq-client-cli (0.1.2)
       cli
       sidekiq
+    silk-bootstrap-rails (0.0.1)
+      railties (~> 3.1)
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -371,6 +373,7 @@ DEPENDENCIES
   shoulda-matchers
   sidekiq
   sidekiq-client-cli
+  silk-bootstrap-rails
   simple_form
   simplecov
   simplecov-rcov

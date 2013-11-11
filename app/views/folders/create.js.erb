@@ -3,6 +3,6 @@
   $('.modal-body').prepend("<%=escape_javascript(render('layouts/error_messages', :object => @folder))%>");
   //$('.modal-body').prepend("<p id='error'><%= @folder.errors.full_messages %> </p>");
 <% else %>
-  $(".folders").replaceWith("<%= escape_javascript(render('folders/folders'))%>");
+  $(".main").replaceWith("<%= escape_javascript(render('folders/folders'))%>");
   $('.modal, .modal-backdrop').remove();
 <% end %>

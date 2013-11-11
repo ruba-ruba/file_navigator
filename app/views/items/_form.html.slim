@@ -9,8 +9,8 @@
           li= msg
   .field
     = f.input :folder_id, :as => :hidden, :input_html => { :value => params[:folder_id] } if params[:folder_id]
-    = f.input :description
+    = f.input :description, as: :text,  as: :text, :input_html => {:rows => 3}
     = f.file_field :item, :type => "file"
   br/
   .actions
-    = f.submit "save", :class => 'btn-submit'
+    = f.submit "save", :class => 'btn-submit submit-big'

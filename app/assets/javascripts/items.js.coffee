@@ -7,7 +7,7 @@
 $ -> 
   #remove item
   $(".remove_item").bind "ajax:before", ->
-    $(this).closest(".item").fadeOut()
+    $(this).closest("tr").fadeOut()
 
   $('.remove_all_by_type').click ->
     $(this).remove()
@@ -19,3 +19,6 @@ $ ->
 
   $("#item_").change ->
     $('.btn').removeClass("hide")
+
+  $("#new_item > .btn").click ->
+    $('form').submit()

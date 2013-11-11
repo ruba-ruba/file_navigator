@@ -1,6 +1,7 @@
 <% if @item.errors.any? %>
   
 <% else %>
-  $(".items").replaceWith("<%= escape_javascript(render('items/items'))%>");
+  $("tr.items").remove();
+  $("table:last-child").append("<%= escape_javascript(render('items/items'))%>");
   $('.modal, .modal-backdrop').remove();
 <% end %>

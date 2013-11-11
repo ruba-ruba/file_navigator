@@ -3,7 +3,7 @@
   .field
     = f.label "folder name"
     = f.input :title, label: false ,input_html: { :autocomplete => "off", type: 'text' }
-    = f.input :description
+    = f.input :description, as: :text, :input_html => {:rows => 3}
     = f.input :parent_id, :as => :hidden, :input_html => { :value => params[:folder_id] } unless params[:action] == "edit"
   .actions
-    = f.button :submit, :class=> "btn-submit" 
+    = f.button :submit, :class=> "btn-submit submit-big" 

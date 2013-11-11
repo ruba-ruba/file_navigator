@@ -1,11 +1,18 @@
 .nested_tree 
   - elements[:folders].each do |folder|
-    div parent_of=(dom_id(folder))
-	    = folder.title
-	    - if folder.children || folder.items
-	      .sub_tree child_of=(dom_id(folder))
-	        = render 'shared/tree_elements', :elements =>  {:folders => folder.children, :items =>  folder.items} 
+    div.tree_folder owner_of=(dom_id(folder))
+      span
+        - if folder.children.any? || folder.items.any?
+          = "<i class='icon-plus'></i>".html_safe
+          = "<i class='icon-minus hide'></i>".html_safe
+        - else
+          = "<i class='icon-anchor'></i>".html_safe
+      '&nbsp
+      = link_to "#{image_tag('folder.png', size: '18x0')} #{folder.title}".html_safe, folder
+      - if folder.children || folder.items
+        .hide child_of=(dom_id(folder))
+          = render 'shared/tree_elements', :elements =>  {:folders => folder.children, :items =>  folder.items} 
 
   - elements[:items].each do |item|
-    = item.item_file_name
+    = link_to "<i class='icon-file'></i> #{item.item_file_name}".html_safe, item
     br/

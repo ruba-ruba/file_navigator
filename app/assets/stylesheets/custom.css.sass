@@ -70,7 +70,7 @@
       margin-left: 40px
       border: 1px solid #656964
       background-color: #E1E1E1
-      border-radius: 5px
+      border-radius: 3px 5px 6px 3px
       max-height: 17px
       min-height: 17px
       max-width: 116px
@@ -83,7 +83,7 @@
         background-color: #BFBEB9
         height: 100%
         border-right: 1px solid  #656964
-        border-radius: 7px 0px 0px 7px
+        border-radius: 3px 0px 0px 3px
         z-index: 1
 
 .middle
@@ -107,9 +107,9 @@
   .navigation
     background-color: #F2F2F2
     border: 2px solid #989894  
+    min-height: 156px !important
     max-width: 70px
     min-width: 70px
-    height: 100%
     min-height: 100%
     float: left
     margin-right: 16px
@@ -161,8 +161,7 @@
               text-decoration: none
               &:hover 
                 text-decoration: none
-              img
-                vertical-align: bottom 
+              i
         tr.t_header
           height: 18px
           font-family:  Impact
@@ -171,7 +170,6 @@
           text-decoration: none
           td
             text-align: left
-
     .tree
       border: 2px solid #989894
       border-top: 3px solid #989894
@@ -241,3 +239,7 @@ input#folders_, input#items_
 
 .nested_tree
   margin-left: 14px
+
+
+input, textarea
+  width: 100% !important
