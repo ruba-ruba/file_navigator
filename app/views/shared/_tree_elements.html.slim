@@ -1,9 +1,10 @@
-.nested_tree
+.nested_tree 
   - elements[:folders].each do |folder|
-    = folder.title
-    - if folder.children || folder.items
-      .sub_tree
-        = render 'shared/tree_elements', :elements =>  {:folders => folder.children, :items =>  folder.items} 
+    div parent_of=(dom_id(folder))
+	    = folder.title
+	    - if folder.children || folder.items
+	      .sub_tree child_of=(dom_id(folder))
+	        = render 'shared/tree_elements', :elements =>  {:folders => folder.children, :items =>  folder.items} 
 
   - elements[:items].each do |item|
     = item.item_file_name
