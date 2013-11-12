@@ -1,7 +1,7 @@
 - @items.each do |item|
   tr.items
     td
-      span.popover_title data-content="#{item.item_file_name}" rel="popover"
+      span.popover_title data-content="#{item.item_file_name}" data-original-title="#{item.item_content_type}" rel="popover"
         = "#{icon(item)} ".html_safe
         = link_to "#{truncate(item.item_file_name, length: 24)}".html_safe, item.item(:original, false), target: '_blank'
     td

@@ -28,13 +28,13 @@
       table
         tr.t_header
           td.name
-            = sortable 'title', 'Name'
+            = sortable 'title', 'item_file_name' , 'Name'
           td.description
-            = sortable 'description', 'Description'
+            = sortable 'description', 'description', 'Description'
           td.size
             | Size
           td.date
-            = sortable 'created_at', 'Date'
+            = sortable 'created_at', 'created_at', 'Date'
           td.edit
             | Edit
           td.delete

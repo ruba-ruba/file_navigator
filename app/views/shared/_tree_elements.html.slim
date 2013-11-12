@@ -15,5 +15,5 @@
 
   - elements[:items].each do |item|
     = "#{icon(item)} ".html_safe
-    = link_to item.item_file_name, item
+    = link_to "#{truncate(item.item_file_name, length: 24)}".html_safe, item.item(:original, false), target: '_blank'
     br/

@@ -97,7 +97,13 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item =  Item.find params[:id]
+    @item = Item.find params[:id]
+
+    new_file_name = "original_" + params[:item][:item_file_name]
+    path = @item.item.path.split("/")
+    path.pop
+    path_for_file = path.join("/")
+    File.rename(@item.item.path ,  path_for_file + "/" + new_file_name)
 
     respond_to do |format|
       if @item.update_attributes(params[:item])
@@ -106,6 +112,8 @@ class ItemsController < ApplicationController
         else
           @items = Item.where(:folder_id => @item.folder_id)
         end
+
+
         format.html { redirect_to :back, notice: 'Item was successfully updated.' }
         format.json { head :no_content }
         format.js

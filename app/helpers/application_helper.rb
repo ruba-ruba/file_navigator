@@ -6,11 +6,11 @@ module ApplicationHelper
     end.join.html_safe
   end
 
-  def sortable(column, title = nil)
+  def sortable(column, items_sort, title = nil)
     title ||= column.titleize
-    css_class = (column.downcase == sort_column) ? "current #{sort_direction}" : nil
-    direction = (column.downcase == sort_column && sort_direction == "asc") ? "desc" : "asc"
-    link_to title, {:sort => column, :direction => direction, remote: true}, {:class => css_class}
+    css_class = (column.downcase == folder_sort_column) ? "current #{sort_direction}" : nil
+    direction = (column.downcase == folder_sort_column && sort_direction == "asc") ? "desc" : "asc"
+    link_to title, {:sort => column, :direction => direction, :items_sort => items_sort, remote: true}, {:class => css_class}
   end
 
 

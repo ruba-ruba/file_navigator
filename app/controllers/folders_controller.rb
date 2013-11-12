@@ -3,7 +3,7 @@ require 'zip'
 
 class FoldersController < ApplicationController
 
-  helper_method :sort_column, :sort_direction
+  helper_method :folder_sort_column, :item_sort_column, :sort_direction
 
   respond_to :js, :html
 
@@ -19,7 +19,23 @@ class FoldersController < ApplicationController
     end
   end
 
+  def show_roots
+    folders = Folder.order(folder_sort_column + ' ' + sort_direction)
+    @items = Item.without_folder.order(item_sort_column + ' ' + sort_direction)
+    @folders = []
+    folders.each do |folder|
+      if folder.root? 
+        @folders << folder
+      end
+    end
+  end
+
   def drop
+  end
+
+  respond_to :json
+  def ng_show
+    respond_with Item.all
   end
 
   def folder_info(folder = nil, sub_folders = [], items = [])
@@ -86,8 +102,8 @@ class FoldersController < ApplicationController
 
   def show
     @folder = Folder.find(params[:id])
-    @folders = @folder.children.order(sort_column + ' ' + sort_direction)
-    @items = @folder.items
+    @folders = @folder.children.order(folder_sort_column + ' ' + sort_direction)
+    @items = @folder.items.order(item_sort_column + ' ' + sort_direction)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -112,17 +128,6 @@ class FoldersController < ApplicationController
       format.html 
       format.json
       format.js { render }
-    end
-  end
-
-  def show_roots
-    folders = Folder.order(sort_column + ' ' + sort_direction)
-    @items = Item.without_folder
-    @folders = []
-    folders.each do |folder|
-      if folder.root? 
-        @folders << folder
-      end
     end
   end
 
@@ -206,8 +211,12 @@ class FoldersController < ApplicationController
       %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
     end
 
-    def sort_column
+    def folder_sort_column
       Folder.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    end
+
+    def item_sort_column
+      Item.column_names.include?(params[:items_sort]) ? params[:items_sort] : "item_file_name"
     end
 
 end

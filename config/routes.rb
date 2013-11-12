@@ -25,6 +25,7 @@ FileNavigator::Application.routes.draw do
   get 'download_file', to: 'folders#download_file'
   get 'download_folder', to: 'folders#download_folder'  
   resources :folders do
+    get 'ng_show', to: 'folders#ng_show', on: :collection
     get 'info', to: 'folders#folder_info', on: :member
     get 'drop', to: 'folders#drop', on: :collection
     resources :comments
