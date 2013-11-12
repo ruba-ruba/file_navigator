@@ -27,7 +27,7 @@ $ ->
     else
       $(".delete_multiple").addClass('hide')
 
-
+    
 
   $("i.icon-plus").on 'click', ->
     $(this).addClass('hide')
