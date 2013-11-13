@@ -33,9 +33,18 @@ class FoldersController < ApplicationController
   def drop
   end
 
-  respond_to :json
+  def ng_index
+    @folders = Folder.roots 
+    @items = Item.without_folder
+
+    respond_to do |format|
+      format.html
+      format.json { render json: {:folders => @folders, :items => @items} }
+    end
+  end
+
   def ng_show
-    respond_with Item.all
+    
   end
 
   def folder_info(folder = nil, sub_folders = [], items = [])

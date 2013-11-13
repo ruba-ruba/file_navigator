@@ -1,0 +1,3 @@
+Uploader = angular.module('Uploader', [])
+
+

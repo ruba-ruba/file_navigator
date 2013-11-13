@@ -25,8 +25,8 @@
 //= require bootstrap-tooltip.js
 //= require bootstrap-popover.js
 //= require highcharts
-//= require_tree .
 //= require_tree ./angular
+//= require_tree .
 
 $(function () {
 
