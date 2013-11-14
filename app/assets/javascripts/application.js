@@ -17,7 +17,10 @@
 //= require jquery.remotipart
 //= require jquery.iframe-transport
 //= require angular
+//= require angular-ui-router
 //= require angular-resource
+//= require angular-route
+//= require angular-sanitize
 //= require bootstrap
 //= require bootstrap-modal
 //= require bootstrap-tooltip

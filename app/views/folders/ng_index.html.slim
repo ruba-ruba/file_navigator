@@ -53,22 +53,23 @@
           td
             | {{ folder.created_at}}
           td
-
+            | <a href="#/edit/{{folder.id}}"> edit </a>
           td
-            | <a href="#" ng-click="destroy(folder.id)"> delete
+            | <a href="" ng-click="destroy(folder.id)"> destroy </a>
 
         tr ng-repeat="item in data.items | orderBy:items_sort:reverse"  
           td
-            | {{ item.item_file_name }} 
+            span icon="" key="item.item_file_name"
+            span ng-bind-html="item.item_file_name | icon"
+            | {{ item.item_file_name | truncate }} 
           td
             | {{ item.description}}
           td
-            | {{ item.item_file_size }}
+            | {{ item.item_file_size | bytes}}
           td
             | {{ item.created_at }}
           td
           td
     .tree.hide
       = render 'shared/tree_elements', :elements => {:folders => Folder.roots, :items =>  Item.without_folder}
-
 
