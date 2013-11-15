@@ -1,29 +1,48 @@
 Uploader = angular.module('Uploader',  ['ngSanitize', 'ActiveRecord', 'ui.router', 'ngResource', 'ngRoute' ])
 
-
 Uploader.config ($routeProvider) ->
   $routeProvider
     .when '/',
-      controller: Uploader.FoldersCtrl
-    .when '/new',
-      controller: Uploader.FoldersCtrl
-    .when '/edit/:folder_id',
-      controller: Uploader.FoldersCtrl
-    .otherwise redirectTo: '/'
+      templateUrl: "../../assets/templates/folders2/index.html"
+      controller: Uploader.Folders2Ctrl
+    .when '/edit/:id',
+      templateUrl: "../../assets/templates/folders2/form.html"
+      controller: Uploader.FolderEditCtrl
+
 Uploader.config [ "$httpProvider", (provider) ->
   provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 ]
 
 
-Uploader.FoldersCtrl = ($scope, $location, Folder) ->
 
-  Folder.get {folder_id: $routeParams.folder_id}, (folder) ->
-    self.original_folder = folder
-    $scope.folder = new Folder self.original_folder
 
-  $scope.destroy = ->
-    self.original_folder.destroy ->
-      $location.path '/folders/ng_index'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

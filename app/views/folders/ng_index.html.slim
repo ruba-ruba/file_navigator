@@ -1,6 +1,4 @@
 = render 'shared/activities'
-
-
 .main
   .navigation
     .buttons.active
@@ -27,49 +25,8 @@
             = link_to folder, Folder.find_by_title(folder)
             |  / 
         = @folder.title if @folder
-    .files ng-controller="FoldersCtrl" 
-      table
-        tr.t_header
-          td.name
-            | <a href="" ng-click="folders_sort = 'title'; items_sort = 'item_file_name'; reverse=!reverse">Name</a>
-          td.description
-            | <a href="" ng-click="folders_sort = 'description'; items_sort = 'description'; reverse=!reverse">Description</a>
-          td.size
-            | Size
-          td.date
-            | <a href="" ng-click="folders_sort = 'created_at'; items_sort = 'created_at'; reverse=!reverse">Date</a>
-          td.edit
-            | Edit
-          td.delete
-            | Delete
 
-        tr ng-repeat="folder in data.folders  | orderBy:folders_sort:reverse"
-          td
-            i class='silk-folder'
-            |  {{ folder.title }}
-          td
-            | {{ folder.description }}
-          td
-          td
-            | {{ folder.created_at}}
-          td
-            | <a href="#/edit/{{folder.id}}"> edit </a>
-          td
-            | <a href="" ng-click="destroy(folder.id)"> destroy </a>
-
-        tr ng-repeat="item in data.items | orderBy:items_sort:reverse"  
-          td
-            span icon="" key="item.item_file_name"
-            span ng-bind-html="item.item_file_name | icon"
-            | {{ item.item_file_name | truncate }} 
-          td
-            | {{ item.description}}
-          td
-            | {{ item.item_file_size | bytes}}
-          td
-            | {{ item.created_at }}
-          td
-          td
+    ng-view
     .tree.hide
       = render 'shared/tree_elements', :elements => {:folders => Folder.roots, :items =>  Item.without_folder}
 

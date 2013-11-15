@@ -25,8 +25,6 @@ FileNavigator::Application.routes.draw do
   get 'download_file', to: 'folders#download_file'
   get 'download_folder', to: 'folders#download_folder'  
   resources :folders do
-    get 'ng_index', to: 'folders#ng_index', on: :collection
-    get 'ng_show', to: 'folders#ng_show', on: :member
     get 'info', to: 'folders#folder_info', on: :member
     get 'drop', to: 'folders#drop', on: :collection
     resources :comments
@@ -34,6 +32,11 @@ FileNavigator::Application.routes.draw do
       delete 'destroy_multiple'
     end
   end
+
+  get "home/index"
+  resources :folders2
+  
+  resources :locations
 
   #grape
   mount MyApp::API => "/"

@@ -1,0 +1,32 @@
+= render 'shared/activities'
+.main
+  .navigation
+    .buttons.active
+      span.documents
+        = image_tag('folder_with_files.png', size: "40x0")
+        br/
+        | My Documents
+    .buttons
+      span.nav
+        = image_tag('folder_with_files.png', size: "40x0")
+        br/
+        | Tree
+  .area
+    .placing
+      .pl-top
+        = image_tag('folder.png', size: '18x0')
+        |  Files stored
+      .pl-down
+        | You are here: / 
+        = link_to "My Documents", root_path
+        |  / 
+        - if @folder && @folder.path
+          - @folder.path.split("/").each do |folder|
+            = link_to folder, Folder.find_by_title(folder)
+            |  / 
+        = @folder.title if @folder
+
+    ng-view
+    .tree.hide
+      = render 'shared/tree_elements', :elements => {:folders => Folder.roots, :items =>  Item.without_folder}
+

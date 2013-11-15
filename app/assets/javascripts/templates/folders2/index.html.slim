@@ -1,0 +1,30 @@
+.files ng-controller="Folders2Ctrl" 
+  table
+    tr.t_header
+      td.name
+        | <a href="" ng-click="folders_sort = 'title'; items_sort = 'item_file_name'; reverse=!reverse">Name</a>
+      td.description
+        | <a href="" ng-click="folders_sort = 'description'; items_sort = 'description'; reverse=!reverse">Description</a>
+      td.size
+        | Size
+      td.date
+        | <a href="" ng-click="folders_sort = 'created_at'; items_sort = 'created_at'; reverse=!reverse">Date</a>
+      td.edit
+        | Edit
+      td.delete
+        | Delete
+
+    tr ng-repeat="folder in folders  | orderBy:folders_sort:reverse"
+      td
+        i class='silk-folder'
+        |  {{ folder.title | truncate }}
+      td
+        | {{ folder.description }}
+      td
+      td
+        | {{ folder.created_at}}
+      td
+        | <a href="#/edit/{{folder.id}}"> edit </a>
+      td
+        | <a href="#" ng-click="destroy(folder.id)"> destroy </a>
+

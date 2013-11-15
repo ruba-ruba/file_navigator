@@ -11,9 +11,11 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require jquery-fileupload
-//= require jquery.ui.all
+//= require underscore
+//= require gmaps/google
 //= require jquery.remotipart
 //= require jquery.iframe-transport
 //= require angular
