@@ -61,6 +61,8 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  #gem "parallel_tests"
+  #gem "zeus-parallel_tests"
   gem 'guard', '2.1.0'
 end
 
@@ -80,6 +82,7 @@ group :test do
   gem 'rack-contrib'
   gem 'guard-spork'
   gem 'spork'
+  gem "zeus"
 end
 
 # To use ActiveModel has_secure_password

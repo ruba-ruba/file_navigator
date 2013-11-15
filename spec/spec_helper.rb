@@ -66,6 +66,9 @@ Spork.each_run do
     #     --seed 1234
     config.order = "random"
 
+    config.before(:each) { GC.disable }
+    config.after(:each) { GC.enable }
+
     include Capybara::DSL
     include Capybara::RSpecMatchers
     

@@ -53,7 +53,6 @@ describe ItemsController do
   describe "PUT#update duplicate column" do
     let!(:item){FactoryGirl.create(:item)}
     it 'should set item duplicate to false' do
-      binding.pry
       xhr :put, :update_duplicate_condition, id: item.id, duplicate: false
       item.save
       item.reload

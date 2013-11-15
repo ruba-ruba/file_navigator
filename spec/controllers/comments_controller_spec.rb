@@ -37,7 +37,6 @@ describe CommentsController do
     let!(:comment){FactoryGirl.create(:folder_comment, user_id: user.id)}
 
     it "should delete comment" do
-      binding.pry
       expect{xhr :delete, :destroy, id: comment, folder_id: comment.commentable.id}.to change(Comment,:count).by(-1) 
     end
   end
