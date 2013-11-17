@@ -5,7 +5,6 @@ html ng-app="Uploader"
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application", controller_name
     = csrf_meta_tags
-    = yield :head
   body
     #main role="main"
       div.wrapper
@@ -20,5 +19,4 @@ html ng-app="Uploader"
           .row-fluid
             span12
               = yield
-              = yield :scripts
         footer
