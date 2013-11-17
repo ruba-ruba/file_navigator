@@ -13,9 +13,6 @@ end
 gem 'angularjs-rails'
 gem 'angular-ui-router-rails', :git => 'git@github.com:rodeschen/angular-ui-router-rails.git'
 
-gem "gmaps4rails", "~> 2.1.0"
-gem 'underscore-rails'
-
 gem 'jquery-rails', "2.1.3"
 gem "jquery-ui-rails"
 gem 'jquery-fileupload-rails'
@@ -59,6 +56,9 @@ group :development do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
   gem 'pry-debugger'
+
+  gem "gmaps4rails", "~> 2.1.0"
+  gem 'underscore-rails'
 end
 
 group :development, :test do

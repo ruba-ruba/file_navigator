@@ -1,8 +1,11 @@
 class LocationsController < ApplicationController
-  # GET /locations
-  # GET /locations.json
+
   def index
     @locations = Location.all
+    @hash = Gmaps4rails.build_markers(@locations) do |loc, marker|
+      marker.lat loc.lat
+      marker.lng loc.lng
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,8 +13,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  # GET /locations/1
-  # GET /locations/1.json
   def show
     @location = Location.find(params[:id])
 
@@ -21,8 +22,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  # GET /locations/new
-  # GET /locations/new.json
   def new
     @location = Location.new
 
@@ -32,13 +31,10 @@ class LocationsController < ApplicationController
     end
   end
 
-  # GET /locations/1/edit
   def edit
     @location = Location.find(params[:id])
   end
 
-  # POST /locations
-  # POST /locations.json
   def create
     @location = Location.new(params[:location])
 
@@ -53,8 +49,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  # PUT /locations/1
-  # PUT /locations/1.json
   def update
     @location = Location.find(params[:id])
 
@@ -69,8 +63,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  # DELETE /locations/1
-  # DELETE /locations/1.json
   def destroy
     @location = Location.find(params[:id])
     @location.destroy

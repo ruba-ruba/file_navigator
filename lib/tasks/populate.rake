@@ -7,10 +7,22 @@ namespace :populate do
   end
 end
 
+
+
+
 def import_from_csv
-  csv_text = File.dirname(__FILE__) + File.read('data.csv')
-  csv = CSV.parse(csv_text, :headers => true)
-  csv.each do |row|
-    Location.create!(row.to_hash)
+  headers = [
+    "name",
+    "lat",
+    "lng"     
+  ]
+ 
+  CSV.foreach("data.csv", {headers: false}) do |row|
+    bar = Location.new
+
+    headers.each_with_index do |key, idx|
+      bar.send("#{key}=", row[idx])
+    end
+    bar.save
   end
 end

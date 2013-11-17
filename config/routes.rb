@@ -33,7 +33,7 @@ FileNavigator::Application.routes.draw do
     end
   end
 
-  get "home/index"
+  get "home", to: 'home#index'
   resources :folders2
   
   resources :locations
