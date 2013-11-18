@@ -1,37 +1,21 @@
-Uploader = angular.module('Uploader',  ['ngSanitize', 'ActiveRecord', 'ui.router', 'ngResource', 'ngRoute' ])
+window.app = window.app || {}
 
-Uploader.config ($routeProvider) ->
-  $routeProvider
-    .when '/',
-      templateUrl: "../../assets/templates/folders2/index.html"
-      controller: Uploader.Folders2Ctrl
-    .when '/edit/:id',
-      templateUrl: "../../assets/templates/folders2/form.html"
-      controller: Uploader.FolderEditCtrl
+Uploader = window.angular.module('Uploader',  ['ngSanitize', 'ActiveRecord', 'ngRoute' ])
+  .config ($routeProvider) ->
+    $routeProvider
+      .when '/',
+        templateUrl: "../../assets/templates/folders2/index.html"
+        controller: window.app.Folders2Ctrl
+      .when '/edit/:folder_id',
+        templateUrl: "../../assets/templates/folders2/form.html"
+        controller: window.app.FolderEditCtrl
+      .when '/new',
+          controller: window.app.FolderNewCtrl
+          templateUrl: "../../assets/templates/folders2/form.html"
 
-Uploader.config [ "$httpProvider", (provider) ->
-  provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
-]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  .config [ "$httpProvider", (provider) ->
+    provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
+  ]
 
 
 

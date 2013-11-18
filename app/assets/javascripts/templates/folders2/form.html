@@ -1,14 +1,13 @@
-<form name="myForm" ng-controller="Folders2Ctrl" >
-
-  <div class="control-group" ng-class="{error: myForm.description.$invalid}">
+<form name="myForm"> 
+  <div class="control-group" ng-class="{error: myForm.title.$invalid}">
     <label>Title</label>
-    <input type="text" name="title" ng-model="folder2.title" required>
+    <input type="text" name="title" ng-model="folder.title" required>
     <span ng-show="myForm.title.$error.required" class="help-inline">Required</span>
   </div>
 
   <div class="control-group" ng-class="{error: myForm.description.$invalid}">
     <label>Description</label>
-    <input type="text" name="description" ng-model="folder2.description" required>
+    <input type="text" name="description" ng-model="folder.description" required>
     <span ng-show="myForm.description.$error.required" class="help-inline">Required</span>
   </div>
 

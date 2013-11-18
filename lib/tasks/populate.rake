@@ -17,7 +17,7 @@ def import_from_csv
     "lng"     
   ]
  
-  CSV.foreach("data.csv", {headers: false}) do |row|
+  CSV.foreach("db/data.csv", {headers: false}) do |row|
     bar = Location.new
 
     headers.each_with_index do |key, idx|

@@ -2,10 +2,6 @@ class LocationsController < ApplicationController
 
   def index
     @locations = Location.all
-    @hash = Gmaps4rails.build_markers(@locations) do |loc, marker|
-      marker.lat loc.lat
-      marker.lng loc.lng
-    end
 
     respond_to do |format|
       format.html # index.html.erb

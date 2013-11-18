@@ -21,17 +21,20 @@ class Folders2Controller < ApplicationController
   end
 
   def create
-    @folder = current_user.folders.build(params[:folder]) 
+    @folder = current_user.folders.build(params[:folders2]) 
     if @folder.save
       render json: 'success'
     else
-      render json: @fodler.errors, status: :unprocessable_entity
+      render json: @folder.errors, status: :unprocessable_entity
     end
   end
 
   def update
     @folder = Folder.find(params[:id])
-    if @folder.update_attributes(params[:folder])
+    p = {}
+    p[:title] = params[:folders2][:title]
+    p[:description] = params[:folders2][:description]
+    if @folder.update_attributes(p)
       render json: 'updated'
     else
       render json: @folder.errors, status: :unprocessable_entity
