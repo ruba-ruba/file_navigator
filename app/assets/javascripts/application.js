@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require jquery-fileupload
 //= require underscore
-//= require gmaps/google
 //= require jquery.remotipart
 //= require jquery.iframe-transport
 //= require angular

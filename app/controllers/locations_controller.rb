@@ -32,15 +32,18 @@ class LocationsController < ApplicationController
   end
 
   def create
+    binding.pry
     @location = Location.new(params[:location])
 
     respond_to do |format|
       if @location.save
         format.html { redirect_to @location, notice: 'Location was successfully created.' }
         format.json { render json: @location, status: :created, location: @location }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @location.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
