@@ -177,6 +177,13 @@ class FoldersController < ApplicationController
     @folder.destroy
 
     respond_to do |format|
+      if @folder.ancestry.present?
+        @folder = @folder.parent
+        @folders = @folder.children
+        @items = @folder.items
+      else
+        show_roots
+      end
       format.js
     end
   end
