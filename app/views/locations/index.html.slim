@@ -37,77 +37,22 @@ button class="btn save_marker"
 
 
 
-coffee:
+javascript:
+  $( document ).ready(function() {
+    var locations = {};
+    var data = #{@locations.to_json.html_safe};
+    $.each(data, function( key, value ) {
+      locations[value.name] =  [value.latitude, value.longitude]
+    });
+    console.log(locations);
 
-  position = []
+    loc = [48.84335831660103, 23.60546887500004]
+    marker = new google.maps.Marker({
+      position: loc,
+      map: map
+    });
 
-  myLatlng = new google.maps.LatLng(48.363882, 24.044922)
-
-  initialize = ->
-    mapProp =
-      center: myLatlng
-      zoom: 6
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-
-    map = new google.maps.Map(document.getElementById("map-canvas"), mapProp)
-
-
-    addmarker = (coords) ->
-      marker = new google.maps.Marker(
-        position: coords
-        title: "new marker"
-        draggable: true
-        map: map
-      )
-      infowindow = new google.maps.InfoWindow(content: 'contentString')
-      lat = marker.getPosition().lat();
-      lng = marker.getPosition().lng();
-      position.push [lat, lng]
-
-
-      google.maps.event.addListener marker, "dragend", ->
-        lat = marker.getPosition().lat();
-        lng = marker.getPosition().lng();
-        position = []
-        position.push lat
-        position.push lng
-        console.log position
-
-    $(".btn_add_marker").on "click", ->
-      addmarker myLatlng      
-
-    remove_markers = ->
-      #some code here
-
-    $(".btn_remove_markers").on "click", ->
-      remove_markers
-
-    $(".arr").click ->
-      alert(position)
-
-  google.maps.event.addDomListener window, "load", initialize
-
-  $(".save_marker").on "click", ->
-    marker_name = $('input[name="marker_name"]').val()
-    saveData = $.ajax(
-      type: "POST"
-      url: "locations/"
-      data: {
-              location: {
-                          name: marker_name,
-                          latitude: position[0],
-                          longitude: position[1]
-                        }
-            }
-      dataType: "text"
-
-      success: (resultData) ->
-        alert "Save Complete"
-    )
-    saveData.error ->
-      alert "Something went wrong"
-    
-
+  });
 
 
 

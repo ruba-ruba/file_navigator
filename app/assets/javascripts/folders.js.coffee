@@ -5,11 +5,6 @@
 
 $ ->
 
-  #remove folder
-  # $(".remove_folder").bind "ajax:before", ->
-  #   $(this).closest("tr").fadeOut()
-
-  #remove modal
   $(document).on "hidden", ".modal", ->
     $(this).remove()
     $("#error_explanation").remove()
