@@ -15,8 +15,14 @@
         td = location.longitude
         td = link_to 'Show', location
         td = link_to 'Edit', edit_location_path(location)
-        td = link_to 'Destroy', location, method: :delete, remote: true, data: {confirm: 'Are you sure?'} 
+        td = link_to 'Destroy', location, method: :delete, remote: true
+
+  h4 = link_to 'refresh', locations_path, remote: true
+
+  = link_to 'New Location', new_location_path
+  
   br/
+  
 
   sass: 
     tr

@@ -1,9 +1,6 @@
 = render 'locations/list'
 
-= link_to 'New Location', new_location_path
-
 br/
-
 #map-canvas
 
 button class="btn btn_add_marker"
@@ -21,7 +18,6 @@ button class="btn save_marker"
 br/
 span.coords
 
-= link_to 'refresh', locations_path, remote: true
 
 javascript:
   $( document ).ready(function() {
@@ -105,28 +101,28 @@ javascript:
 
     // save marker
 
-  $(".save_marker").on("click", function() {
-    var marker_name, saveData;
-    marker_name = $('input[name="marker_name"]').val();
-    saveData = $.ajax({
-      type: "POST",
-      url: "locations/",
-      data: {
-        location: {
-          name: marker_name,
-          latitude: position[0],
-          longitude: position[1]
+    $(".save_marker").on("click", function() {
+      var marker_name, saveData;
+      marker_name = $('input[name="marker_name"]').val();
+      saveData = $.ajax({
+        type: "POST",
+        url: "locations/",
+        data: {
+          location: {
+            name: marker_name,
+            latitude: position[0],
+            longitude: position[1]
+          }
+        },
+        dataType: "text",
+        success: function(resultData) {
+          console.log('saved');
         }
-      },
-      dataType: "text",
-      success: function(resultData) {
-        alert("Save Complete");
-      }
+      });
+      return saveData.error(function() {
+        alert("Something went wrong");
+      });
     });
-    return saveData.error(function() {
-      alert("Something went wrong");
-    });
-  });
 
 
     
