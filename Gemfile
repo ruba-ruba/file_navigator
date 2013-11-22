@@ -52,11 +52,10 @@ group :development do
   gem 'faker'
   gem 'populator'
   gem 'thin', '1.5.1'
-  gem 'meta_request', '0.2.1'
   gem 'pry-rails'
   gem 'pry-stack_explorer'
   gem 'pry-debugger'
-
+  gem 'meta_request'
   gem "gmaps4rails", "~> 2.1.0"
   gem 'geocoder'
   gem 'underscore-rails'
