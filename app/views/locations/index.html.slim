@@ -1,21 +1,5 @@
-h1 Listing locations
-table
-  tr
-    th Name
-    th Lat
-    th Lng
-    th
-    th
-    th
-  - @locations.each do |location|
-    tr
-      td = location.name
-      td = location.latitude
-      td = location.longitude
-      td = link_to 'Show', location
-      td = link_to 'Edit', edit_location_path(location)
-      td = link_to 'Destroy', location, method: :delete, data: {confirm: 'Are you sure?'} 
-br/
+= render 'locations/list'
+
 = link_to 'New Location', new_location_path
 
 br/
@@ -26,8 +10,7 @@ button class="btn btn_add_marker"
   | add marker
 button class="btn btn_remove_markers"
   | remove all markers
-button class="btn arr"
-  | show_data
+
 br/
 br/
 | marker name:  
@@ -35,28 +18,118 @@ input name="marker_name"
 button class="btn save_marker"
   | save marker
 
+br/
+span.coords
 
+= link_to 'refresh', locations_path, remote: true
 
 javascript:
   $( document ).ready(function() {
     var locations = {};
     var data = #{@locations.to_json.html_safe};
     $.each(data, function( key, value ) {
-      locations[value.name] =  [value.latitude, value.longitude]
+      locations[value.name] = (new google.maps.LatLng(value.latitude, value.longitude));
     });
     console.log(locations);
 
     loc = [48.84335831660103, 23.60546887500004]
-    function initialize() {
-      var mapOptions = {
-          center: new google.maps.LatLng(-34.397, 150.644),
-          zoom: 8,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+
+
+    var initialize, myLatlng, position;
+
+    position = [];
+
+    myLatlng = new google.maps.LatLng(48.363882, 24.044922);
+
+    function initialize () {
+      var addmarker, map, mapProp, remove_markers;
+      mapProp = {
+        center: myLatlng,
+        zoom: 6,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       };
-      var map = new google.maps.Map(document.getElementById("map-canvas"),
-          mapOptions);
+      map = new google.maps.Map(document.getElementById("map-canvas"), mapProp);
+      function addmarker (coords) {
+        var infowindow, lat, lng, marker;
+        marker = new google.maps.Marker({
+          position: coords,
+          title: "new marker",
+          draggable: true,
+          map: map
+        });
+        lat = marker.getPosition().lat();
+        lng = marker.getPosition().lng();
+        position.push([lat, lng]);
+
+        return google.maps.event.addListener(marker, "dragend", function() {
+          lat = marker.getPosition().lat();
+          lng = marker.getPosition().lng();
+          position = [];
+          position.push(lat);
+          position.push(lng);
+          return console.log(position);
+        });
+      };
+
+      // adding exciting markers
+      $.each(locations, function( key, value ) {
+        var marker = new google.maps.Marker({
+          title: 'title',
+          draggable: false,
+          position: value,
+          });
+        marker.setMap(map);
+
+        var infowindow = new google.maps.InfoWindow({
+          content: key
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
+        });
+
+      });
+      // adding exciting markers
+
+      $(".btn_add_marker").on("click", function() {
+        return addmarker(myLatlng);
+      });
+      remove_markers = function() {};
+      $(".btn_remove_markers").on("click", function() {
+        return remove_markers;
+      });
+      
     };
 
+    google.maps.event.addDomListener(window, "load", initialize);
+
+    // save marker
+
+  $(".save_marker").on("click", function() {
+    var marker_name, saveData;
+    marker_name = $('input[name="marker_name"]').val();
+    saveData = $.ajax({
+      type: "POST",
+      url: "locations/",
+      data: {
+        location: {
+          name: marker_name,
+          latitude: position[0],
+          longitude: position[1]
+        }
+      },
+      dataType: "text",
+      success: function(resultData) {
+        alert("Save Complete");
+      }
+    });
+    return saveData.error(function() {
+      alert("Something went wrong");
+    });
+  });
+
+
+    
   });
 
 

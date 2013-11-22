@@ -61,10 +61,10 @@ ActiveRecord::Schema.define(:version => 20131115085719) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
-    t.decimal  "latitude"
-    t.decimal  "longitude"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.decimal  "latitude",   :precision => 15, :scale => 10
+    t.decimal  "longitude",  :precision => 15, :scale => 10
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "users", :force => true do |t|

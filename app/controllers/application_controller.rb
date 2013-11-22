@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def total_size
     size = Item.pluck(:item_file_size).inject{|sum,x| sum + x }
-    @taken = size*100/QUOTA
+    @taken = size*100/QUOTA if size
     @total = QUOTA
   end
 

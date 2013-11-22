@@ -6,6 +6,7 @@ class LocationsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @locations }
+      format.js
     end
   end
 
@@ -32,12 +33,12 @@ class LocationsController < ApplicationController
   end
 
   def create
-    binding.pry
     @location = Location.new(params[:location])
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
+        @locations = Location.all
+        format.html {  }
         format.json { render json: @location, status: :created, location: @location }
         format.js
       else
@@ -67,8 +68,10 @@ class LocationsController < ApplicationController
     @location.destroy
 
     respond_to do |format|
+      @locations = Location.all
       format.html { redirect_to locations_url }
       format.json { head :no_content }
+      format.js
     end
   end
 end
