@@ -41,7 +41,7 @@ gem "highcharts-rails", "~> 3.0.0"
 gem 'sidekiq'
 gem 'sidekiq-client-cli'
 gem 'whenever', :require => false
-gem 'sinatra', require: false
+gem 'sinatra', :require => false
 
 group :development do
   gem 'annotate', '2.5.0'

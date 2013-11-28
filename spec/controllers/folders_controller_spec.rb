@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-
-
 describe FoldersController do
   render_views
   login_user
@@ -48,7 +46,7 @@ describe FoldersController do
 
   describe 'post#create' do
     it 'creates new folder' do
-      expect{post :create, folder: FactoryGirl.attributes_for(:folder)}.to change(Folder,:count).by(1)
+      expect{post :create, folder: FactoryGirl.attributes_for(:folder, title: nil)}.to change(Folder,:count).by(1)
     end
     it "invalid attr don't create folder" do
       expect{ post :create, folder: FactoryGirl.attributes_for(:folder, title: nil) }.to_not change(Folder,:count)
